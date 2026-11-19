@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nguyễn Hoàng Hưng – Quản lý vận hành chuỗi nhà hàng F&amp;B</title>
+<meta name="description" content="Nguyễn Hoàng Hưng – Area Manager F&amp;B tại TP.HCM với hơn 11 năm kinh nghiệm vận hành nhà hàng. Tư vấn mở quán mới, kiểm soát chi phí, đào tạo quản lý, chuẩn hóa quy trình.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nguyễn Hoàng Hưng – Quản lý vận hành chuỗi nhà hàng F&amp;B">
+<meta property="og:description" content="Hơn 11 năm đi từ nhân viên phục vụ đến Area Manager phụ trách 5+ cửa hàng. Tư vấn mở quán, kiểm soát chi phí, đào tạo quản lý F&amp;B tại TP.HCM.">
+<meta property="og:image" content="https://wannaburn.github.io/nguyenhoanghung/avatar.jpg">
+<meta property="og:url" content="https://wannaburn.github.io/nguyenhoanghung/">
+<meta property="og:locale" content="vi_VN">
+<meta name="theme-color" content="#0d0c0b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0c0b;
+  --bg-2:#151311;
+  --card:rgba(255,255,255,.035);
+  --card-hover:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.09);
+  --border-hot:rgba(245,165,36,.45);
+  --text:#f4efe8;
+  --muted:#b8afa4;
+  --dim:#8f877d;
+  --accent:#f5a524;
+  --accent-2:#ff7a1a;
+  --accent-ink:#1a1206;
+  --radius:20px;
+  --max:1140px;
+  --pad:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.65;font-size:16px;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(900px 520px at 85% -10%, rgba(245,165,36,.13), transparent 60%),
+    radial-gradient(700px 500px at -10% 30%, rgba(255,122,26,.07), transparent 60%);
+  background-repeat:no-repeat;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+@media (min-width:768px){:root{--pad:32px}}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(13,12,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.brand{font-weight:800;text-decoration:none;letter-spacing:-.01em;white-space:nowrap;display:flex;align-items:center;gap:8px}
+.brand-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.nav ul{list-style:none;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a.link{display:block;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500;padding:8px 12px;border-radius:999px;white-space:nowrap;transition:color .2s,background .2s}
+.nav a.link:hover,.nav a.link:focus-visible{color:var(--text);background:var(--card-hover)}
+.nav .cta-mini{display:none}
+@media (max-width:860px){
+  .nav ul{display:none}
+  .nav .cta-mini{display:inline-flex}
+}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:inherit;font-weight:700;font-size:16px;text-decoration:none;padding:14px 24px;border-radius:999px;border:1px solid transparent;transition:transform .2s,box-shadow .25s,background .2s,border-color .2s;cursor:pointer}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--accent-ink);box-shadow:0 8px 30px -8px rgba(245,165,36,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px -8px rgba(245,165,36,.75)}
+.btn-ghost{background:var(--card);border-color:var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--border-hot);background:var(--card-hover);transform:translateY(-2px)}
+.btn-sm{padding:8px 16px;font-size:14px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* Sections */
+section{padding:72px 0;scroll-margin-top:60px}
+@media (min-width:768px){section{padding:104px 0}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+h2{font-size:clamp(28px,5vw,48px);line-height:1.15;font-weight:800;letter-spacing:-.025em;max-width:22ch}
+.lead{color:var(--muted);margin-top:14px;max-width:62ch;font-size:17px}
+.head{margin-bottom:40px}
+
+/* Hero */
+.hero{padding:56px 0 40px}
+@media (min-width:768px){.hero{padding:96px 0 112px}}
+.hero-grid{display:grid;gap:40px;align-items:center}
+@media (min-width:900px){.hero-grid{grid-template-columns:1.35fr .9fr;gap:56px}}
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted);padding:6px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);margin-bottom:22px}
+.pulse{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.hero h1{font-size:clamp(40px,8.4vw,84px);line-height:1.04;font-weight:900;letter-spacing:-.035em}
+.hero h1 .grad{background:linear-gradient(120deg,#ffd27a 0%,var(--accent) 40%,var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .role{margin-top:18px;font-size:clamp(17px,2.4vw,21px);font-weight:600;color:var(--text)}
+.hero .role span{color:var(--accent)}
+.hero .intro{margin-top:16px;color:var(--muted);font-size:clamp(16px,2vw,18px);max-width:56ch}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero .meta{margin-top:22px;color:var(--dim);font-size:14px;display:flex;align-items:center;gap:6px}
+.photo-wrap{position:relative;justify-self:center;width:min(320px,78vw);aspect-ratio:1}
+.photo-wrap::before{content:"";position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(245,165,36,.35),transparent 65%);filter:blur(10px)}
+.photo-ring{position:relative;width:100%;height:100%;border-radius:50%;padding:4px;background:conic-gradient(from 200deg,var(--accent),var(--accent-2),rgba(255,255,255,.08),var(--accent))}
+.photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:6px solid var(--bg)}
+.photo-tag{position:absolute;bottom:6%;left:-6%;background:rgba(21,19,17,.88);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.35;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.photo-tag b{display:block;color:var(--accent);font-size:20px;font-weight:800}
+@media (max-width:420px){.photo-tag{left:0}}
+
+/* Cards */
+.card{position:relative;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;overflow:hidden;transition:border-color .25s,background .25s,transform .25s,box-shadow .3s}
+.card::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(245,165,36,.12),transparent 45%);opacity:0;transition:opacity .3s}
+.card:hover{border-color:var(--border-hot);background:var(--card-hover);transform:translateY(-3px);box-shadow:0 20px 50px -20px rgba(245,165,36,.25)}
+.card:hover::after{opacity:1}
+@media (max-width:480px){.card{padding:22px}}
+
+/* Stats bento */
+.bento-stats{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.stat .num{font-size:clamp(44px,8vw,76px);font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--text)}
+.stat .num .plus{color:var(--accent)}
+.stat .label{margin-top:12px;color:var(--muted);font-size:15px}
+.stat.hero-stat{grid-column:1 / -1;background:linear-gradient(140deg,rgba(245,165,36,.16),rgba(255,122,26,.04) 60%),var(--card);border-color:rgba(245,165,36,.28)}
+.stat.hero-stat .num{font-size:clamp(64px,13vw,128px)}
+.stat.hero-stat .num span.n{background:linear-gradient(120deg,#ffd27a,var(--accent) 50%,var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+@media (max-width:480px){.bento-stats .stat:not(.hero-stat) .num{font-size:44px}.bento-stats .stat .label{font-size:14px}}
+@media (max-width:899px){.bento-stats .stat:last-child{grid-column:1 / -1}}
+@media (min-width:900px){
+  .bento-stats{grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto}
+  .stat.hero-stat{grid-column:1 / 3;grid-row:1 / 3;display:flex;flex-direction:column;justify-content:flex-end;min-height:320px}
+  .stat:nth-child(2){grid-column:3 / 5}
+}
+
+/* Services bento */
+.bento-svc{display:grid;gap:14px}
+@media (min-width:760px){.bento-svc{grid-template-columns:1fr 1fr}}
+.svc .sub{margin-top:8px;color:var(--muted);font-size:15px}
+.ticks{list-style:none;margin-top:18px;display:grid;gap:10px}
+.ticks li{position:relative;padding-left:30px;line-height:1.5}
+.ticks li::before{content:"";position:absolute;left:0;top:3px;width:20px;height:20px;border-radius:50%;background:rgba(245,165,36,.14) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f5a524' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat;border:1px solid rgba(245,165,36,.35)}
+.ticks li b{color:var(--text)}
+.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:rgba(245,165,36,.12);border:1px solid rgba(245,165,36,.3);color:var(--accent);margin-bottom:20px}
+.icon svg{width:24px;height:24px}
+.svc h3{font-size:22px;font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.svc p{margin-top:10px;color:var(--muted)}
+.svc .idx{position:absolute;top:22px;right:24px;font-weight:800;color:rgba(255,255,255,.12);font-size:15px}
+
+/* Why */
+.why-grid{display:grid;gap:14px}
+@media (min-width:760px){.why-grid{grid-template-columns:1fr 1fr}}
+.why{display:flex;gap:16px;align-items:flex-start}
+.why .check{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--accent-ink)}
+.why .check svg{width:18px;height:18px}
+.why h3{font-size:18px;font-weight:700;line-height:1.35}
+.why p{color:var(--muted);margin-top:4px;font-size:15px}
+
+/* Timeline */
+.timeline{position:relative;list-style:none;display:grid;gap:16px;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--accent),rgba(245,165,36,.05))}
+.tl{position:relative}
+.tl::before{content:"";position:absolute;left:-28px;top:30px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 12px rgba(245,165,36,.5)}
+.tl.now::before{background:var(--accent)}
+.tl .when{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);background:rgba(245,165,36,.1);border:1px solid rgba(245,165,36,.25);padding:3px 10px;border-radius:999px}
+.tl h3{font-size:20px;font-weight:800;margin-top:12px;line-height:1.3;letter-spacing:-.01em}
+.tl .co{color:var(--text);opacity:.85;font-weight:500;margin-top:2px}
+.tl p{color:var(--muted);margin-top:8px;font-size:15px}
+.tl .model{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:14px;font-weight:700;color:var(--text);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:999px;padding:5px 14px 5px 5px}
+.tl .model span{flex:none;white-space:nowrap;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);border-radius:999px;padding:3px 9px}
+.tl .concept{margin-top:10px;padding:10px 14px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);font-size:14px;color:var(--muted)}
+.tl .concept b{color:var(--text);font-weight:700}
+.tl .ticks{margin-top:14px;gap:8px;font-size:15px;color:var(--muted)}
+.tl .ticks li.win{color:var(--text)}
+@media (min-width:900px){
+  .tl .row{display:grid;grid-template-columns:180px 1fr;gap:24px}
+  .tl .when{align-self:start}
+  .tl h3{margin-top:0}
+}
+
+/* Experience summary */
+.exp-grid{display:grid;gap:14px}
+@media (min-width:760px){.exp-grid{grid-template-columns:1fr 1fr}}
+@media (min-width:1100px){.exp-grid{grid-template-columns:1fr 1fr 1fr}}
+.exp h3{font-size:19px;font-weight:800;line-height:1.3;letter-spacing:-.01em}
+.exp .ticks{margin-top:14px;gap:8px;font-size:15px;color:var(--muted)}
+.exp .from{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.exp .from span{font-size:12px;font-weight:600;color:var(--dim);border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+
+/* Education */
+.edu{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.edu .icon{margin-bottom:0;width:60px;height:60px}
+.edu .icon svg{width:30px;height:30px}
+.edu h3{font-size:22px;font-weight:800}
+.edu p{color:var(--muted)}
+.edu .yr{margin-left:auto;font-weight:800;color:var(--accent);font-size:18px}
+@media (max-width:600px){.edu .yr{margin-left:0}}
+
+/* Contact */
+.contact-card{text-align:center;padding:56px 24px;background:
+  radial-gradient(600px 300px at 50% 0%,rgba(245,165,36,.22),transparent 70%),var(--bg-2);border-color:rgba(245,165,36,.3)}
+.contact-card h2{margin:0 auto;max-width:20ch}
+.contact-card .lead{margin-left:auto;margin-right:auto}
+.contact-card .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:32px}
+.contact-list{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;margin-top:32px;color:var(--muted);font-size:15px}
+.contact-list a{text-decoration:none;color:var(--text);font-weight:600;overflow-wrap:break-word}
+.contact-list a:hover{color:var(--accent)}
+.contact-card:hover{transform:none}
+footer{padding:28px 0 40px;color:var(--dim);font-size:14px;text-align:center}
+
+/* Reveal (only when JS + motion allowed) */
+.js-anim .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js-anim .reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .card:hover,.btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Điều hướng chính">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="brand-dot" aria-hidden="true"></span>Hoàng Hưng</a>
+    <ul>
+      <li><a class="link" href="#so-lieu">Con số</a></li>
+      <li><a class="link" href="#dich-vu">Dịch vụ</a></li>
+      <li><a class="link" href="#vi-sao">Vì sao chọn Hưng</a></li>
+      <li><a class="link" href="#hanh-trinh">Hành trình</a></li>
+      <li><a class="link" href="#kinh-nghiem">Kinh nghiệm</a></li>
+      <li><a class="link" href="#hoc-van">Học vấn</a></li>
+      <li><a class="link" href="#lien-he">Liên hệ</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm cta-mini" href="#lien-he">Liên hệ</a>
+  </div>
+</nav>
+
+<main id="top">
+  <!-- Hero -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <div class="badge"><span class="pulse" aria-hidden="true"></span>F&amp;B · TP.HCM</div>
+        <h1>Nguyễn<br><span class="grad">Hoàng Hưng</span></h1>
+        <p class="role">Quản lý vận hành chuỗi nhà hàng <span>·</span> Area Manager F&amp;B</p>
+        <p class="intro">Hơn 11 năm đi từ nhân viên phục vụ đến Area Manager phụ trách 5+ cửa hàng. Tôi giúp chủ quán mở cửa hàng bài bản, giữ chi phí trong tầm kiểm soát và xây đội ngũ quản lý tự vận hành được.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://zalo.me/0938952436" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg>
+            Nhắn Zalo
+          </a>
+          <a class="btn btn-ghost" href="mailto:nguyenhoanghung190196@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Gửi email
+          </a>
+        </div>
+        <p class="meta">Tư vấn · Đào tạo · Sẵn sàng trao đổi cơ hội Area / Operation Manager</p>
+      </div>
+      <div class="photo-wrap reveal">
+        <div class="photo-ring"><img src="avatar.jpg" alt="Chân dung Nguyễn Hoàng Hưng" width="300" height="300"></div>
+        <div class="photo-tag"><b>11+ năm</b>vận hành F&amp;B</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <section id="so-lieu">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Con số nổi bật</span>
+        <h2>Kinh nghiệm đo được bằng cửa hàng thật</h2>
+      </div>
+      <div class="bento-stats">
+        <div class="card stat hero-stat reveal">
+          <div class="num"><span class="n" data-count="11">11</span><span class="plus">+</span></div>
+          <div class="label">năm kinh nghiệm vận hành F&amp;B (từ 2015)</div>
+        </div>
+        <div class="card stat reveal">
+          <div class="num"><span class="n" data-count="5">5</span><span class="plus">+</span></div>
+          <div class="label">cửa hàng đang phụ trách</div>
+        </div>
+        <div class="card stat reveal">
+          <div class="num"><span class="n" data-count="10">10</span><span class="plus">+</span></div>
+          <div class="label">dự án mở cửa hàng mới</div>
+        </div>
+        <div class="card stat reveal">
+          <div class="num"><span class="n" data-count="5">5</span><span class="plus">+</span></div>
+          <div class="label">doanh nghiệp F&amp;B hàng đầu</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="dich-vu">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Dịch vụ</span>
+        <h2>Tôi có thể giúp cửa hàng của bạn ở đâu</h2>
+        <p class="lead">Tư vấn và đào tạo dựa trên kinh nghiệm vận hành trực tiếp tại nhiều chuỗi nhà hàng.</p>
+      </div>
+      <div class="bento-svc">
+        <article class="card svc reveal">
+          <span class="idx">01</span>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg></div>
+          <h3>Tư vấn mở quán mới</h3>
+          <p class="sub">Kinh nghiệm từ hơn 10 dự án mở cửa hàng mới.</p>
+          <ul class="ticks">
+            <li>Bộ quy trình vận hành cho từng bộ phận, sẵn sàng trước ngày khai trương</li>
+            <li>Kế hoạch tuyển dụng và đào tạo đội ngũ theo công suất quán</li>
+            <li>Đồng hành giai đoạn khai trương, xử lý sự cố ngay tại cửa hàng</li>
+            <li>Bàn giao để quản lý của bạn tự vận hành được</li>
+          </ul>
+        </article>
+        <article class="card svc reveal">
+          <span class="idx">02</span>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+          <h3>Kiểm soát chi phí</h3>
+          <p class="sub">Để doanh thu biến thành lợi nhuận.</p>
+          <ul class="ticks">
+            <li>Rà soát chi phí bán hàng (COS), nhân công (COL), điện, nước, gas</li>
+            <li>Đọc báo cáo lãi lỗ, chỉ ra khoản chi đang vượt định mức</li>
+            <li>Đề xuất cách cắt giảm mà không ảnh hưởng chất lượng phục vụ</li>
+            <li>Thiết lập cách theo dõi chi phí hằng ngày, hằng tuần</li>
+          </ul>
+        </article>
+        <article class="card svc reveal">
+          <span class="idx">03</span>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-1a6 6 0 0 1 6-6h2a6 6 0 0 1 6 6v1"/><path d="M17 3.5a4 4 0 0 1 0 7"/><path d="M22 21v-1a6 6 0 0 0-3.5-5.5"/></svg></div>
+          <h3>Đào tạo quản lý</h3>
+          <p class="sub">Cho quản lý cửa hàng và giám sát ca.</p>
+          <ul class="ticks">
+            <li>Điều hành ca, phân công và giữ chân nhân sự</li>
+            <li>Đọc số liệu doanh thu, chi phí để ra quyết định</li>
+            <li>Xử lý tình huống với khách hàng và nhân viên</li>
+            <li>Kèm cặp trực tiếp tại cửa hàng, không chỉ lý thuyết</li>
+          </ul>
+        </article>
+        <article class="card svc reveal">
+          <span class="idx">04</span>
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="m9 12 2 2 4-4"/><path d="M9 17h6"/></svg></div>
+          <h3>Chuẩn hóa quy trình</h3>
+          <p class="sub">Để mọi chi nhánh vận hành như một.</p>
+          <ul class="ticks">
+            <li>Quy trình phục vụ chuẩn từ đón khách đến thanh toán</li>
+            <li>Checklist mở ca, đóng ca, vệ sinh cho từng bộ phận</li>
+            <li>Chất lượng đồng đều giữa các chi nhánh</li>
+            <li>Rút ngắn thời gian đào tạo nhân viên mới</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why -->
+  <section id="vi-sao">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Vì sao làm việc với Hưng</span>
+        <h2>Người đã đứng ở mọi vị trí trong nhà hàng</h2>
+      </div>
+      <div class="why-grid">
+        <div class="card why reveal">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          <div><h3>Đi lên từ vị trí nhân viên nhà hàng</h3><p>Hiểu công việc của từng bộ phận, từ bàn đến bếp.</p></div>
+        </div>
+        <div class="card why reveal">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          <div><h3>Đã quản lý từ 1 đến 5+ cửa hàng cùng lúc</h3><p>Qua đủ mô hình: casual dining, fast food, buffet lẩu nướng, nhà hàng dining.</p></div>
+        </div>
+        <div class="card why reveal">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          <div><h3>Thực chiến mở cửa hàng mới</h3><p>Hơn 10 dự án.</p></div>
+        </div>
+        <div class="card why reveal">
+          <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>
+          <div><h3>Quen làm việc với số liệu</h3><p>Chi phí, KPI, báo cáo lãi lỗ.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section id="hanh-trinh">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Hành trình nghề nghiệp</span>
+        <h2>Từ nhân viên phục vụ đến quản lý khu vực</h2>
+      </div>
+      <ol class="timeline">
+        <li class="card tl now reveal"><div class="row"><span class="when">03/2025 – nay</span><div>
+          <h3>Area Manager</h3>
+          <div class="co">Công ty TNHH Thực phẩm Papaxốt</div>
+          <div class="model"><span>Mô hình</span>Casual dining</div>
+          <ul class="ticks">
+            <li>Phụ trách toàn bộ vận hành của 5+ cửa hàng trong khu vực.</li>
+            <li class="win">Đảm bảo các cửa hàng hoàn thành chỉ tiêu doanh thu, giữ chi phí trong định mức và mang lại lợi nhuận theo kỳ vọng của công ty.</li>
+            <li class="win">Xây đội ngũ quản lý cửa hàng chủ động, vận hành ổn định và đồng đều giữa các chi nhánh.</li>
+            <li>Papaxốt 3 năm liền (2024 – 2026) tài trợ và đón tiếp các đoàn Nam vương, Hoa hậu quốc tế.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">04/2023 – 03/2025</span><div>
+          <h3>Store Manager → Quản lý cụm cửa hàng</h3>
+          <div class="co">Công ty TNHH Thực phẩm Papaxốt</div>
+          <div class="model"><span>Mô hình</span>Casual dining</div>
+          <ul class="ticks">
+            <li>Phạm vi quản lý mở rộng từ 1 lên cụm 2 rồi 3 cửa hàng tại Quận 3, Quận 7, Quận 8 và Phú Nhuận.</li>
+            <li class="win">Đưa cửa hàng đầu tiên đạt chỉ tiêu doanh thu nhiều tháng liên tiếp; kết quả ổn định là lý do được giao thêm cửa hàng.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">03/2022 – 03/2023</span><div>
+          <h3>Training Store Manager</h3>
+          <div class="co">Công ty Thực phẩm Phúc Lộc Thọ</div>
+          <div class="model"><span>Mô hình</span>Fast food</div>
+          <ul class="ticks">
+            <li>Thành viên SWAT team, tham gia hơn 10 dự án mở cửa hàng mới; hỗ trợ quản lý các cửa hàng mới mở.</li>
+            <li class="win">Giúp cửa hàng mới vào guồng vận hành ổn định đúng tiến độ; quản lý mới nắm vững quy trình và chỉ tiêu.</li>
+            <li>Đồng thời quản lý 2 chi nhánh.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">10/2021 – 03/2022</span><div>
+          <h3>Restaurant Manager</h3>
+          <div class="co">Công ty TNHH Ăn Được Phúc</div>
+          <div class="model"><span>Mô hình</span>Buffet lẩu nướng tại bàn</div>
+          <ul class="ticks">
+            <li>Cải tiến quy trình làm việc của các bộ phận trong nhà hàng.</li>
+            <li class="win">Tăng doanh thu nhờ các chương trình khuyến mãi tự đề xuất, đồng thời tối ưu chi phí vận hành để cải thiện lợi nhuận.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">06/2020 – 09/2021</span><div>
+          <h3>Store Manager</h3>
+          <div class="co">Công ty Thực phẩm Phúc Lộc Thọ</div>
+          <div class="model"><span>Mô hình</span>Fast food</div>
+          <ul class="ticks">
+            <li class="win">Đạt chỉ tiêu doanh thu 6 tháng liên tiếp ngay từ cửa hàng đầu tiên được giao.</li>
+            <li class="win">Kết quả ổn định giúp được tin tưởng giao quản lý đồng thời 2 cửa hàng.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">10/2019 – 04/2020</span><div>
+          <h3>Store Manager</h3>
+          <div class="co">Gà Rán Louisiana Việt Nam</div>
+          <div class="model"><span>Mô hình</span>Fast food</div>
+          <ul class="ticks">
+            <li>Phụ trách toàn bộ vận hành, tuyển dụng, nhân sự và làm việc với nhà cung cấp.</li>
+            <li class="win">Giữ chi phí vận hành ở mức tối thiểu, đảm bảo cửa hàng đạt mục tiêu doanh thu hoặc duy trì đà tăng trưởng.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">05/2019 – 09/2019</span><div>
+          <h3>Store Manager</h3>
+          <div class="co">Công ty TNHH Huy Việt Nam</div>
+          <div class="model"><span>Mô hình</span>Casual dining</div>
+          <ul class="ticks">
+            <li class="win">Chịu trách nhiệm doanh thu cửa hàng, kiểm soát chi phí ở mức tối thiểu và duy trì doanh thu theo mục tiêu.</li>
+          </ul></div></div></li>
+        <li class="card tl reveal"><div class="row"><span class="when">03/2015 – 05/2019</span><div>
+          <h3>Nhân viên → Assistant Restaurant Manager</h3>
+          <div class="co">Golden Gate – nhãn Ba Con Cừu</div>
+          <div class="model"><span>Mô hình</span>Dining · À la carte và buffet lẩu</div>
+          <ul class="ticks">
+            <li>Thăng tiến qua 4 cấp bậc: nhân viên, Team Member Leader, Shift Supervisor, Assistant Restaurant Manager.</li>
+            <li>Được đào tạo bài bản về phân tích và kiểm soát chi phí nhà hàng; trực tiếp đào tạo nhân viên mới.</li>
+            <li class="win">Hỗ trợ quản lý đồng thời 2 chi nhánh và được đề xuất lên Restaurant Manager.</li>
+          </ul></div></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Experience summary -->
+  <section id="kinh-nghiem">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Kinh nghiệm</span>
+        <h2>Những gì 11 năm vận hành để lại</h2>
+        <p class="lead">Tổng hợp từ 6 doanh nghiệp, 4 mô hình kinh doanh, hơn 10 dự án mở mới và nhiều cửa hàng đã trực tiếp quản lý.</p>
+      </div>
+      <div class="exp-grid">
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+          <h3>Vận hành đa mô hình</h3>
+          <ul class="ticks">
+            <li>Casual dining, fast food, buffet lẩu nướng và nhà hàng dining chuyên nghiệp.</li>
+            <li>Hiểu khác biệt về quy trình, nhân sự và cấu trúc chi phí của từng mô hình.</li>
+          </ul>
+          <div class="from"><span>Papaxốt</span><span>Phúc Lộc Thọ</span><span>Ăn Được Phúc</span><span>Ba Con Cừu</span></div>
+        </article>
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+          <h3>Chi phí và lợi nhuận</h3>
+          <ul class="ticks">
+            <li>Kiểm soát COS, COL và chi phí vận hành; đọc và giải trình báo cáo lãi lỗ.</li>
+            <li>Xây menu buffet tối ưu chi phí, tối đa lợi nhuận.</li>
+            <li>Đưa cửa hàng hoàn thành chỉ tiêu doanh thu và lợi nhuận theo kỳ vọng.</li>
+          </ul>
+          <div class="from"><span>Ba Con Cừu</span><span>Ăn Được Phúc</span><span>Papaxốt</span></div>
+        </article>
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9h18v2a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M5 13v7h14v-7"/><path d="M10 20v-4h4v4"/></svg></div>
+          <h3>Mở mới và mở rộng chuỗi</h3>
+          <ul class="ticks">
+            <li>Hơn 10 dự án mở cửa hàng mới trong SWAT team.</li>
+            <li>Hỗ trợ quản lý cửa hàng mới vào guồng vận hành ổn định.</li>
+            <li>Mở rộng phạm vi quản lý từ 1 lên 5+ cửa hàng.</li>
+          </ul>
+          <div class="from"><span>Phúc Lộc Thọ</span><span>Papaxốt</span></div>
+        </article>
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7"/><path d="M3.5 17V7h10v10"/><path d="M13.5 10h4l3 4v3"/></svg></div>
+          <h3>Công suất lớn và kênh giao hàng</h3>
+          <ul class="ticks">
+            <li>Vận hành mô hình phục vụ trên 2.000 suất ăn mỗi ngày, xử lý cao điểm cùng lúc.</li>
+            <li>Làm việc với các đối tác giao hàng lớn: Grab, ShopeeFood, Be, Xanh SM.</li>
+          </ul>
+          <div class="from"><span>Phúc Lộc Thọ</span></div>
+        </article>
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M8 7c0-1.5 1-2 1-3.5M12 7c0-1.5 1-2 1-3.5M16 7c0-1.5 1-2 1-3.5"/><path d="M8 21h8"/></svg></div>
+          <h3>Am hiểu sản phẩm</h3>
+          <ul class="ticks">
+            <li>Món chảo nóng, gà rán phong cách châu Á và Âu – Mỹ.</li>
+            <li>Món thuần Việt của nhiều vùng miền.</li>
+            <li>Lẩu bò, cừu và rượu vang; buffet lẩu nướng.</li>
+          </ul>
+          <div class="from"><span>Papaxốt</span><span>Louisiana</span><span>Huy Việt Nam</span><span>Ba Con Cừu</span></div>
+        </article>
+        <article class="card exp reveal">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg></div>
+          <h3>Dịch vụ, sự kiện và đội ngũ</h3>
+          <ul class="ticks">
+            <li>Các phong cách phục vụ chuyên nghiệp theo chuẩn tập đoàn lớn.</li>
+            <li>Tổ chức sự kiện, đón tiếp và làm việc với các ê-kíp quốc tế.</li>
+            <li>Đào tạo nhân viên và quản lý, đi lên từ chính vị trí nhân viên.</li>
+          </ul>
+          <div class="from"><span>Ba Con Cừu</span><span>Papaxốt</span><span>Phúc Lộc Thọ</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section id="hoc-van">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="eyebrow">Học vấn</span>
+        <h2>Nền tảng quản trị</h2>
+      </div>
+      <div class="card edu reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9 12 4l10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></svg></div>
+        <div>
+          <h3>Cử nhân Quản trị khách sạn</h3>
+          <p>Đại học Công nghệ TP.HCM (HUTECH)</p>
+        </div>
+        <span class="yr">2014 – 2018</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="lien-he">
+    <div class="wrap">
+      <div class="card contact-card reveal">
+        <span class="eyebrow">Liên hệ</span>
+        <h2>Cần người giúp cửa hàng của bạn chạy tốt hơn?</h2>
+        <p class="lead">Nhắn Zalo hoặc gửi email để trao đổi về tư vấn, đào tạo hoặc cơ hội hợp tác.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://zalo.me/0938952436" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.6 8.6 0 0 1-3.8-.9L3 20.5l1.6-4.6A8.4 8.4 0 1 1 21 11.5z"/></svg>
+            Nhắn Zalo
+          </a>
+          <a class="btn btn-ghost" href="mailto:nguyenhoanghung190196@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Gửi email
+          </a>
+        </div>
+        <ul class="contact-list">
+          <li>Zalo: <a href="https://zalo.me/0938952436" target="_blank" rel="noopener">0938 952 436</a></li>
+          <li>Email: <a href="mailto:nguyenhoanghung190196@gmail.com">nguyenhoanghung190196<wbr>@gmail.com</a></li>
+          <li>Khu vực: <strong style="color:var(--text)">TP.HCM</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© <span id="yr">2026</span> Nguyễn Hoàng Hưng · Quản lý vận hành F&amp;B · TP.HCM</div></footer>
+
+<script>
+(function(){
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-anim');
+
+  // Reveal on scroll
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el,i){ el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms'; io.observe(el); });
+
+  // Count-up
+  var nums=document.querySelectorAll('[data-count]');
+  var co=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var el=e.target, end=+el.getAttribute('data-count'), t0=null, dur=1400;
+      function step(t){ if(!t0) t0=t; var p=Math.min((t-t0)/dur,1); p=1-Math.pow(1-p,3);
+        el.textContent=Math.round(end*p); if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step); co.unobserve(el);
+      setTimeout(function(){ el.textContent=end; }, dur+800);
+    });
+  },{threshold:.5});
+  nums.forEach(function(n){ co.observe(n); });
+
+  // Cursor glow on cards
+  document.querySelectorAll('.card').forEach(function(c){
+    c.addEventListener('pointermove',function(ev){ var r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(ev.clientX-r.left)+'px'); c.style.setProperty('--my',(ev.clientY-r.top)+'px'); });
+  });
+})();
+</script>
+</body>
+</html>
