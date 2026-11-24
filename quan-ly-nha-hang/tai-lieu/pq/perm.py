@@ -1,0 +1,41 @@
+# Nguồn duy nhất cho ma trận phân quyền: dùng cho cả Excel và app
+ROLES=[
+ ('OM','Operations Manager','Cấp 1','BOD','Toàn chuỗi (mọi cửa hàng)','Điều hành vận hành toàn chuỗi, duyệt kế hoạch và mục tiêu, phê duyệt sau AM, trước BOD.'),
+ ('AM','Area Manager','Cấp 2','OM','Các cửa hàng trong zone được giao','Quản lý zone nhiều cửa hàng: duyệt roster, chấm công, đặt hàng, hủy hàng; coaching RGM; phê duyệt trước OM.'),
+ ('RGM','Restaurant General Manager','Cấp 3','AM','1 cửa hàng','Cửa hàng trưởng: chịu trách nhiệm doanh thu, nhân sự, hàng hóa, QSC của cửa hàng.'),
+ ('ARGM','Assistant RGM','Cấp 4','RGM','1 cửa hàng','Trợ lý cửa hàng trưởng: đứng ca, mở/đóng ca, kết ca, chấm công, hỗ trợ RGM.'),
+ ('NV','Nhân viên','Cấp 5','ARGM / RGM','Dữ liệu của bản thân + lịch cửa hàng','Phục vụ, thu ngân/O2C, bếp, pha chế, KSM, tạp vụ, bảo vệ (PT1/2/3, FT1/2).'),
+]
+# key, nhóm, nội dung, OM, AM, RGM, ARGM, NV, ghi chú
+M=[
+ ('dtCH','Hôm nay','Doanh thu ngày/tuần/tháng của cửa hàng','X','X','X','X','—','AM chỉ xem cửa hàng trong zone.'),
+ ('dtChuoi','Hôm nay','So sánh doanh thu giữa các cửa hàng / cả năm','X','X','—','—','—','OM xem toàn chuỗi, AM xem zone.'),
+ ('checklist','Hôm nay','Checklist công việc theo khung giờ','X','X','S','S','S','NV chỉ tick checklist bộ phận của mình; OM/AM theo dõi.'),
+ ('soGiaoCa','Hôm nay','Sổ giao ca (logbook)','X','X','S','S','—','Ghi doanh thu, nhân sự, hàng hóa, vấn đề tồn đọng khi bàn giao ca.'),
+ ('soDo','Nhà hàng trực tiếp','Sơ đồ nhân sự đang có mặt (FOH/BOH)','X','X','X','X','X',''),
+ ('ccBanThan','Nhà hàng trực tiếp','Tự chấm công vào/ra ca của bản thân','S','S','S','S','S','NV chỉ bấm được dòng của chính mình.'),
+ ('ccHo','Nhà hàng trực tiếp','Chấm công hộ / sửa giờ công nhân viên','X','D','D','S','—','Phạt trễ theo quy định 6–9′ / 10–19′ / ≥20′.'),
+ ('lichCa','Nhà hàng trực tiếp','Lịch ca (roster)','X','D','D','S','X','Roster nộp trước 16h Chủ nhật; NV đăng ký lịch trước 17h thứ 6.'),
+ ('hoSoNV','Nhân sự','Danh sách và hồ sơ nhân viên','X','X','S','X','—',''),
+ ('luong','Nhân sự','Lương, thưởng, mức lương','D','D','X','—','—','NV chỉ xem phiếu lương của bản thân (ngoài app). Chốt lương ngày 10.'),
+ ('danhGia','Nhân sự','Đánh giá, kỷ luật (L1–L4)','D','D','S','X','—',''),
+ ('khNam','Kế hoạch','Kế hoạch năm / quý','D','S','X','X','—','Duyệt: AM → OM → BOD.'),
+ ('khThang','Kế hoạch','Kế hoạch tháng / tuần của cửa hàng','X','D','S','S','—',''),
+ ('viecNgay','Kế hoạch','Việc trong ngày','X','X','S','S','X','NV xem việc được giao.'),
+ ('mucTieu','Kế hoạch','Đặt mục tiêu doanh thu','D','S','X','X','—','KPI chốt ngày 25.'),
+ ('nhapDT','Doanh thu','Nhập doanh thu ngày, số khách (DSR)','X','X','S','S','—','DSR gửi trước 10h.'),
+ ('soDT','Doanh thu','Sổ doanh thu, biểu đồ, dự báo','X','X','X','X','—',''),
+ ('taiChinh','Doanh thu','Chi phí, %COS, %COL, lãi lỗ','X','X','X','—','—','Chức năng sắp có.'),
+ ('ketCa','Doanh thu','Kết ca, két, tiền lệch','X','X','D','S','—','Lệch cho phép 20.000đ. Chức năng sắp có.'),
+ ('datHang','Hàng hóa','Đặt hàng BTT / đặt bổ sung','X','D','S','S','—','Đặt trước 10h; bổ sung 16–22h do AM duyệt. Chức năng sắp có.'),
+ ('kiemKe','Hàng hóa','Kiểm kê, phiếu hủy, biên bản hủy','X','D','S','S','—','BB hủy thứ 2 → AM ký thứ 3. Chức năng sắp có.'),
+ ('lichLe','Lịch & nhắc việc','Lịch ngày lễ, âm lịch','X','X','X','X','X',''),
+ ('nhacViec','Lịch & nhắc việc','Lịch làm việc, nhắc việc của cửa hàng','X','S','S','S','X',''),
+ ('camNang','Cẩm nang','Cẩm nang quản lý (bản đồ công việc, kiến thức)','X','X','X','X','X','NV xem để học lên T-ARGM.'),
+ ('luuY','Cẩm nang','Lưu ý từng tháng','S','S','X','X','—',''),
+ ('saoLuu','Cài đặt','Sao lưu, khôi phục, xóa dữ liệu','D','S','S','—','—',''),
+ ('phanQuyen','Cài đặt','Phân quyền người dùng','D','X','—','—','—','Chỉ OM thay đổi; AM đề xuất.'),
+]
+STORES=[('001_PPX-QTR','Quang Trung (Gò Vấp)',''),('002_PPX-NTR','Nguyễn Trãi (Q1)',''),('003_PPX-DD','110 Đồng Đen (Tân Bình)','AM3'),('004_PPX-PH','8A Phạm Hùng (Q8)',''),
+ ('006_PPX-NTT','427 Nguyễn Thị Thập (Q7)',''),('008_PPX-SVH','760 Sư Vạn Hạnh (Q10)','AM3'),('009_PPX-ATP','Aeon Tân Phú',''),('010_PPX-NKKN','213Bis NKKN (Q3)','AM3'),
+ ('TSN','74 Tân Sơn Nhì (Tân Phú)',''),('HH','45 Hoa Hồng (Phú Nhuận)','AM3'),('Café-PCAC','Café Phượng Các (Q3)','AM3'),('NAT','Nguyễn Ảnh Thủ (khai trương 2026)','AM3')]
