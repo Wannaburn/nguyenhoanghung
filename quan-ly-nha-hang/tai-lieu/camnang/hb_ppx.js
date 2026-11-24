@@ -52,12 +52,10 @@ const DL=[
 const DLG=[['Q','Quý · nửa năm','Mốc theo quý, 6 tháng và năm'],['M','Tháng','Ngày cố định trong tháng'],['W','Tuần','Thứ cố định trong tuần'],['D','Ngày','Mốc tính theo sự việc'],['H','Giờ','Giờ chót trong ngày']];
 const ICO={Q:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',M:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.5"/>',W:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M7 14h2M11 14h2M15 14h2M7 17h2"/>',D:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',H:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
 const dlIco=(g,s)=>`<svg viewBox="0 0 24 24" width="${s||22}" height="${s||22}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[g]}</svg>`;
-function poster(kind,title,sub,body,foot,file){return`<section class="panel poster"><div class="pst-bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="path">~/papaxot/cam-nang/${file}</span><span class="kind">${esc(kind)}</span></div>
- <div class="pst-body"><div class="pst-h"><h2 class="pst-t"><span class="pr" aria-hidden="true">$</span> ${title}</h2><p><span class="cmt">// </span>${sub}</p></div>${body}<div class="pst-f"><span class="cmt">// nguồn: </span>${foot.replace(/^Nguồn:\s*/,'')}</div></div></section>`}
-function dlHot(x,dd,wd,nm){return x.g==='M'&&x.d&&x.d.includes(dd)?'Hôm nay':x.g==='W'&&x.d&&x.d.includes(wd)?'Hôm nay':x.g==='H'&&x.h&&nm<x.h&&nm>=x.h-180?'Sắp đến hạn':''}
+function poster(kind,title,sub,body,foot){return`<div class="panel poster"><div class="pst-h"><span class="lbl">${esc(kind)}</span><h2 class="pst-t">${title}</h2><p>${sub}</p></div>${body}<div class="pst-f">${foot}</div></div>`}
 function hbDeadline(){
  const t=today(),dd=t.getDate(),wd=t.getDay(),nm=nowMin(),f=U.dlG||'all',am=!!U.dlAm;
- const now=x=>dlHot(x,dd,wd,nm);
+ const now=x=>x.g==='M'&&x.d&&x.d.includes(dd)?'Hôm nay':x.g==='W'&&x.d&&x.d.includes(wd)?'Hôm nay':x.g==='H'&&x.h&&nm<x.h&&nm>=x.h-180?'Sắp đến hạn':'';
  const who=w=>`<span class="who-c ${w}">${w}</span>`;
  const sec=DLG.filter(([g])=>f==='all'||f===g).map(([g,n,s])=>{const rows=DL.filter(x=>x.g===g).map(x=>({...x,it:x.it.filter(i=>!am||i[1]==='AM')})).filter(x=>x.it.length);if(!rows.length)return'';
   return`<div class="tl2-sec"><div class="tl2-g"><span class="tl2-ico">${dlIco(g,26)}</span><div><b>${n}</b><small>${s}</small></div></div>
@@ -66,11 +64,11 @@ function hbDeadline(){
  const seg=`<div class="row"><div class="seg">${[['all','Tất cả'],...DLG.map(x=>[x[0],x[1]])].map(([k,n])=>`<button class="${f===k?'on':''}" data-act="dl-g" data-k="${k}">${n}</button>`).join('')}</div><button class="btn sm ${am?'pri':''}" data-act="dl-am" aria-pressed="${am}">Chỉ việc của AM</button></div>`;
  return poster('Mẫu 15 · Timeline','Deadline công việc hệ thống','Báo cáo và công việc theo Quý → Tháng → Tuần → Ngày → Giờ. Mốc trùng hôm nay được tô sáng.',
   seg+`<div class="legend">${['CH','AM','OM','RSC'].map(w=>`<span>${who(w)} ${{CH:'Cửa hàng làm',AM:'AM làm',OM:'OM làm',RSC:'Văn phòng / RSC làm'}[w]}</span>`).join('')}</div><div class="tl2">${sec||'<div class="empty">Không có mục nào.</div>'}</div>`,
-  'Nguồn: Deadline báo cáo công việc hệ thống, HM công việc, QT đề xuất trình ký báo cáo chi, QĐ hủy bill – hủy NVL, Career Path PPX, QĐ nộp tiền & sổ doanh thu.','deadline.ts')}
+  'Nguồn: Deadline báo cáo công việc hệ thống, HM công việc, QT đề xuất trình ký báo cáo chi, QĐ hủy bill – hủy NVL, Career Path PPX, QĐ nộp tiền & sổ doanh thu.')}
 /* Hình giải phẫu nhà hàng: mặt cắt, chú thích đánh số */
 function calloutR(pts){/* pts: [n,x,y,t1,t2] điểm đã ở hệ tọa độ ngoài; nhãn xếp cột phải */
  const top=70,gap=Math.min(78,600/Math.max(1,pts.length-1));
- return pts.map(([n,x,y,t1,t2],i)=>{const ly=top+i*gap,lx=660;return`<path d="M${x} ${y} L${lx-40} ${ly} H${lx}" class="ld"/><rect x="${x-16}" y="${y-16}" width="32" height="32" class="cn"/><text x="${x}" y="${y+7}" class="cnt">${n}</text><text x="${lx+8}" y="${ly-2}" class="lb1">${n}. ${t1}</text><text x="${lx+8}" y="${ly+26}" class="lb2">${t2}</text>`}).join('')}
+ return pts.map(([n,x,y,t1,t2],i)=>{const ly=top+i*gap,lx=660;return`<path d="M${x} ${y} L${lx-40} ${ly} H${lx}" class="ld"/><circle cx="${x}" cy="${y}" r="16" class="cn"/><text x="${x}" y="${y+7}" class="cnt">${n}</text><text x="${lx+8}" y="${ly-2}" class="lb1">${n}. ${t1}</text><text x="${lx+8}" y="${ly+26}" class="lb2">${t2}</text>`}).join('')}
 function svgRestaurant(){
  const T=(x,y)=>[Math.round(.75*x-100),Math.round(.75*y+60)];
  const pts=[[1,300,138,'Mặt tiền','Note I · Brand in–out'],[2,390,245,'Nhà vệ sinh','Note V · 7 chú ý'],[3,500,215,'Phòng quản lý','17 HM · 6 NOTE QL'],[4,742,215,'Kho · nhận hàng','5S · kiểm hàng ≤ 3 giờ'],[5,450,530,'Khu khách','Note II · III · IV'],[6,590,520,'Quầy O2C','Note III · 5S CCDC O2C'],[7,690,520,'Bếp · bar · SBOH','Note VI · 5 tiêu chuẩn sạch'],[8,790,440,'Tủ đông · tủ mát','Note đỏ · ATVSTP'],[9,877,545,'Gas · điện','Note đỏ · PCCC – ATLĐ']].map(([n,x,y,a,b])=>{const[X,Y]=T(x,y);return[n,X,Y,a,b]});
@@ -118,7 +116,7 @@ function hbOps(){
   <p class="muted">Bảo quản: đông -18°C, mát 1–8°C, vùng nguy hiểm 5–60°C; rã lần 1 HSD 12h, lần 2 6h; kiểm nhiệt tủ 3 lần/ngày. Sự cố tủ: báo AM → thùng xốp + đá khô 2kg/20kg → giữ hàng hoặc chuyển BTT.</p>`;
  return poster('Mẫu 10 · Sơ đồ giải phẫu','Giải phẫu vận hành Papaxốt','9 vị trí trong nhà hàng gắn với 17 HM, 6 NOTE, Full 5S, 5 tiêu chuẩn sạch và note an toàn đỏ.',
   svgRestaurant()+`<div class="ana-grid">${card('A','17 hạng mục vận hành · 10 ngày · 4 tuần · 3 tháng',hm,'wide')}${card('B',`6 NOTE QL · ${nd} chú ý`,n6,'wide')}${card('C','Bộ Full 5S',s5,'wide')}${card('D','5 tiêu chuẩn sạch',clean)}${card('E','Note an toàn đỏ',safe,'red')}</div>`,
-  'Nguồn: HM công việc, Bộ mở – đóng ca các vị trí & 6 note, BỘ QUY ĐỊNH FULL 5S, sổ tay quy trình PPX. Hình minh hoạ, không theo mặt bằng cửa hàng cụ thể.','van-hanh.svg')}
+  'Nguồn: HM công việc, Bộ mở – đóng ca các vị trí & 6 note, BỘ QUY ĐỊNH FULL 5S, sổ tay quy trình PPX. Hình minh hoạ, không theo mặt bằng cửa hàng cụ thể.')}
 /* Quy định: giải phẫu một nhân viên PPX */
 const QD=[
  {n:1,p:'Đầu',t:'Thăng tiến & đào tạo',s:['Career Path PPX 27.08.24','Lịch đào tạo NV'],it:[
@@ -182,7 +180,7 @@ function hbRules(){
  return poster('Mẫu 10 · Sơ đồ giải phẫu','Giải phẫu quy định Papaxốt','Toàn bộ quy định khối cửa hàng gom thành 6 nhóm, gắn lên 6 bộ phận của một nhân viên PPX. Bấm vào từng nhóm để xem chi tiết.',
   svgStaff()+`<div class="qd-grid">${QD.map(g=>{const on=open==null||open===g.n;return`<div class="ana-c qd ${on?'':'mini'}"><button class="ana-h" data-act="qd-open" data-n="${g.n}" aria-expanded="${open===g.n}"><span class="ana-n">${g.n}</span><h3>${esc(g.t)}<small>${esc(g.p)} · ${g.it.length} điểm chính</small></h3></button>
    ${on?`<ul>${g.it.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="src">${g.s.map(x=>`<span class="chip">${esc(x)}</span>`).join('')}</div>`:''}</div>`}).join('')}</div>`,
-  'Nguồn: thư mục QĐ KHỐI NHÀ HÀNG và QĐ BẾP TỔNG trên Drive. Số liệu lấy theo bản có ngày ban hành mới nhất; khi công ty ra memo mới cần cập nhật lại.','quy-dinh.md')}
+  'Nguồn: thư mục QĐ KHỐI NHÀ HÀNG và QĐ BẾP TỔNG trên Drive. Số liệu lấy theo bản có ngày ban hành mới nhất; khi công ty ra memo mới cần cập nhật lại.')}
 /* Kiến thức ngành: lộ trình Module 7–16 (Leading A Shift) */
 const MOD=[
  [7,'Sẵn sàng để lãnh đạo','Từ nhân viên thành người quản lý',['Khác biệt vai trò nhân viên và quản lý: phạm vi, trách nhiệm, quyền hạn, ảnh hưởng','Năng lực cần có của người quản lý','Kỹ năng cơ bản: phân công công việc, cho phản hồi tích cực và mang tính xây dựng, ghi nhận công lao','Xử lý phản ứng không mong đợi từ nhân viên']],
@@ -203,7 +201,7 @@ function svgRoad(){
  return`<svg class="anat road" viewBox="0 0 1080 830" role="img" aria-label="Lộ trình học Module 7 đến 16">
  <path d="${d}" class="rd"/><path d="${d}" class="rdl"/>
  <text x="60" y="90" class="lb2">Bắt đầu</text>
- ${MOD.map(([n,t],i)=>{const[x,y]=P[i];return`<g><rect x="${x-38}" y="${y-38}" width="76" height="76" class="stop"/><text x="${x}" y="${y+12}" class="stopn">${n}</text><text x="${x}" y="${y+80}" class="lb1" text-anchor="middle">${SH[i]}</text></g>`}).join('')}
+ ${MOD.map(([n,t],i)=>{const[x,y]=P[i];return`<g><circle cx="${x}" cy="${y}" r="38" class="stop"/><text x="${x}" y="${y+12}" class="stopn">${n}</text><text x="${x}" y="${y+80}" class="lb1" text-anchor="middle">${SH[i]}</text></g>`}).join('')}
  </svg>`}
 function hbIndustry(){
  const done=S.mod||{};const c=MOD.filter(m=>done[m[0]]).length;
@@ -211,4 +209,4 @@ function hbIndustry(){
   `<div class="row"><span class="lbl">Đã học</span><b class="num">${c}/10 chặng</b><div class="bar" style="flex:1;min-width:120px"><i style="width:${c*10}%"></i></div></div>`+svgRoad()+
   `<div class="mod-list">${MOD.map(([n,t,sub,pts])=>{const on=!!done[n];return`<div class="mod ${on?'on':''}"><div class="mod-h"><span class="mod-i">${`<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${MOD_ICO[n]}</svg>`}</span><div><span class="lbl">Chặng ${n-6} · Module ${n}</span><h3>${esc(t)}</h3><small>${esc(sub)}</small></div>
    <button class="btn sm ${on?'pri':''}" data-act="mod-done" data-n="${n}" aria-pressed="${on}">${on?'✓ Đã học':'Đánh dấu đã học'}</button></div><ul>${pts.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>${n===11?'<small class="muted">File Module 11 trên Drive đang trùng nội dung Module 7, ý chính viết theo tên module và chuẩn PPX. Anh gửi file đúng để em cập nhật.</small>':''}</div>`}).join('')}</div>`,
-  'Nguồn: bộ Leading A Shift – In Store Management (Trainee Guide 2020), Module 07–16 trên Drive. Dòng "Liên hệ PPX" do em nối sang quy định Papaxốt.','nganh.roadmap')}
+  'Nguồn: bộ Leading A Shift – In Store Management (Trainee Guide 2020), Module 07–16 trên Drive. Dòng "Liên hệ PPX" do em nối sang quy định Papaxốt.')}
