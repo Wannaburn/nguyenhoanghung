@@ -266,6 +266,43 @@ td.r,th.r{text-align:right}
 .floor-row b{font-family:var(--font-head)}
 .floor-row .who-list{grid-column:1/-1;display:flex;gap:5px;flex-wrap:wrap}
 .floor-row em{color:var(--saffron);font-style:normal}
+
+/* Hôm nay */
+.alerts{display:flex;flex-direction:column;gap:8px}
+.alert{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:9px;background:var(--sunk);flex-wrap:wrap}
+.alert>i{width:4px;align-self:stretch;border-radius:3px;background:var(--faint);flex:none}
+.alert .t{flex:1;min-width:180px;display:flex;flex-direction:column}
+.alert .t small{color:var(--muted);overflow-wrap:anywhere}
+.alert.red{background:var(--red-soft)}.alert.red>i{background:var(--red)}.alert.red b{color:var(--red)}
+.alert.yellow{background:var(--saffron-soft)}.alert.yellow>i{background:var(--saffron)}
+.alert.blue>i{background:var(--blue)}
+.alert.ok{background:var(--accent-soft)}.alert.ok>i{background:var(--accent)}
+.rev-line{flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-block:10px}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.timeline{display:flex;flex-direction:column}
+.tl-block{display:grid;grid-template-columns:118px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.tl-block:first-child{border-top:0}
+.tl-time{display:flex;flex-direction:column;gap:2px;border-left:3px solid var(--line);padding-left:9px}
+.tl-time b{font-family:var(--font-head);font-size:.92rem}
+.tl-time span{font-size:.68rem;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.tl-time em{font-style:normal;font-size:.72rem;font-weight:600}
+.tl-block.now{background:var(--accent-soft);border-radius:8px;padding-inline:8px}
+.tl-block.now .tl-time{border-color:var(--accent)}.tl-block.now em{color:var(--accent)}
+.tl-block.late .tl-time{border-color:var(--red)}.tl-block.late em{color:var(--red)}
+.tl-block.done .tl-time{border-color:var(--accent)}.tl-block.done{opacity:.7}
+.tl-block.future{opacity:.85}
+.tl-items .ck-t{display:flex;flex-direction:column}
+.tl-items .ck-t b{font-weight:600}
+.tl-items .ck-t small{color:var(--muted);font-size:.8rem;line-height:1.45}
+.tl-items .ck-t i{font-style:normal;font-size:.68rem;color:var(--faint)}
+.tl-items .ck.on .ck-t b{text-decoration:line-through;color:var(--muted)}
+.lb-form{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.lb-form textarea{min-height:56px}
+.lb-list{display:flex;flex-direction:column;gap:10px}
+.lb-item{border:1px solid var(--line);border-radius:9px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.lb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 16px}
+.lb-grid p{margin:2px 0 0;font-size:.86rem;white-space:pre-line}
+@media (max-width:560px){.tl-block{grid-template-columns:minmax(0,1fr);gap:6px}}
 /* Chức vụ */
 .role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .role-card{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:14px;text-align:left;display:flex;flex-direction:column;gap:4px}
@@ -453,8 +490,8 @@ function shift(level,d,n){
 /* ---------- Dữ liệu ---------- */
 const KEY='so-ke-hoach-nha-hang.v1';
 let S=null;
-function blank(){return{v:1,name:'',plans:[],revenue:{},targets:{},events:[],notes:{},sampleTargets:[],sample:false,learn:{},path:{},chk:{},staff:[],attend:{},profile:{}}}
-function load(){try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}if(!S||!S.v)S=seed();const b=blank();for(const k in b)if(S[k]==null)S[k]=b[k];if(S.sample&&(!S.staff.length||S.staff.some(x=>x.s&&!x.store))){S.staff=S.staff.filter(x=>!x.s);for(const k in S.attend)for(const id in S.attend[k]){S.attend[k][id]=S.attend[k][id].filter(r=>!r.s);if(!S.attend[k][id].length)delete S.attend[k][id]}seedStaff(S);save()}}
+function blank(){return{v:1,name:'',plans:[],revenue:{},targets:{},events:[],notes:{},sampleTargets:[],sample:false,learn:{},path:{},chk:{},staff:[],attend:{},profile:{},logbook:[]}}
+function load(){try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}if(!S||!S.v)S=seed();const b=blank();for(const k in b)if(S[k]==null)S[k]=b[k];if(S.sample&&(!S.staff.length||S.staff.some(x=>x.s&&!x.store))){S.staff=S.staff.filter(x=>!x.s);for(const k in S.attend)for(const id in S.attend[k]){S.attend[k][id]=S.attend[k][id].filter(r=>!r.s);if(!S.attend[k][id].length)delete S.attend[k][id]}seedStaff(S);save()}if(S.sample&&!S.logbook.length){seedToday(S);save()}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 
 function seed(){
@@ -483,12 +520,13 @@ function seed(){
   E('Đối chiếu công nợ nhà cung cấp',new Date(y,t.getMonth(),28),'monthly','supplier',3,'');
   E('Gia hạn giấy chứng nhận an toàn thực phẩm',addDays(t,18),'none','other',14,'');
   seedStaff(s);
+  seedToday(s);
   return s;
 }
 function clearSample(){
   S.plans=S.plans.filter(p=>!p.s);S.events=S.events.filter(e=>!e.s);
   for(const k in S.revenue)if(S.revenue[k].s)delete S.revenue[k];
-  (S.sampleTargets||[]).forEach(k=>delete S.targets[k]);S.staff=S.staff.filter(x=>!x.s);for(const k in S.attend){for(const id in S.attend[k]){S.attend[k][id]=S.attend[k][id].filter(r=>!r.s);if(!S.attend[k][id].length)delete S.attend[k][id]}}S.sampleTargets=[];S.sample=false;save();
+  (S.sampleTargets||[]).forEach(k=>delete S.targets[k]);S.logbook=(S.logbook||[]).filter(x=>!x.s);S.staff=S.staff.filter(x=>!x.s);for(const k in S.attend){for(const id in S.attend[k]){S.attend[k][id]=S.attend[k][id].filter(r=>!r.s);if(!S.attend[k][id].length)delete S.attend[k][id]}}S.sampleTargets=[];S.sample=false;save();
 }
 
 /* ---------- Doanh thu & mục tiêu ---------- */
@@ -708,13 +746,6 @@ function vHandbook(){
   <div class="panel kpi"><span class="lbl">Phạm vi</span><span class="v">${HB.length} nhóm · ${total} việc</span><span class="sub">Chia theo ngày, tuần, tháng, quý, năm</span></div></div>
   ${U.hbDomain?'':`<div class="seg">${tabs.map(([k,n])=>`<button class="${U.hbTab===k?'on':''}" data-act="hb-tab" data-k="${k}">${n}</button>`).join('')}</div>`}
   ${body}`;
-}
-function dashChecklist(){
-  const t=today();const groups=[['day','Hằng ngày',period('day',t)],['week','Trong tuần này',period('week',t)],['month',`Trong tháng ${t.getMonth()+1}`,period('month',t)]];
-  const cols=groups.map(([f,lab,p])=>{const ts=ALL_TASKS.filter(x=>x.f===f),c=S.chk[p.key]||{},n=ts.filter(x=>c[x.id]).length;
-    return`<div class="ck-col"><div class="row"><span class="lbl">${lab}</span><span class="spacer"></span><span class="num muted" style="font-size:.8rem">${n}/${ts.length}</span></div><div class="bar"><i style="width:${n/ts.length*100}%"></i></div>
-    <div class="ck-list">${ts.map(x=>`<div class="ck ${c[x.id]?'on':''}" style="--dc:var(${x.d.col})"><button class="check ${c[x.id]?'done':''}" data-act="chk" data-k="${p.key}" data-id="${x.id}" aria-label="Đánh dấu xong">${c[x.id]?'✓':''}</button><button class="ck-t" data-act="lesson" data-id="${x.id}">${esc(x.t)}<small>${esc(x.d.name)}</small></button></div>`).join('')}</div></div>`}).join('');
-  return`<div class="panel"><div class="panel-h"><div><h2>Công việc chuẩn của quản lý</h2><p class="muted" style="margin:2px 0 0;font-size:.82rem">Lấy từ Cẩm nang. Bấm tên việc để xem cách làm.</p></div><a class="btn sm" href="#cam-nang">Mở cẩm nang</a></div><div class="grid g3">${cols}</div></div>`;
 }
 function calcUpdate(box){
   const v=id=>{const s=(document.getElementById(id)||{}).value;return s?parseMoney(s):NaN},n=id=>{const s=(document.getElementById(id)||{}).value;return s?parseFloat(String(s).replace(',','.')):NaN};
@@ -1071,8 +1102,8 @@ function seedStaff(s){
 }
 
 /* ---------- Phân quyền (đồng bộ với file Phan-quyen-app-PPX.xlsx) ---------- */
-const PERM={"dtCH": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "—"}, "dtChuoi": {"OM": "X", "AM": "X", "RGM": "—", "ARGM": "—", "NV": "—"}, "checklist": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "—"}, "soDo": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "ccBanThan": {"OM": "S", "AM": "S", "RGM": "S", "ARGM": "S", "NV": "S"}, "ccHo": {"OM": "X", "AM": "D", "RGM": "D", "ARGM": "S", "NV": "—"}, "lichCa": {"OM": "X", "AM": "D", "RGM": "D", "ARGM": "S", "NV": "X"}, "hoSoNV": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "X", "NV": "—"}, "luong": {"OM": "D", "AM": "D", "RGM": "X", "ARGM": "—", "NV": "—"}, "danhGia": {"OM": "D", "AM": "D", "RGM": "S", "ARGM": "X", "NV": "—"}, "khNam": {"OM": "D", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "khThang": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "viecNgay": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "X"}, "mucTieu": {"OM": "D", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "nhapDT": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "—"}, "soDT": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "—"}, "taiChinh": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "—", "NV": "—"}, "ketCa": {"OM": "X", "AM": "X", "RGM": "D", "ARGM": "S", "NV": "—"}, "datHang": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "kiemKe": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "lichLe": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "nhacViec": {"OM": "X", "AM": "S", "RGM": "S", "ARGM": "S", "NV": "X"}, "camNang": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "luuY": {"OM": "S", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "saoLuu": {"OM": "D", "AM": "S", "RGM": "S", "ARGM": "—", "NV": "—"}, "phanQuyen": {"OM": "D", "AM": "X", "RGM": "—", "ARGM": "—", "NV": "—"}};
-const PERM_ROWS=[["dtCH", "Tổng quan", "Doanh thu ngày/tuần/tháng của cửa hàng"], ["dtChuoi", "Tổng quan", "So sánh doanh thu giữa các cửa hàng / cả năm"], ["checklist", "Tổng quan", "Checklist công việc chuẩn của quản lý"], ["soDo", "Nhà hàng trực tiếp", "Sơ đồ nhân sự đang có mặt (FOH/BOH)"], ["ccBanThan", "Nhà hàng trực tiếp", "Tự chấm công vào/ra ca của bản thân"], ["ccHo", "Nhà hàng trực tiếp", "Chấm công hộ / sửa giờ công nhân viên"], ["lichCa", "Nhà hàng trực tiếp", "Lịch ca (roster)"], ["hoSoNV", "Nhân sự", "Danh sách và hồ sơ nhân viên"], ["luong", "Nhân sự", "Lương, thưởng, mức lương"], ["danhGia", "Nhân sự", "Đánh giá, kỷ luật (L1–L4)"], ["khNam", "Kế hoạch", "Kế hoạch năm / quý"], ["khThang", "Kế hoạch", "Kế hoạch tháng / tuần của cửa hàng"], ["viecNgay", "Kế hoạch", "Việc trong ngày"], ["mucTieu", "Kế hoạch", "Đặt mục tiêu doanh thu"], ["nhapDT", "Doanh thu", "Nhập doanh thu ngày, số khách (DSR)"], ["soDT", "Doanh thu", "Sổ doanh thu, biểu đồ, dự báo"], ["taiChinh", "Doanh thu", "Chi phí, %COS, %COL, lãi lỗ"], ["ketCa", "Doanh thu", "Kết ca, két, tiền lệch"], ["datHang", "Hàng hóa", "Đặt hàng BTT / đặt bổ sung"], ["kiemKe", "Hàng hóa", "Kiểm kê, phiếu hủy, biên bản hủy"], ["lichLe", "Lịch & nhắc việc", "Lịch ngày lễ, âm lịch"], ["nhacViec", "Lịch & nhắc việc", "Lịch làm việc, nhắc việc của cửa hàng"], ["camNang", "Cẩm nang", "Cẩm nang quản lý (bản đồ công việc, kiến thức)"], ["luuY", "Cẩm nang", "Lưu ý từng tháng"], ["saoLuu", "Cài đặt", "Sao lưu, khôi phục, xóa dữ liệu"], ["phanQuyen", "Cài đặt", "Phân quyền người dùng"]];
+const PERM={"dtCH": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "—"}, "dtChuoi": {"OM": "X", "AM": "X", "RGM": "—", "ARGM": "—", "NV": "—"}, "checklist": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "S"}, "soGiaoCa": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "—"}, "soDo": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "ccBanThan": {"OM": "S", "AM": "S", "RGM": "S", "ARGM": "S", "NV": "S"}, "ccHo": {"OM": "X", "AM": "D", "RGM": "D", "ARGM": "S", "NV": "—"}, "lichCa": {"OM": "X", "AM": "D", "RGM": "D", "ARGM": "S", "NV": "X"}, "hoSoNV": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "X", "NV": "—"}, "luong": {"OM": "D", "AM": "D", "RGM": "X", "ARGM": "—", "NV": "—"}, "danhGia": {"OM": "D", "AM": "D", "RGM": "S", "ARGM": "X", "NV": "—"}, "khNam": {"OM": "D", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "khThang": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "viecNgay": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "X"}, "mucTieu": {"OM": "D", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "nhapDT": {"OM": "X", "AM": "X", "RGM": "S", "ARGM": "S", "NV": "—"}, "soDT": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "—"}, "taiChinh": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "—", "NV": "—"}, "ketCa": {"OM": "X", "AM": "X", "RGM": "D", "ARGM": "S", "NV": "—"}, "datHang": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "kiemKe": {"OM": "X", "AM": "D", "RGM": "S", "ARGM": "S", "NV": "—"}, "lichLe": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "nhacViec": {"OM": "X", "AM": "S", "RGM": "S", "ARGM": "S", "NV": "X"}, "camNang": {"OM": "X", "AM": "X", "RGM": "X", "ARGM": "X", "NV": "X"}, "luuY": {"OM": "S", "AM": "S", "RGM": "X", "ARGM": "X", "NV": "—"}, "saoLuu": {"OM": "D", "AM": "S", "RGM": "S", "ARGM": "—", "NV": "—"}, "phanQuyen": {"OM": "D", "AM": "X", "RGM": "—", "ARGM": "—", "NV": "—"}};
+const PERM_ROWS=[["dtCH", "Hôm nay", "Doanh thu ngày/tuần/tháng của cửa hàng"], ["dtChuoi", "Hôm nay", "So sánh doanh thu giữa các cửa hàng / cả năm"], ["checklist", "Hôm nay", "Checklist công việc theo khung giờ"], ["soGiaoCa", "Hôm nay", "Sổ giao ca (logbook)"], ["soDo", "Nhà hàng trực tiếp", "Sơ đồ nhân sự đang có mặt (FOH/BOH)"], ["ccBanThan", "Nhà hàng trực tiếp", "Tự chấm công vào/ra ca của bản thân"], ["ccHo", "Nhà hàng trực tiếp", "Chấm công hộ / sửa giờ công nhân viên"], ["lichCa", "Nhà hàng trực tiếp", "Lịch ca (roster)"], ["hoSoNV", "Nhân sự", "Danh sách và hồ sơ nhân viên"], ["luong", "Nhân sự", "Lương, thưởng, mức lương"], ["danhGia", "Nhân sự", "Đánh giá, kỷ luật (L1–L4)"], ["khNam", "Kế hoạch", "Kế hoạch năm / quý"], ["khThang", "Kế hoạch", "Kế hoạch tháng / tuần của cửa hàng"], ["viecNgay", "Kế hoạch", "Việc trong ngày"], ["mucTieu", "Kế hoạch", "Đặt mục tiêu doanh thu"], ["nhapDT", "Doanh thu", "Nhập doanh thu ngày, số khách (DSR)"], ["soDT", "Doanh thu", "Sổ doanh thu, biểu đồ, dự báo"], ["taiChinh", "Doanh thu", "Chi phí, %COS, %COL, lãi lỗ"], ["ketCa", "Doanh thu", "Kết ca, két, tiền lệch"], ["datHang", "Hàng hóa", "Đặt hàng BTT / đặt bổ sung"], ["kiemKe", "Hàng hóa", "Kiểm kê, phiếu hủy, biên bản hủy"], ["lichLe", "Lịch & nhắc việc", "Lịch ngày lễ, âm lịch"], ["nhacViec", "Lịch & nhắc việc", "Lịch làm việc, nhắc việc của cửa hàng"], ["camNang", "Cẩm nang", "Cẩm nang quản lý (bản đồ công việc, kiến thức)"], ["luuY", "Cẩm nang", "Lưu ý từng tháng"], ["saoLuu", "Cài đặt", "Sao lưu, khôi phục, xóa dữ liệu"], ["phanQuyen", "Cài đặt", "Phân quyền người dùng"]];
 const ROLE_INFO=[["OM", "Operations Manager", "Toàn chuỗi (mọi cửa hàng)", "Điều hành vận hành toàn chuỗi, duyệt kế hoạch và mục tiêu, phê duyệt sau AM, trước BOD."], ["AM", "Area Manager", "Các cửa hàng trong zone được giao", "Quản lý zone nhiều cửa hàng: duyệt roster, chấm công, đặt hàng, hủy hàng; coaching RGM; phê duyệt trước OM."], ["RGM", "Restaurant General Manager", "1 cửa hàng", "Cửa hàng trưởng: chịu trách nhiệm doanh thu, nhân sự, hàng hóa, QSC của cửa hàng."], ["ARGM", "Assistant RGM", "1 cửa hàng", "Trợ lý cửa hàng trưởng: đứng ca, mở/đóng ca, kết ca, chấm công, hỗ trợ RGM."], ["NV", "Nhân viên", "Dữ liệu của bản thân + lịch cửa hàng", "Phục vụ, thu ngân/O2C, bếp, pha chế, KSM, tạp vụ, bảo vệ (PT1/2/3, FT1/2)."]];
 const STORE_LIST=[["001_PPX-QTR", "Quang Trung (Gò Vấp)"], ["002_PPX-NTR", "Nguyễn Trãi (Q1)"], ["003_PPX-DD", "110 Đồng Đen (Tân Bình)"], ["004_PPX-PH", "8A Phạm Hùng (Q8)"], ["006_PPX-NTT", "427 Nguyễn Thị Thập (Q7)"], ["008_PPX-SVH", "760 Sư Vạn Hạnh (Q10)"], ["009_PPX-ATP", "Aeon Tân Phú"], ["010_PPX-NKKN", "213Bis NKKN (Q3)"], ["TSN", "74 Tân Sơn Nhì (Tân Phú)"], ["HH", "45 Hoa Hồng (Phú Nhuận)"], ["Café-PCAC", "Café Phượng Các (Q3)"], ["NAT", "Nguyễn Ảnh Thủ (khai trương 2026)"]];
 const LVO={'—':0,'X':1,'S':2,'D':3},LVN={'—':'Không','X':'Xem','S':'Sửa','D':'Duyệt'};
@@ -1088,7 +1119,8 @@ function guard(a,ds){
     case 'quick-rev':case 'edit-rev':case 'del-rev':return can('nhapDT','S');
     case 'clear-target':return can('mucTieu','S');
     case 'new-ev':case 'edit-ev':case 'del-ev':case 'ev-done':case 'hb-cal':return can('nhacViec','S');
-    case 'chk':return can('checklist','S');
+    case 'chk':return can('checklist','S')&&(myRole()!=='NV'||!ds.g||ds.g===myGroup());
+    case 'lb-read':return can('soGiaoCa');
     case 'w-in':return (S.profile.staffId===ds.id&&can('ccBanThan','S'))||can('ccHo','S');
     case 'w-new':case 'w-edit':case 'w-del':return can('hoSoNV','S');
     case 'reset-note':return can('luuY','S');
@@ -1097,7 +1129,7 @@ function guard(a,ds){
   }
   return true;
 }
-const FORM_NEED={target:()=>can('mucTieu','S'),rev:()=>can('nhapDT','S'),ev:()=>can('nhacViec','S'),staff:()=>can('hoSoNV','S')};
+const FORM_NEED={logbook:()=>can('soGiaoCa','S'),target:()=>can('mucTieu','S'),rev:()=>can('nhapDT','S'),ev:()=>can('nhacViec','S'),staff:()=>can('hoSoNV','S')};
 function applyLocks(root){
   if(!myRole())return;
   (root||document).querySelectorAll('[data-act]').forEach(el=>{if(guard(el.dataset.act,el.dataset))return;
@@ -1126,11 +1158,98 @@ function permPanel(){
   <p class="muted" style="margin:0;font-size:.8rem">D = Duyệt · S = Sửa · X = Xem · — = Không. Cột được viền là chức vụ của bạn. Chưa có đăng nhập: phân quyền giúp mỗi người thấy đúng phần việc, chưa phải bảo mật.</p></div>`;
 }
 
+const SHIFT_CL={"QL": {"n": "Quản lý", "items": [["MỞ CA", "8h00 – 9h00", "Kiểm tra bên ngoài", "Vỉa hè, bãi xe, bảng hiệu, đèn, cửa kính, cây cảnh: sạch, sáng, an toàn", "ADP"], ["MỞ CA", "8h00 – 9h00", "Kiểm tra đóng ca hôm trước", "Thiết bị, đèn, quạt hút, máy lạnh, gas; vệ sinh đóng ca của từng bộ phận", "ADP, PPX"], ["MỞ CA", "8h00 – 9h00", "Tiền & sổ bàn giao", "Kiểm doanh thu ca trước, tiền vốn, quỹ vận hành, niêm phong; ký sổ bàn giao tiền quản lý", "ADP, PLT"], ["MỞ CA", "8h00 – 9h00", "Đọc logbook", "Đọc logbook / sổ bàn giao ca, mail; ghi việc tồn đọng cần xử lý trong ngày", "ADP, PPX"], ["MỞ CA", "8h00 – 9h00", "Hàng hóa & chất lượng", "Kiểm tra xả hàng bếp, quầy ra món, bar; nhiệt độ tủ; thử cảm quan món, xốt", "PPX, ADP"], ["MỞ CA", "8h00 – 9h00", "Quầy thu ngân", "Kiểm tài sản quầy; giao tiền vốn cho thu ngân; giá và CTKM trên POS/app đúng memo, mở món đã khóa", "PPX, PLT"], ["MỞ CA", "8h00 – 9h00", "Phân công", "Kiểm tra bảng phân công 5 nhóm (Phục vụ – Thu ngân – Bar – KSM – Bếp); sổ đặt bàn hôm nay", "PPX, ADP"], ["MỞ CA", "8h00 – 9h00", "Daily checklist", "Đi một vòng kiểm tra tổng thể trước giờ đón khách: sảnh, toilet, bar, bếp, KV ra món. Đánh V/X, lỗi phải sửa ngay trong ca", "ADP"], ["MỞ CA", "9h00 – 9h30", "Briefing đầu ca", "Đồng phục, tác phong, sức khỏe NV; plan sale, TC, target thu ngân; món cần upsale; phân vị trí; CTKM; nhắc lại lỗi cũ", "PPX, ADP, HL"], ["MỞ CA", "9h30 – 10h30", "Công việc quản lý", "Chuẩn bị hàng trả; nhận và kiểm hàng nhập (cân, HSD, nhiệt độ)", "PPX"], ["MỞ CA", "9h30 – 10h30", "Công việc quản lý", "Hoàn tất đặt hàng BTT trước 10h; gửi DSR, tồn trước 10h; trả lời mail, báo cáo", "PPX"], ["GIỮA CA", "10h30 – 14h30", "Tập trung vận hành", "Thường trực ở sảnh; kiểm soát thao tác NV, chất lượng món, quy trình; hỗ trợ và hỏi ý kiến khách; kiểm soát đơn delivery", "PPX, ADP"], ["GIỮA CA", "10h30 – 14h30", "Kiểm tra 9 note", "Kiểm tra 9 note theo khung giờ quy định, 30 phút/lần", "PPX"], ["GIỮA CA", "10h30 – 14h30", "Phối hợp bộ phận", "Di chuyển giữa các bộ phận, gỡ điểm tắc; dọn bàn trong tối đa 10 phút sau khi khách về", "ADP, PL"], ["GIAO CA", "14h00 – 15h00", "Giao ca nhân viên", "Kiểm tra xả hàng, chất lượng giao ca từng bộ phận; thu ngân kiểm đếm tiền, voucher, ký sổ bàn giao", "PPX, ADP, PLT"], ["GIAO CA", "14h00 – 15h00", "Chuẩn bị ca tối", "Cập nhật hàng hóa còn/thiếu, bổ sung CCDC cho ca tối; kiểm tra đơn hàng NCC", "ADP"], ["GIAO CA", "15h00 – 16h00", "Bàn giao ca quản lý", "Bàn giao: doanh thu – nhân sự – hàng hóa – vấn đề tồn đọng ca sáng (ghi logbook)", "PPX, ADP"], ["CA TỐI", "16h00 – 17h30", "Kiểm tra ca chiều", "Xả hàng, chất lượng sản phẩm, tài sản quầy thu ngân, bảng phân công; bật bảng hiệu, đèn ngoài", "PPX, ADP"], ["CA TỐI", "16h00 – 17h30", "Doanh thu ca sáng", "Cập nhật doanh thu ca sáng, so với kế hoạch; đặt mục tiêu ca tối", "ADP"], ["CA TỐI", "17h30 – 18h00", "Briefing ca tối", "Đồng phục; plan sale, TC; món upsale; phân vị trí; CTKM; việc cần hoàn thành trong ca", "PPX, ADP"], ["CA TỐI", "18h00 – 21h00", "Tập trung vận hành", "Thường trực sảnh, kiểm soát chất lượng và quy trình, hỗ trợ khách; kiểm tra 9 note 30 phút/lần", "PPX"], ["CUỐI CA", "21h00 – 22h30", "Hàng hóa", "Đặt hàng ca tối / bổ sung (16–22h, AM duyệt); kiểm hàng sơ bộ; tổ chức NV đếm tồn vào sổ; xả hàng cho ngày mai", "PPX, ADP"], ["CUỐI CA", "21h00 – 22h30", "Vệ sinh cuối ngày", "Kiểm tra vệ sinh và chất lượng kết ca của từng bộ phận", "PPX, ADP"], ["CUỐI CA", "21h00 – 22h30", "Doanh thu", "Kết ca thu ngân cùng QL: in báo cáo, đếm tiền, voucher; hoàn tất DSR, số tồn cuối ngày; ghi sổ bàn giao tiền, niêm phong", "PPX, PLT"], ["CUỐI CA", "21h00 – 22h30", "Logbook", "Ghi vấn đề tồn đọng vào logbook; việc chưa xong đưa vào ưu tiên của ngày mai", "ADP, HL"], ["CUỐI CA", "22h30", "Đóng cửa", "Tắt điện, nước, gas, thiết bị không dùng; kiểm nhiệt độ tủ; quay clip giao ca; bàn giao bảo vệ (ký sổ), khóa cửa", "PPX, ADP"]]}, "PV": {"n": "Phục vụ", "items": [["MỞ CA", "10h00 – 10h30", "Tác phong", "Vào ca, chấm công; đồng phục đúng chuẩn; cất điện thoại vào hộp quy định", "ADP, PL"], ["MỞ CA", "10h00 – 10h30", "Kiểm tra thiết bị sảnh", "Quạt, máy bắt côn trùng, đèn, wifi, tivi, máy lạnh", "PPX"], ["MỞ CA", "10h00 – 10h30", "Vệ sinh", "Quét nhà, hành lang; nhặt lá, cây cối; bàn ghế, tủ station, vách, tranh; toilet", "PPX, PL"], ["MỞ CA", "10h30 – 11h00", "Chuẩn bị đón khách", "Lau muỗng nĩa, đũa, kéo, kẹp; khay dụng cụ; vệ sinh menu; set up bàn theo chuẩn; chuẩn bị xốt, tablet ở station", "PPX, ADP"], ["GIỮA CA", "11h00 – 14h00", "Phục vụ", "Chào – tư vấn – order – phục vụ món – take care – thanh toán; dọn bàn tối đa 10 phút sau khi khách về", "PPX, PL"], ["GIỮA CA", "11h00 – 14h00", "Duy trì", "Thường xuyên kiểm tra vệ sinh khu vực; hỗ trợ thu ngân khi khách xếp hàng đông", "ADP, PL"], ["GIAO CA", "14h00 – 17h00", "Vệ sinh giao ca", "Quét nhà, bàn ghế, station; vệ sinh CCDC cho ca sau; làm vệ sinh theo lịch phân công; bàn giao ca tối", "PPX, ADP"], ["CA TỐI", "17h00 – 18h00", "Chuẩn bị đón khách", "Như mở ca: CCDC, khay, menu, set up bàn", "PPX"], ["CA TỐI", "18h00 – 21h30", "Phục vụ", "Phục vụ theo quy trình; take care khách; dọn bàn và set up bàn mới", "PPX"], ["CUỐI CA", "21h30 – 22h30", "Vệ sinh cuối ngày", "Khu vực ngưng phục vụ; CCDC; bàn ghế và phủ kín; giặt phơi khăn; lịch vệ sinh ngày/tuần", "PPX"], ["CUỐI CA", "22h30", "Kiểm tra cuối ca", "Tắt thiết bị sảnh; báo cáo công việc với QL ca trước khi về", "PPX, ADP"]]}, "TN": {"n": "Thu ngân", "items": [["MỞ CA", "10h00 – 10h30", "Tiền", "Kiểm tiền két, doanh thu, lưu ý bàn giao ca tối hôm qua; nhận tiền vốn từ QL, kiểm tiền lẻ, ký sổ bàn giao", "PPX, ADP, PLT"], ["MỞ CA", "10h00 – 10h30", "Thiết bị", "Khởi động POS, máy in bill, giấy in, máy tool/payoo, tablet order, điện thoại bàn; đăng nhập phần mềm bằng ID của mình", "PPX, ADP, PLT"], ["MỞ CA", "10h00 – 10h30", "Giá & CTKM", "Mở món đã khóa trên app; giá và CTKM đúng memo; cập nhật CKTM trong ngày; kiểm tra mã QR thanh toán", "PLT, ADP"], ["MỞ CA", "10h30 – 11h00", "Chuẩn bị đón khách", "Tiền lẻ, giấy tờ, hóa đơn; thông tin đặt bàn (số bàn, số khách, CKTM); hỗ trợ bộ phận khác set up", "PPX, ADP"], ["GIỮA CA", "11h00 – 14h00", "Thanh toán", "Thanh toán nhanh, chính xác; bill và hóa đơn VAT đầy đủ; bill hủy phải có chữ ký NV và QL, ghi lý do", "PPX, ADP, PLT"], ["GIAO CA", "14h00 – 15h00", "Kết ca sáng", "In báo cáo kết ca; đếm tiền mặt, voucher cùng QL; bàn giao doanh thu; bàn giao tiền thối, bill chưa thanh toán, máy tool cho ca chiều; ký sổ", "PPX, ADP, PLT"], ["CA TỐI", "15h00 – 17h00", "Nhận ca chiều", "Nhận bàn giao tiền, voucher từ QL; kiểm tra lại thiết bị, set up quầy", "PLT, ADP"], ["CUỐI CA", "22h00 – 22h30", "Kết ca", "Kết ca, đếm két, bàn giao doanh thu cho QL; bàn giao thông tin cho ca sáng mai; tắt và sạc thiết bị; vệ sinh quầy", "PPX, ADP"]]}, "BEP": {"n": "Bếp", "items": [["MỞ CA", "8h00 – 8h30", "Thiết bị", "Kiểm vệ sinh ca tối hôm trước; bật và kiểm tra gas, bếp, lò, lò chiên (dầu, nhiệt độ), nồi cơm, đèn, van nước; nhiệt độ tủ đông/mát", "PPX, ADP"], ["MỞ CA", "8h00 – 8h30", "Hàng hóa", "Kiểm số lượng tồn, chất lượng, HSD: thịt, rau, xốt, hàng khô; xả hàng đông lạnh nếu cần; chỉnh ngày nhãn", "PPX"], ["MỞ CA", "8h30 – 10h30", "Chuẩn bị NL bán", "Nấu cơm, nướng gà, chiên trứng, canh súp, luộc rau mì/rau cơm, sơ chế rau, pha bột, chia kim chi; ưu tiên NL đã hết", "PPX"], ["MỞ CA", "10h30 – 11h00", "Chuẩn bị NL bán", "Ép cơm, định hình gà chiên; nhận hàng nhập (kiểm trong 3 giờ)", "PPX"], ["GIỮA CA", "11h00 – 14h00", "Làm món", "Làm món đúng định lượng, thời gian; duy trì vệ sinh khu vực (Clean as you go)", "PPX"], ["GIAO CA", "14h00 – 15h00", "Vệ sinh ca sáng", "Rửa rau, cấp đá bảo quản; bọc NL dở dang; vệ sinh thiết bị, dụng cụ, kệ inox, sàn, cống; đổ rác; bàn giao ca", "PPX"], ["CA TỐI", "15h00 – 17h30", "Chuẩn bị ca tối", "Kiểm hàng hóa; chuẩn bị NL bán; ép cơm, định hình gà", "PPX"], ["CUỐI CA", "21h00 – 22h30", "Kết ca", "Kiểm đếm tồn; cấp đông lại hàng cần thiết; xả hàng ngày mai; hủy hàng (nếu có, ghi phiếu); vệ sinh toàn bộ; úp chảo, giặt khăn", "PPX"], ["CUỐI CA", "22h30", "Đóng bếp", "Kiểm nhiệt độ tủ đông/mát; tắt thiết bị và gas không dùng", "PPX"]]}, "BAR": {"n": "Pha chế", "items": [["MỞ CA", "8h00 – 8h30", "Thiết bị", "Tủ lạnh, máy Pepsi, bình CO2, máy ép ly, ấm đun; tủ mát giữ đúng nhiệt độ", "PPX, PL"], ["MỞ CA", "8h00 – 9h00", "Chuẩn bị", "HSD, chất lượng NVL tồn (syrup, trà, nước pha sẵn, decor); set up ly, ống hút, túi, ca đong; refill NVL, báo hàng hết/gần hết", "PPX"], ["GIỮA CA", "9h00 – 14h00", "Pha chế", "Pha theo bill, đúng định lượng; giao nước đúng bill/thẻ rung; kiểm nhập hàng", "PPX"], ["GIAO CA", "14h00 – 15h00", "Vệ sinh & bàn giao", "Vệ sinh thiết bị, kệ, bồn rửa, cống; đổ rác; pha nước giao ca; kiểm tồn; bàn giao chất lượng, HSD, vấn đề phát sinh", "PPX"], ["CUỐI CA", "21h00 – 22h30", "Kết ca", "Kiểm tồn; pha nước giao ca; vệ sinh chai syrup, CCDC, thiết bị, khu vực; chà sàn", "PPX"], ["CUỐI CA", "22h30", "Kiểm tra", "Nhiệt độ tủ mát; tắt thiết bị không dùng", "PPX"]]}};
+const CL_SRC={"PPX": "PPX – Checklist bộ phận theo khung giờ", "ADP": "Ăn Được Phúc – Manager/Daily Checklist, Chi tiết công việc", "PLT": "Phúc Lộc Thọ – SOP FOH 12/2020, Sổ bàn giao tiền", "HL": "Highlands – Shift Leader Skills", "PL": "Phúc Long – Sổ tay vận hành, Lobby"};
+/* ---------- Trang Hôm nay: cảnh báo, checklist khung giờ, sổ giao ca ---------- */
+const STAFF_GROUP={pv:'PV',tn:'TN',bc:'BEP',pb:'BEP',rc:'BEP',kho:'BEP',pc:'BAR',ql:'QL'};
+function myGroup(){const p=S.profile||{};if(p.role!=='NV')return'QL';const st=S.staff.find(x=>x.id===p.staffId);return st?(STAFF_GROUP[st.role]||'PV'):'PV'}
+function parseSpan(t){const m=[...String(t).matchAll(/(\d+)h(\d*)/g)].map(x=>+x[1]*60+(+x[2]||0));return m.length>1?[m[0],m[1]]:[m[0],m[0]+15]}
+function clItems(g){return(SHIFT_CL[g]||SHIFT_CL.QL).items.map(([ph,t,gr,d,src],i)=>{const[s,e]=parseSpan(t);return{id:g+'-'+i,ph,t,g:gr,d,src,start:s,end:e}})}
+const clKey=()=>'D'+ymd(today());
+const isDone=x=>!!((S.chk[clKey()]||{})[x.id]);
+const readerName=()=>roleLabel()||'Không rõ';
+function todayAlerts(){
+  const t=today(),nm=nowMin(),out=[];
+  const staff=mySites().flatMap(siteStaff);const info=worldAt(ymd(t),Math.max(360,Math.min(1440,nm)),staff);
+  if(info.absent.length)out.push({lv:'red',t:`${info.absent.length} người có ca nhưng chưa vào ca`,d:info.absent.slice(0,6).map(x=>x.s.name+' ('+storeOf(x.s).replace(/^\d+_PPX-/,'')+')').join(', ')+(info.absent.length>6?'…':''),a:'<a class="btn sm" href="#nha-hang">Xem bản đồ</a>'});
+  if(can('nhapDT')){const yd=addDays(t,-1),k=ymd(yd);if(!S.revenue[k])out.push({lv:nm>=600?'red':'yellow',t:`Chưa nhập doanh thu ngày ${dm(yd)} (DSR)`,d:nm>=600?'Đã quá hạn 10h00.':'Hạn gửi DSR trước 10h00.',a:`<button class="btn sm pri" data-act="edit-rev" data-d="${k}">Nhập ngay</button>`})}
+  if(can('dtCH')){const yd=addDays(t,-1),e=S.revenue[ymd(yd)],tg=dayT(yd);if(e&&tg&&e.amount<tg*0.9)out.push({lv:'yellow',t:`Doanh thu hôm qua chỉ đạt ${Math.round(e.amount/tg*100)}% mục tiêu ngày`,d:`${money(e.amount)} / ${money(tg)}. Ghi nguyên nhân và hướng xử lý vào sổ giao ca.`,a:'<a class="btn sm" href="#doanh-thu">Xem doanh thu</a>'})}
+  if(can('checklist')){const g=U.clGroup||myGroup();const late=clItems(g).filter(x=>x.end<=nm&&!isDone(x));if(late.length)out.push({lv:'yellow',t:`${late.length} việc trong checklist ${SHIFT_CL[g].n} đã quá giờ nhưng chưa tick`,d:late.slice(0,3).map(x=>x.t+' · '+x.g).join('; ')+(late.length>3?'…':''),a:'<button class="btn sm" data-act="scroll-to" data-id="tl">Xem checklist</button>'})}
+  if(can('soGiaoCa')){const lim=ymd(addDays(t,-1));const un=(S.logbook||[]).filter(l=>l.date>=lim&&l.author!==readerName()&&!(l.reads||[]).includes(readerName()));if(un.length)out.push({lv:'blue',t:`${un.length} ghi chú giao ca chưa đọc`,d:un.map(l=>`${l.shift} ${dm(parse(l.date))} – ${l.author}`).join('; '),a:'<button class="btn sm" data-act="scroll-to" data-id="lb">Đọc sổ giao ca</button>'})}
+  eventsOn(t).filter(e=>!(e.done&&e.done[ymd(t)])).forEach(e=>out.push({lv:'blue',t:e.title,d:[e.time||'Trong ngày',EVT[e.type]].filter(Boolean).join(' · '),a:can('nhacViec','S')?`<button class="btn sm" data-act="ev-done" data-id="${e.id}" data-d="${ymd(t)}">Đã xong</button>`:''}));
+  upcoming(3).filter(u=>u.kind==='hol'&&u.type!=='lunar').forEach(u=>out.push({lv:'blue',t:u.title+(u.i?` · còn ${u.i} ngày`:' · hôm nay'),d:u.tip,a:''}));
+  return out;
+}
+function revLine(){
+  if(!can('dtCH'))return'';const t=today(),yd=addDays(t,-1),e=S.revenue[ymd(yd)],tgY=dayT(yd),td=S.revenue[ymd(t)],m=period('month',t),mr=revSum(m.start,t).sum,mt=target(m).v;
+  const pc=(a,b)=>b?Math.round(a/b*100)+'%':'';
+  return`<div class="panel rev-line"><span class="lbl">Doanh thu</span>
+   <span>Hôm qua <b class="num">${e?money(e.amount):'chưa nhập'}</b>${e&&tgY?` <span class="chip ${e.amount>=tgY*0.9?'done':'off'}">${pc(e.amount,tgY)}</span>`:''}</span>
+   <span>Hôm nay <b class="num">${td?money(td.amount):'chưa nhập'}</b></span>
+   <span>Tháng ${t.getMonth()+1} <b class="num">${money(mr)}</b>${mt?` <span class="muted">· ${pc(mr,mt)} mục tiêu</span>`:''}</span>
+   <span class="spacer"></span><a class="btn sm" href="#doanh-thu">Xem chi tiết ›</a></div>`;
+}
+function timeline(){
+  if(!can('checklist'))return'';
+  const p=S.profile||{},nm=nowMin(),g=U.clGroup||myGroup(),items=clItems(g),k=clKey(),c=S.chk[k]||{};
+  const tabs=p.role==='NV'?'':`<div class="seg">${Object.entries(SHIFT_CL).map(([id,x])=>`<button class="${id===g?'on':''}" data-act="cl-group" data-g="${id}">${x.n}</button>`).join('')}</div>`;
+  const blocks=[];items.forEach(x=>{const b=blocks[blocks.length-1];if(b&&b.t===x.t&&b.ph===x.ph)b.items.push(x);else blocks.push({t:x.t,ph:x.ph,start:x.start,end:x.end,items:[x]})});
+  const done=items.filter(x=>c[x.id]).length;
+  const html=blocks.map(b=>{const all=b.items.every(x=>c[x.id]);const st=all?'done':nm>=b.start&&nm<b.end?'now':nm>=b.end?'late':'future';
+    return`<div class="tl-block ${st}"><div class="tl-time"><b class="num">${esc(b.t)}</b><span>${esc(b.ph)}</span>${st==='now'?'<em>Đang diễn ra</em>':st==='late'?'<em>Quá giờ</em>':''}</div>
+      <div class="tl-items">${b.items.map(x=>`<div class="ck ${c[x.id]?'on':''}"><button class="check ${c[x.id]?'done':''}" data-act="chk" data-k="${k}" data-id="${x.id}" data-g="${g}" aria-label="Đánh dấu xong">${c[x.id]?'✓':''}</button><div class="ck-t"><b>${esc(x.g)}</b><small>${esc(x.d)}</small><i title="${esc(x.src.split(', ').map(s=>CL_SRC[s]||s).join(' · '))}">${esc(x.src)}</i></div></div>`).join('')}</div></div>`}).join('');
+  return`<div class="panel" id="tl"><div class="panel-h"><div><h2>Checklist ca hôm nay · ${esc(SHIFT_CL[g].n)}</h2><p class="muted" style="margin:2px 0 0;font-size:.82rem">Theo khung giờ PPX, tổng hợp từ tài liệu đào tạo PPX, Ăn Được Phúc, Phúc Lộc Thọ, Highlands, Phúc Long.</p></div><span class="num muted">${done}/${items.length} việc</span></div>
+   ${tabs}<div class="bar"><i style="width:${done/items.length*100}%"></i></div><div class="timeline">${html}</div></div>`;
+}
+function logbookPanel(){
+  if(!can('soGiaoCa'))return'';
+  const lim=ymd(addDays(today(),-6));const list=(S.logbook||[]).filter(l=>l.date>=lim).sort((a,b)=>b.at.localeCompare(a.at));
+  const F=[['dt','Doanh thu'],['ns','Nhân sự'],['hh','Hàng hóa'],['vd','Vấn đề tồn đọng / việc ca sau cần làm']];
+  const form=`<form class="form lb-form" data-form="logbook"><label>Ca<select id="lb-shift" name="shift"><option ${nowMin()<900?'selected':''}>Ca sáng</option><option ${nowMin()>=900?'selected':''}>Ca tối</option></select></label>
+    ${F.map(([k,n])=>`<label class="${k==='vd'?'wide':''}">${n}<textarea id="lb-${k}" name="${k}" rows="2" placeholder="${k==='dt'?'VD: Ca sáng 18,2tr, 61 khách, đạt 104% kế hoạch':k==='ns'?'VD: Minh xin về sớm 13h, thiếu 1 phục vụ ca tối':k==='hh'?'VD: Hết xốt tiêu, đã báo BTT; bò lát còn 12 phần':'VD: Máy lạnh lầu 2 chảy nước, đã gọi bảo trì'}"></textarea></label>`).join('')}
+    <div class="row wide"><span class="muted" style="font-size:.8rem">Người ghi: ${esc(readerName())}</span><span class="spacer"></span><button class="btn pri">Lưu ghi chú giao ca</button></div></form>`;
+  const items=list.map(l=>{const read=(l.reads||[]).includes(readerName())||l.author===readerName();
+    return`<div class="lb-item"><div class="row"><b>${esc(l.shift)} · ${dm(parse(l.date))}</b><span class="muted">${esc(l.author)} · ${esc(l.at.slice(11,16))}</span><span class="spacer"></span>${read?`<span class="chip done">Đã đọc</span>`:`<button class="btn sm pri" data-act="lb-read" data-id="${l.id}">Đánh dấu đã đọc</button>`}</div>
+      <div class="lb-grid">${F.filter(([k])=>l[k]).map(([k,n])=>`<div><span class="lbl">${n}</span><p>${esc(l[k])}</p></div>`).join('')}</div>
+      ${(l.reads||[]).length?`<small class="muted">Đã đọc: ${esc(l.reads.join(', '))}</small>`:''}</div>`}).join('');
+  return`<div class="panel" id="lb"><div class="panel-h"><h2>Sổ giao ca</h2><span class="muted" style="font-size:.82rem">7 ngày gần nhất</span></div>${form}<div class="lb-list">${items||'<div class="empty">Chưa có ghi chú giao ca.</div>'}</div></div>`;
+}
+function vDash(){
+  const t=today(),l=lunar(t),nm=nowMin();
+  const al=todayAlerts();
+  const todays=[...S.plans.filter(x=>x.key===`D${ymd(t)}`),...S.plans.filter(x=>x.key===period('week',t).key&&x.status!=='done')];
+  const note=(S.notes[t.getMonth()+1]??MONTH_NOTES[t.getMonth()+1]);const up=upcoming(30).filter(u=>u.i>0);
+  const alertHtml=al.length?al.map(a=>`<div class="alert ${a.lv}"><i></i><div class="t"><b>${esc(a.t)}</b><small>${esc(a.d)}</small></div>${a.a}</div>`).join(''):'<div class="alert ok"><i></i><div class="t"><b>Mọi thứ đang ổn</b><small>Không có việc gì cần xử lý gấp lúc này.</small></div></div>';
+  return`${sampleBanner()}
+  <div class="head"><div><span class="lbl">${DOW_FULL[t.getDay()]} · Tuần ${isoWeek(t)}${myRole()?' · '+esc(roleLabel()):''}</span><h1>Hôm nay, ${pad(t.getDate())}/${pad(t.getMonth()+1)}/${t.getFullYear()} · ${m2hm(nm)}</h1><p>Âm lịch: ngày ${l.d} tháng ${l.m}${l.leap?' nhuận':''} năm ${canChi(l.y)}</p></div>
+  <div class="row"><button class="btn" data-act="quick-rev">Nhập doanh thu</button><button class="btn pri" data-act="new-plan" data-l="day" data-d="${ymd(t)}">+ Việc hôm nay</button></div></div>
+  <div class="panel"><div class="panel-h"><h2>Cần chú ý</h2><span class="num muted">${al.filter(a=>a.lv!=='blue').length} việc gấp</span></div><div class="alerts">${alertHtml}</div></div>
+  ${revLine()}
+  <div class="grid g3">
+    <div class="span2">${timeline()||'<div class="panel"><div class="empty">Chức vụ của bạn không có checklist ca.</div></div>'}</div>
+    <div class="col">
+      <div class="panel"><div class="panel-h"><h2>Việc riêng hôm nay</h2><a class="btn sm" href="#ke-hoach" data-act="goto-plan" data-l="day">Kế hoạch</a></div>
+        <div class="list">${todays.length?todays.map(planItem).join(''):`<div class="empty">Chưa có việc riêng cho hôm nay.</div>`}</div></div>
+      <div class="panel"><div class="panel-h"><h2>Sắp tới</h2><a class="btn sm" href="#lich">Lịch</a></div>
+        <div class="list">${up.length?up.slice(0,6).map(upItem).join(''):`<div class="empty">Không có ngày lễ hay việc nào cần nhắc.</div>`}</div></div>
+      ${!can('luuY')?'':`<div class="panel"><div class="panel-h"><h2>Lưu ý tháng ${t.getMonth()+1}</h2><a class="btn sm" href="#luu-y">Sửa</a></div><div style="white-space:pre-line;font-size:.86rem">${esc(note)}</div></div>`}
+    </div>
+  </div>
+  ${logbookPanel()}`;
+}
+function seedToday(s){
+  const t=today(),nm=nowMin(),y=addDays(t,-1);s.logbook=s.logbook||[];
+  s.logbook.push({id:uid(),date:ymd(y),shift:'Ca tối',at:ymd(y)+'T22:35',author:'ARGM · Ngọc',dt:'Ca tối 21,4tr, 68 khách. Bàn tiệc 12 người lầu 2 đã thanh toán đủ.',ns:'Quân đi trễ 12 phút, đã nhắc nhở lần 1.',hh:'Bò lát còn 14 phần, gà phi lê 9 phần. Đã đặt bổ sung BTT.',vd:'Tủ mát số 2 lúc 21h đo 9°C, đã chuyển hàng sang tủ 1. Ca sáng gọi bảo trì.',reads:[],s:1});
+  if(nm>=900)s.logbook.push({id:uid(),date:ymd(t),shift:'Ca sáng',at:ymd(t)+'T15:05',author:'RGM · Lan',dt:'Ca sáng 17,9tr, đạt 98% kế hoạch.',ns:'Đủ người. Vy về sớm 14h theo lịch.',hh:'Hết xốt tiêu lúc 13h, đã báo BTT giao trước 16h.',vd:'Bảo trì đã sửa tủ mát số 2, nhiệt độ 4°C.',reads:[],s:1});
+  const c=s.chk['D'+ymd(t)]=s.chk['D'+ymd(t)]||{};
+  clItems('QL').forEach((x,i)=>{if(x.end<=nm&&i%5!==3)c[x.id]=1});
+}
+
 /* ---------- Trạng thái giao diện ---------- */
 const U={planLevel:'month',planDate:today(),revMonth:new Date(today().getFullYear(),today().getMonth(),1),calMonth:new Date(today().getFullYear(),today().getMonth(),1),notesYear:today().getFullYear(),hbTab:'map',hbDomain:null};
 const VIEWS=[
  ['nha-hang','Bản đồ nhà hàng','<path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-5h6v5M9 11h.01M15 11h.01"/>','Bản đồ'],
- ['tong-quan','Tổng quan','<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>','Tổng quan'],
+ ['tong-quan','Hôm nay','<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>','Hôm nay'],
  ['cam-nang','Cẩm nang','<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M9 7h6M9 11h6"/>','Cẩm nang'],
  ['ke-hoach','Kế hoạch','<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor"/>','Kế hoạch'],
  ['doanh-thu','Doanh thu','<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>','Doanh thu'],
@@ -1153,37 +1272,6 @@ function render(){
 const sampleBanner=()=>S.sample?`<div class="banner"><span>Bạn đang xem <b>dữ liệu mẫu</b> để hình dung cách dùng. Khi sẵn sàng, xóa đi và nhập số liệu thật.</span><span class="spacer"></span><button class="btn sm" data-act="clear-sample">Xóa dữ liệu mẫu</button></div>`:'';
 
 /* ---------- Tổng quan ---------- */
-function vDash(){
-  const t=today(),l=lunar(t);
-  const ps=['day','week','month','quarter','year'].map(L=>period(L,t));
-  const kp=(p,lab)=>{const r=revSum(p.start,p.end<t?p.end:t).sum,tg=target(p).v;const el=diffDays(p.start,t)+1,tot=diffDays(p.start,p.end)+1;const exp=Math.min(100,el/tot*100);const pct=tg?Math.round(r/tg*100):0;
-    return`<div class="panel kpi"><span class="lbl">${lab}</span><span class="v">${money(r)}</span><div class="bar ${tg?pctCls(pct,exp):''}"><i style="width:${Math.min(100,pct)}%"></i></div><span class="sub">${tg?`${pct}% mục tiêu ${money(tg)}${p.level!=='day'?` · thời gian đã qua ${Math.round(exp)}%`:''}`:'Chưa đặt mục tiêu'}</span></div>`};
-  const up=upcoming(45);
-  const todays=[...S.plans.filter(x=>x.key===ps[0].key),...S.plans.filter(x=>x.key===ps[1].key&&x.status!=='done')];
-  const last=[];for(let i=13;i>=0;i--)last.push(addDays(t,-i));
-  const chart=barChart(last.map(d=>dm(d)),last.map(d=>(S.revenue[ymd(d)]||{}).amount||0),last.map(d=>dayT(d)),{hi:13,h:200,aria:'Doanh thu 14 ngày gần nhất'});
-  const note=(S.notes[t.getMonth()+1]??MONTH_NOTES[t.getMonth()+1]);
-  const pr=ps.slice(1).map(p=>{const g=prog(plansIn(p));return`<div class="row"><span style="width:62px" class="muted">${LV[p.level]}</span><div class="bar spacer"><i style="width:${g.pct}%"></i></div><span class="num" style="width:74px;text-align:right">${g.d}/${g.t} xong</span></div>`}).join('');
-  return`${sampleBanner()}
-  <div class="head"><div><span class="lbl">${DOW_FULL[t.getDay()]} · Tuần ${isoWeek(t)}${myRole()?' · '+esc(roleLabel()):''}</span><h1>${pad(t.getDate())} tháng ${t.getMonth()+1}, ${t.getFullYear()}</h1><p>Âm lịch: ngày ${l.d} tháng ${l.m}${l.leap?' nhuận':''} năm ${canChi(l.y)}</p></div>
-  <div class="row"><button class="btn" data-act="quick-rev">Nhập doanh thu hôm nay</button><button class="btn pri" data-act="new-plan" data-l="day" data-d="${ymd(t)}">+ Việc hôm nay</button></div></div>
-  ${can('dtCH')?`<div class="grid g4">${kp(ps[0],'Hôm nay')}${kp(ps[1],'Tuần này')}${kp(ps[2],`Tháng ${t.getMonth()+1}`)}${kp(ps[4],`Năm ${t.getFullYear()}`)}</div>`:''}
-  ${can('checklist')?dashChecklist():''}
-  <div class="grid g3">
-    <div class="panel"><div class="panel-h"><h2>Việc cần làm</h2><a class="btn sm" href="#ke-hoach" data-act="goto-plan" data-l="day">Mở kế hoạch ngày</a></div>
-      <div class="list">${todays.length?todays.map(planItem).join(''):`<div class="empty">Chưa có việc cho hôm nay. Thêm việc để theo dõi.</div>`}</div>
-      ${eventsOn(t).length?`<span class="lbl">Lịch hôm nay</span><div class="list">${eventsOn(t).map(e=>evItem(e,t)).join('')}</div>`:''}
-    </div>
-    <div class="panel"><div class="panel-h"><h2>Sắp tới</h2><a class="btn sm" href="#lich">Xem lịch</a></div>
-      <div class="list">${up.length?up.slice(0,9).map(upItem).join(''):`<div class="empty">Không có ngày lễ hay việc nào cần nhắc.</div>`}</div></div>
-    ${!can('luuY')?'':`<div class="panel"><div class="panel-h"><h2>Lưu ý tháng ${t.getMonth()+1}</h2><a class="btn sm" href="#luu-y">Sửa</a></div>
-      <div style="white-space:pre-line;font-size:.88rem">${esc(note)}</div></div>`}
-  </div>
-  ${!can('soDT')?'':`<div class="grid g3">
-    <div class="panel span2"><div class="panel-h"><h2>Doanh thu 14 ngày</h2><span class="legend"><span><b style="color:var(--accent)">■</b> Đạt</span><span><b style="color:var(--saffron)">■</b> Dưới 90% mục tiêu</span><span><b style="color:var(--red)">- -</b> Mục tiêu ngày</span></span></div>${chart}</div>
-    <div class="panel"><h2>Tiến độ kế hoạch</h2>${pr}<p class="muted" style="margin:0;font-size:.8rem">Tính cả các việc ở cấp nhỏ hơn nằm trong kỳ. Việc "đang làm" được tính nửa.</p></div>
-  </div>`}`;
-}
 function upItem(u){const lab=u.i===0?'Hôm nay':u.i===1?'Ngày mai':`Còn ${u.i} ngày`;
   return`<div class="item"><div class="when"><b class="num">${pad(u.d.getDate())}</b><small>Th${u.d.getMonth()+1}</small></div><div class="t"><b>${esc(u.title)}</b><small>${esc(u.tip)}</small></div><span class="chip ${u.type}">${lab}</span></div>`}
 function planItem(x){const pp=period(x.level,parse(x.date));
@@ -1365,6 +1453,9 @@ document.addEventListener('click',async ev=>{
   if(myRole()&&!guard(a,ds)){toast(`Chức vụ ${myRole()} chỉ được xem phần này`);return}
   switch(a){
     case 'close':closeModal();break;
+    case 'cl-group':U.clGroup=ds.g;{const y=window.scrollY;render();window.scrollTo(0,y)}return;
+    case 'scroll-to':{const el=document.getElementById(ds.id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});return}
+    case 'lb-read':{const l=(S.logbook||[]).find(x=>x.id===ds.id);if(l){l.reads=l.reads||[];if(!l.reads.includes(readerName()))l.reads.push(readerName());save()}const y=window.scrollY;render();window.scrollTo(0,y);return}
     case 'w-in':{const td=ymd(today()),at=S.attend[td]=S.attend[td]||{},recs=at[ds.id]=at[ds.id]||[],open=recs.find(r=>!r.out),nm=m2hm(nowMin());const st=S.staff.find(x=>x.id===ds.id);if(open)open.out=nm;else recs.push({in:nm,out:null});save();toast(`${st.name} ${open?'ra ca':'vào ca'} lúc ${nm}`);if(W.live&&W.date===td)W.T=Math.max(360,Math.min(1440,nowMin()));break}
     case 'site':W.site=ds.id;W.sel=null;if(location.hash!=='#nha-hang'){location.hash='nha-hang';return}window.scrollTo(0,0);break;
     case 'map':W.site=null;W.sel=null;break;
@@ -1431,6 +1522,7 @@ document.addEventListener('submit',e=>{
     else S.plans.push({id:uid(),level:fd.level,date:fd.date,key,title:fd.title.trim(),cat:fd.cat,status:fd.status,note:fd.note});save();closeModal();toast('Đã lưu kế hoạch')}
   if(f.dataset.form==='staff'){if(!fd.name.trim())return;const days=[0,1,2,3,4,5,6].filter(d=>fd['d'+d]);if(fd.shift&&!ranges(fd.shift).length){toast('Ca làm chưa đúng. VD: 08:00-14:00, 17:00-22:00');return}const id=f.dataset.id;const o={name:fd.name.trim(),role:fd.role,shift:fd.shift,days,store:fd.store||'',zone:fd.zone||''};
     if(id){const x=S.staff.find(p=>p.id===id);Object.assign(x,o);delete x.s}else S.staff.push({id:uid(),...o});save();closeModal();toast('Đã lưu nhân viên')}
+  if(f.dataset.form==='logbook'){if(!['dt','ns','hh','vd'].some(k=>(fd[k]||'').trim())){toast('Ghi ít nhất một mục trước khi lưu');return}const n=new Date();S.logbook.push({id:uid(),date:ymd(today()),shift:fd.shift,at:ymd(today())+'T'+pad(n.getHours())+':'+pad(n.getMinutes()),author:readerName(),dt:(fd.dt||'').trim(),ns:(fd.ns||'').trim(),hh:(fd.hh||'').trim(),vd:(fd.vd||'').trim(),reads:[]});save();toast('Đã lưu ghi chú giao ca');const y=window.scrollY;render();window.scrollTo(0,y);return}
   if(f.dataset.form==='ev'){if(!fd.title.trim())return;const id=f.dataset.id;const o={title:fd.title.trim(),date:fd.date,time:fd.time,repeat:fd.repeat,type:fd.type,remind:+fd.remind||0,note:fd.note};
     if(id){const x=S.events.find(p=>p.id===id);Object.assign(x,o);delete x.s}else S.events.push({id:uid(),done:{},...o});save();closeModal();toast('Đã lưu lịch')}
   render();
