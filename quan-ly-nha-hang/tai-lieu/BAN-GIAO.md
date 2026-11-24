@@ -61,3 +61,11 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
 - Từ 24/11/2026 công ty dùng Odoo (https://papaxot.hyperdata.vn) thay KAS/SMAC.
 - Anh Hưng tải dữ liệu từ Odoo về máy tại `C:\Users\Dell\Downloads\Hưng\ClaudeCode\Dữ liệu`. **Mỗi khi cần dữ liệu, báo anh Hưng** để anh đưa file lên (Google Drive thư mục "Đào tạo AM Hưng", hoặc nối máy qua Remote Control). Phiên cloud không đọc trực tiếp được ổ C của anh.
 - Môi trường cloud "nguyenhoanghung" đã mở host papaxot.hyperdata.vn để thử lấy dữ liệu bằng API key Odoo (phiên "Sổ Kế Hoạch PPX – lấy sales T11 từ Odoo").
+
+## Doanh thu theo cửa hàng từ Odoo (24/11/2026)
+
+- Trang Doanh thu có khối "Doanh thu theo cửa hàng": thanh tiến độ so target, bảng DT thuần · % zone · bill · AOV · % CK · TB/ngày · dự báo tháng · target (nhập được, đơn vị triệu) · đạt · dự báo/target, cơ cấu kênh (tại chỗ / mang về / app), biểu đồ ngày lọc theo cửa hàng.
+- Dữ liệu nằm trong hằng `ODOO_SALES` (doanh thu từng ngày từng CH + tổng kênh). `applyOdoo()` thay doanh thu mẫu bằng tổng zone theo ngày, xóa target mẫu; target từng CH lưu `S.storeT` (mặc định theo bảng KPI tham khảo: DD 1,3 tỷ, SVH 1 tỷ, NKKN 650tr, PCAC 650tr; HH chưa có).
+- **Repo GitHub đang công khai**: trong repo `ODOO_SALES=null`. Số thật chỉ ghi vào bản sao để publish Artifact riêng tư: `python3 -I tai-lieu/odoo/import_sales.py <Sales-...xlsx> <Pivot_Doanh_thu_...xlsx> <bản sao index.html>`.
+- File nguồn kỳ 01–24/11: "Sales-T11-theo-cua-hang-ngay.xlsx" và "Pivot_Doanh_thu_papaxot.revenue.report.xlsx" (anh Hưng gửi qua upload). Chưa có số lượng bán theo món.
+
