@@ -68,4 +68,4 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
 - Dữ liệu nằm trong hằng `ODOO_SALES` (doanh thu từng ngày từng CH + tổng kênh). `applyOdoo()` thay doanh thu mẫu bằng tổng zone theo ngày, xóa target mẫu; target từng CH lưu `S.storeT` (mặc định theo bảng KPI tham khảo: DD 1,3 tỷ, SVH 1 tỷ, NKKN 650tr, PCAC 650tr; HH chưa có).
 - **Repo GitHub đang công khai**: trong repo `ODOO_SALES=null`. Số thật chỉ ghi vào bản sao để publish Artifact riêng tư: `python3 -I tai-lieu/odoo/import_sales.py <Sales-...xlsx> <Pivot_Doanh_thu_...xlsx> <bản sao index.html>`.
 - File nguồn kỳ 01–24/11: "Sales-T11-theo-cua-hang-ngay.xlsx" và "Pivot_Doanh_thu_papaxot.revenue.report.xlsx" (anh Hưng gửi qua upload). Chưa có số lượng bán theo món.
-
+- Tab "Kiến thức vận hành PPX" (25/11): chỉ còn 2 hình — mổ xẻ nhà hàng theo 6 NOTE (6 thẻ chi tiết) và "An toàn đỏ" (mặt cắt bếp – kho 8 điểm + thẻ ATVSTP, PCCC – ATLĐ, khi có sự cố). Mã nguồn `tai-lieu/camnang/hb_ops_v2.js` (thay `svgRestaurant`, `hbOps` trong hb_ppx.js).

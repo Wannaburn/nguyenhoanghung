@@ -420,6 +420,17 @@ button.ana-h{cursor:pointer}
 .st-in{width:72px;text-align:right;padding:4px 6px}
 .mixg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px}.mixg>div{display:flex;flex-direction:column;gap:3px;font-size:.84rem}.mix{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--sunk);margin-bottom:2px}.mix i{display:block;height:100%}
 @media (max-width:560px){.sb-row{grid-template-columns:52px minmax(0,1fr);}.sb-row>span{grid-column:2;font-size:.78rem}}
+
+/* An toàn đỏ, 6 NOTE */
+.n6c{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+.n6c ol{font-size:.82rem}
+.safe-h{border-bottom:2px solid var(--red);margin-top:8px}.safe-h .pst-t{color:var(--red)}
+.anat.safe-fig{border-color:var(--red)}
+.anat .tag{fill:var(--surface);stroke:var(--ink);stroke-width:1}.anat .panel{fill:var(--sunk);stroke:var(--ink);stroke-width:2}.anat .bolt{fill:var(--saffron);stroke:var(--ink);stroke-width:1}
+.anat .ext{fill:var(--red);stroke:var(--ink);stroke-width:2}.anat .exit{fill:var(--accent);stroke:var(--ink);stroke-width:2}.anat .exitt{fill:#fff;font:700 20px var(--font-head);text-anchor:middle}
+.anat .knife{fill:var(--muted)}.anat .pan{fill:none;stroke:var(--ink);stroke-width:3}.anat .pipe{fill:none;stroke:var(--red);stroke-width:3}.anat .bin{fill:var(--sunk);stroke:var(--ink);stroke-width:2}
+@media (max-width:1000px){.n6c{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.n6c{grid-template-columns:minmax(0,1fr)}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
@@ -781,10 +792,13 @@ function hbDeadline(){
 function calloutR(pts){/* pts: [n,x,y,t1,t2] điểm đã ở hệ tọa độ ngoài; nhãn xếp cột phải */
  const top=70,gap=Math.min(78,600/Math.max(1,pts.length-1));
  return pts.map(([n,x,y,t1,t2],i)=>{const ly=top+i*gap,lx=660;return`<path d="M${x} ${y} L${lx-40} ${ly} H${lx}" class="ld"/><circle cx="${x}" cy="${y}" r="16" class="cn"/><text x="${x}" y="${y+7}" class="cnt">${n}</text><text x="${lx+8}" y="${ly-2}" class="lb1">${n}. ${t1}</text><text x="${lx+8}" y="${ly+26}" class="lb2">${t2}</text>`}).join('')}
+const N6_POS=[[300,138],[450,520],[590,500],[640,430],[390,245],[690,520]];
+const N6_SUB=['Bảng hiệu · outside · bảo vệ','Sàn · bàn ghế · đèn · sạch','Đón · order · thanh toán','Gửi món · xốt · dọn bàn','Cửa · bồn · sàn · mùi','Phân công · hàng · an toàn'];
+const N6_SHORT=['Brand','Không gian','O2C','Bưng món','Nhà vệ sinh','F-B-S OH'];
 function svgRestaurant(){
  const T=(x,y)=>[Math.round(.75*x-100),Math.round(.75*y+60)];
- const pts=[[1,300,138,'Mặt tiền','Note I · Brand in–out'],[2,390,245,'Nhà vệ sinh','Note V · 7 chú ý'],[3,500,215,'Phòng quản lý','17 HM · 6 NOTE QL'],[4,742,215,'Kho · nhận hàng','5S · kiểm hàng ≤ 3 giờ'],[5,450,530,'Khu khách','Note II · III · IV'],[6,590,520,'Quầy O2C','Note III · 5S CCDC O2C'],[7,690,520,'Bếp · bar · SBOH','Note VI · 5 tiêu chuẩn sạch'],[8,790,440,'Tủ đông · tủ mát','Note đỏ · ATVSTP'],[9,877,545,'Gas · điện','Note đỏ · PCCC – ATLĐ']].map(([n,x,y,a,b])=>{const[X,Y]=T(x,y);return[n,X,Y,a,b]});
- return`<svg class="anat" viewBox="0 0 1080 760" role="img" aria-label="Mặt cắt nhà hàng Papaxốt với 9 vị trí vận hành">
+ const pts=NOTE6.map(([id,n,r],i)=>{const[X,Y]=T(...N6_POS[i]);return[i+1,X,Y,`Note ${id} · ${N6_SHORT[i]} (${r.length})`,N6_SUB[i]]});
+ return`<svg class="anat" viewBox="0 0 1080 560" role="img" aria-label="Mổ xẻ nhà hàng Papaxốt theo 6 NOTE QL">
  <g transform="translate(-100 60) scale(.75)">
  <rect x="230" y="170" width="620" height="420" class="wall"/><path d="M210 175 L540 70 L870 175 Z" class="roof"/>
  <rect x="420" y="112" width="240" height="44" rx="6" class="sign"/><text x="540" y="144" class="signt">PAPAXỐT</text>
@@ -793,42 +807,49 @@ function svgRestaurant(){
  <line x1="345" y1="370" x2="345" y2="590" class="part"/>
  ${[[400,520],[500,520]].map(([x,y])=>`<rect x="${x-35}" y="${y}" width="70" height="10" class="tbl"/><line x1="${x-25}" y1="${y+10}" x2="${x-25}" y2="590" class="part"/><line x1="${x+25}" y1="${y+10}" x2="${x+25}" y2="590" class="part"/>`).join('')}
  <rect x="560" y="470" width="60" height="120" class="counter"/>
- <line x1="640" y1="300" x2="640" y2="590" class="part"/><rect x="650" y="470" width="80" height="120" class="kit"/><circle cx="672" cy="470" r="9" class="burn"/><circle cx="708" cy="470" r="9" class="burn"/>
+ <line x1="640" y1="300" x2="640" y2="590" class="part"/><path d="M640 430 h-40" class="part"/><rect x="650" y="470" width="80" height="120" class="kit"/><circle cx="672" cy="470" r="9" class="burn"/><circle cx="708" cy="470" r="9" class="burn"/>
  <rect x="745" y="420" width="90" height="170" class="fridge"/><line x1="745" y1="500" x2="835" y2="500" class="part"/>
  <rect x="650" y="190" width="185" height="100" class="room"/><rect x="440" y="190" width="120" height="110" class="room"/><rect x="350" y="190" width="80" height="110" class="room"/>
- <rect x="860" y="500" width="34" height="90" rx="10" class="gas"/>
  </g>
+ ${calloutR(pts)}
+ </svg>`}
+function svgSafety(){
+ const pts=[[1,105,450,'Tủ đông','≤ -18°C · đo, ghi phiếu'],[2,225,450,'Tủ mát','1–8°C · rã đông tại đây'],[3,165,215,'Kệ kho','HSD · tem nhãn · sống–chín riêng'],[4,320,600,'Thùng rác','Có nắp · không bụi, mùi, ruồi'],[5,582,592,'Bình gas','Kiểm đầu ca · khóa kết ca'],[6,505,225,'Tủ điện','Thiết bị tốt · tắt khi không dùng'],[7,420,340,'Bình chữa cháy','Đúng vị trí · còn hạn · lối thoát'],[8,375,505,'Sàn · dao · chảo','Sàn khô · dao, chảo đúng chỗ']];
+ return`<svg class="anat safe-fig" viewBox="0 0 1080 700" role="img" aria-label="Mặt cắt bếp Papaxốt với 8 điểm an toàn đỏ">
+ <rect x="30" y="120" width="580" height="520" class="wall"/><line x1="10" y1="640" x2="630" y2="640" class="ground"/>
+ <text x="320" y="95" class="lb1" text-anchor="middle">BẾP · KHO</text>
+ ${[180,250,320].map(y=>`<line x1="50" y1="${y}" x2="280" y2="${y}" class="part"/>`).join('')}
+ ${[[60,140,40],[120,148,32],[190,140,40],[60,210,40],[150,214,36],[215,206,44],[70,280,40],[160,284,36]].map(([x,y,h])=>`<rect x="${x}" y="${y}" width="50" height="${h}" class="box"/><rect x="${x+8}" y="${y+8}" width="22" height="10" class="tag"/>`).join('')}
+ <rect x="50" y="380" width="110" height="260" class="fridge"/><rect x="170" y="380" width="110" height="260" class="fridge"/>
+ <text x="105" y="420" class="tiny" text-anchor="middle">-18°C</text><text x="225" y="420" class="tiny" text-anchor="middle">1–8°C</text>
+ <line x1="148" y1="470" x2="148" y2="530" class="part"/><line x1="182" y1="470" x2="182" y2="530" class="part"/>
+ <rect x="470" y="180" width="70" height="90" class="panel"/><path d="M510 195 l-14 30 h12 l-8 28 l22-36 h-12 l8-22z" class="bolt"/>
+ <rect x="405" y="315" width="30" height="70" rx="8" class="ext"/><rect x="412" y="305" width="16" height="12" class="ext"/>
+ <rect x="300" y="190" width="90" height="34" class="exit"/><text x="345" y="214" class="exitt">EXIT</text>
+ <rect x="300" y="495" width="150" height="16" class="tbl"/><line x1="312" y1="511" x2="312" y2="640" class="part"/><line x1="438" y1="511" x2="438" y2="640" class="part"/>
+ <path d="M340 492 l50 -6 l-2 6z" class="knife"/>
+ <rect x="460" y="495" width="100" height="145" class="kit"/><circle cx="485" cy="495" r="10" class="burn"/><circle cx="530" cy="495" r="10" class="burn"/><path d="M505 488 v-22 h50 v22" class="pan"/>
+ <rect x="565" y="545" width="34" height="95" rx="10" class="gas"/><path d="M582 545 v-30 h-30" class="pipe"/>
+ <rect x="300" y="585" width="40" height="55" class="bin"/><line x1="296" y1="580" x2="344" y2="580" class="ground"/>
  ${calloutR(pts)}
  </svg>`}
 function hbOps(){
  const nd=NOTE6.reduce((a,x)=>a+x[2].length,0);
- const card=(n,title,body,cls)=>`<div class="ana-c ${cls||''}"><div class="ana-h"><span class="ana-n">${n}</span><h3>${title}</h3></div>${body}</div>`;
- const hm=`<div class="hm17"><div><span class="lbl">10 hạng mục ngày</span><ol>${[...HM_DAY].sort((a,b)=>a.n-b.n).map(h=>`<li><b>${esc(h.t)}</b> <small>${h.w.map(w=>fmtH(w[0])+'–'+fmtH(w[1])).join(' & ')} · ${esc(h.tool)}</small></li>`).join('')}</ol></div>
-  <div><span class="lbl">4 hạng mục tuần</span><ol start="11">${HM_WEEK.map(h=>`<li><b>${esc(h.t)}</b></li>`).join('')}</ol><span class="lbl">3 hạng mục tháng</span><ol start="15">${HM_MONTH.map(h=>`<li><b>${esc(h.t)}</b></li>`).join('')}</ol>
-  <p class="muted">AM dùng 17 HM để kiểm tra vận hành cửa hàng trong zone. Khung giờ QL: 8h–9h mở ca, 9h–10h30 công việc QL, 10h30–14h và 17h–21h tập trung vận hành, 14h–15h giao ca, 21h–22h30 kết ca.</p></div></div>`;
- const n6=`<div class="n6g">${NOTE6.map(([id,n,r])=>`<div><b>${id}. ${esc(n)}</b> <span class="chip">${r.length} chú ý</span><ul>${r.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div><p class="muted">Tổng ${nd} chú ý, QL check ca sáng và ca tối, ghi bàn giao ca cuối bảng.</p>`;
- const sw=(bg,fg,t)=>`<span class="sw" style="background:${bg};color:${fg}">${t}</span>`;
- const G='#2e7d4f',LG='#cfe8d6',R='#c0392b',Y='#f2c94c',BR='#7a4e2d',GR='#8a8f93',W='#ffffff';
- const s5=`<div class="s5x"><div><span class="lbl">Mục tiêu</span><ul><li>Môi trường sạch sẽ, ngăn nắp</li><li>Dễ tìm, dễ lấy khi cần</li><li>Người hỗ trợ và người kiểm hiệu quả</li><li>Nâng cao kỷ luật, chuyên nghiệp</li><li>Nhân viên tự hào về nơi làm việc</li></ul>
-  <span class="lbl">Bộ full set up (7 phần)</span><ol><li>9 tiêu chuẩn set up</li><li>5 tiêu chuẩn vệ sinh</li><li>Bộ set up màu</li><li>Bộ phân bổ khu vực</li><li>Bộ liệt kê chi tiết các nhóm khu vực</li><li>Bảng vẽ sơ đồ</li><li>Bộ 3 nghiệm thu (FOH · SBOH · BOH)</li></ol>
-  <span class="lbl">Quy trình</span><p>Set up → Nghiệm thu → Bàn giao + đào tạo → Kiểm tra (bộ 3 nghiệm thu) → Duy trì (QL & NV giữ sắp xếp 5S + tiêu chuẩn 5S sạch).</p></div>
-  <div><span class="lbl">9 tiêu chuẩn set up</span><ol><li>Tên nhóm chính</li><li>Tên nhóm phụ</li><li>Bảng hướng dẫn</li><li>Dụng cụ</li><li>Thiết bị</li><li>Nguyên liệu</li><li>Kho + kệ (có tab treo 5S)</li><li>Tab treo 5S</li><li>Kiểm tra set up 5S màu (chất liệu, kích thước, màu, tab treo)</li></ol>
-  <span class="lbl">Bộ màu nhãn</span><table class="sw-t"><thead><tr><th>Loại</th><th>FOH</th><th>BOH</th></tr></thead><tbody>
-  <tr><td>Nhóm chính · 7×20</td><td>${sw(G,W,'Xanh lá')}</td><td>${sw(LG,'#111','Nhận hàng')} ${sw(R,W,'Bếp')} ${sw(BR,W,'Hỗ trợ')} ${sw(Y,'#111','Điện')}</td></tr>
-  <tr><td>Nhóm phụ</td><td>${sw(LG,'#111','Xanh nhạt 4×10')}</td><td>${sw('#2f6fa3',W,'7×10')}</td></tr>
-  <tr><td>Bảng hướng dẫn</td><td>${sw(W,'#111','Trắng')}</td><td>${sw(W,'#111','Trắng')}</td></tr>
-  <tr><td>Dụng cụ · 2,5×6</td><td>${sw(LG,'#111','Xanh nhạt')}</td><td>${sw(G,W,'Xanh lá')}</td></tr>
-  <tr><td>Thiết bị · 2,5×6</td><td>${sw(R,W,'Đỏ')}</td><td>${sw(R,W,'Đỏ')}</td></tr>
-  <tr><td>Nguyên liệu · 2,5×6</td><td>${sw(Y,'#111','Vàng')}</td><td>${sw(Y,'#111','Vàng')}</td></tr>
-  <tr><td>Kho · 2,5×6</td><td>${sw(BR,W,'Nâu')}</td><td>${sw(GR,W,'Xám')}</td></tr>
-  <tr><td>5S</td><td>${sw(W,'#111','Trắng')}</td><td>${sw(W,'#111','Trắng')}</td></tr></tbody></table>
-  <small class="muted">Nhóm phụ BOH: file ghi "Nâu CF" nhưng mô tả "nền xanh dương chữ đen", em để theo mô tả, anh xác nhận lại.</small></div></div>`;
- const clean=`<ol class="big5">${S5_STD.map((x,i)=>`<li><b>${i+1}</b><span>${esc(x)}</span></li>`).join('')}</ol><p class="muted">Áp dụng cho từng khu vực: FOH (Khách hàng, O2C, Phục vụ, Bar), SBOH (check món, giao món, trộn món, clear, tạp vụ, giặt khô, rác), BOH (nhận hàng, kho, bếp trong, phụ bếp). Khăn: xanh lá lau ướt, vàng lau khô, xanh dương bếp/kính, trắng muỗng nĩa, nâu đế gỗ; CIF pha 1:3; lau 1 chiều.</p>`;
- const safe=`<div class="sf2">${SAFE.map(([n,r])=>`<div><b>${esc(n)}</b><ul>${r.map(([x,s])=>`<li>${esc(x)}${s==='?'?' <span class="chip ask">chờ xác nhận</span>':''}</li>`).join('')}</ul></div>`).join('')}</div>
-  <p class="muted">Bảo quản: đông -18°C, mát 1–8°C, vùng nguy hiểm 5–60°C; rã lần 1 HSD 12h, lần 2 6h; kiểm nhiệt tủ 3 lần/ngày. Sự cố tủ: báo AM → thùng xốp + đá khô 2kg/20kg → giữ hàng hoặc chuyển BTT.</p>`;
- return poster('Mẫu 10 · Sơ đồ giải phẫu','Giải phẫu vận hành Papaxốt','9 vị trí trong nhà hàng gắn với 17 HM, 6 NOTE, Full 5S, 5 tiêu chuẩn sạch và note an toàn đỏ.',
-  svgRestaurant()+`<div class="ana-grid">${card('A','17 hạng mục vận hành · 10 ngày · 4 tuần · 3 tháng',hm,'wide')}${card('B',`6 NOTE QL · ${nd} chú ý`,n6,'wide')}${card('C','Bộ Full 5S',s5,'wide')}${card('D','5 tiêu chuẩn sạch',clean)}${card('E','Note an toàn đỏ',safe,'red')}</div>`,
-  'Nguồn: HM công việc, Bộ mở – đóng ca các vị trí & 6 note, BỘ QUY ĐỊNH FULL 5S, sổ tay quy trình PPX. Hình minh hoạ, không theo mặt bằng cửa hàng cụ thể.')}
+ const n6=`<div class="n6c">${NOTE6.map(([id,n,r],i)=>`<div class="ana-c"><div class="ana-h"><span class="ana-n">${i+1}</span><h3>Note ${id} · ${esc(n)}<small>${r.length} chú ý · ${esc(N6_SUB[i])}</small></h3></div><ol>${r.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</div>`;
+ const card=(n,t,body,cls)=>`<div class="ana-c ${cls||''}"><div class="ana-h"><span class="ana-n">${n}</span><h3>${t}</h3></div>${body}</div>`;
+ const li=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+ const q=' <span class="chip ask">chờ xác nhận</span>';
+ const sA=card('A','ATVSTP · an toàn vệ sinh thực phẩm',li(SAFE[0][1].map(([x,s])=>esc(x)+(s==='?'?q:'')))+
+  `<span class="lbl">Bảo quản & HSD</span>`+li(['Tủ đông -18°C, tủ mát 1–8°C; vùng nguy hiểm 5–60°C','Kiểm nhiệt độ tủ 3 lần/ngày, ghi phiếu theo dõi','Rã đông lần 1: HSD 12h; lần 2: 6h; không cấp đông lại lần 2','HSD: đông lạnh 30 ngày · mì miến 96h · kim chi 14 ngày · rau 72h · bánh mì 24h','Rau sơ chế: ngâm muối 3 phút (4gr/1L), rửa 3 lần','Kiểm hàng nhập trễ nhất 3 giờ sau khi xe xuống hàng']),'red');
+ const sB=card('B','PCCC – ATLĐ · an toàn lao động',li(SAFE[1][1].map(([x,s])=>esc(x)+(s==='?'?q:'')))+
+  `<span class="lbl">Kết ca</span>`+li(['Tắt thiết bị không dùng, kiểm nhiệt độ tủ','Khóa điện, nước, gas, cửa → quay clip kết ca','Bàn giao bảo vệ, ký sổ']),'red');
+ const sC=card('C','Khi có sự cố',li(['<b>Tủ đông/mát hư:</b> báo AM → chuyển hàng vào thùng xốp + đá khô 2kg/20kg → giữ hàng hoặc chuyển về BTT','<b>Hàng nhập lỗi, cận/hết date:</b> nhắn group bếp @QC trong ngày; quá hạn không có QC xác nhận thì CH chịu đền','<b>Hàng hết HSD tại CH:</b> hủy có tính đền, phải trả hàng về Bếp tổng kèm phiếu','<b>Tai nạn, cháy nổ:</b> ưu tiên an toàn người, báo QL ca → AM → OM']),'red');
+ return poster('Mẫu 10 · Sơ đồ giải phẫu','Mổ xẻ Papaxốt theo 6 NOTE',`6 khu vực QL kiểm mỗi ca sáng và ca tối, tổng ${nd} chú ý. Sau đó là hình "An toàn đỏ".`,
+  svgRestaurant()+n6+
+  `<div class="pst-h safe-h"><span class="lbl">Hình 2</span><h2 class="pst-t">An toàn đỏ</h2><p>8 điểm nguy cơ trong bếp – kho. Không đạt thì dừng việc khác để xử lý ngay.</p></div>`+
+  svgSafety()+`<div class="ana-grid">${sA}${sB}${sC}</div>`,
+  'Nguồn: Bộ mở – đóng ca các vị trí & 6 note, sổ tay quy trình PPX, QĐ hủy bill – hủy NVL 2025. Hình minh hoạ, không theo mặt bằng cửa hàng cụ thể.')}
+
 /* Quy định: giải phẫu một nhân viên PPX */
 const QD=[
  {n:1,p:'Đầu',t:'Thăng tiến & đào tạo',s:['Career Path PPX 27.08.24','Lịch đào tạo NV'],it:[
