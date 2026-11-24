@@ -36,7 +36,8 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
    - **Kiến thức vận hành PPX** (mẫu 10 giải phẫu): mặt cắt nhà hàng 9 vị trí + thẻ A–E: 17 HM, 6 NOTE, Full 5S (9 tiêu chuẩn set up, bộ màu FOH/BOH), 5 tiêu chuẩn sạch, note an toàn đỏ.
    - **Quy định công ty** (mẫu 10 giải phẫu): nhân viên PPX với 6 bộ phận = 6 nhóm `QD` (thăng tiến – đào tạo; lương thưởng phúc lợi; nội quy tác phong; tiền & chi phí; hàng hóa; vận hành & sự vụ).
    - **Kiến thức ngành** (mẫu 02 lộ trình): Module 7–16 bộ Leading A Shift (`MOD`), đánh dấu đã học lưu `S.mod`. File Module 11 trên Drive trùng nội dung Module 7.
-   - 3 tab cũ (Bản đồ công việc, Lộ trình 90 ngày, Kiến thức & công thức) vẫn giữ, nội dung cũ chưa viết lại theo PPX.
+   - Đã bỏ 3 tab cũ (Bản đồ công việc, Lộ trình 90 ngày, Kiến thức & công thức) khỏi giao diện; code cũ (`HB`, `hbMap`, `hbPath`, `hbKb`) còn trong file nhưng không hiển thị.
+   - Giao diện kiểu code (`patch_code_style.py`): góc vuông, font JetBrains Mono, thanh cửa sổ terminal kèm tên file (deadline.ts, van-hanh.svg, quy-dinh.md, nganh.roadmap), nền lưới, 4 ô chỉ số dạng biến (deadline.homNay, vanHanh.hangMuc, quyDinh.nhom, module.daHoc).
 5. **Kế hoạch** Năm → Quý → Tháng → Tuần → Ngày, mục tiêu doanh thu tự chia xuống.
 6. **Doanh thu** (chung một quán, chưa tách theo cửa hàng), **Lịch** (âm lịch Hồ Ngọc Đức, ngày lễ VN, nhắc việc lặp), **Lưu ý tháng**, **Cài đặt** (bảng quyền, đổi chức vụ, sao lưu).
 
