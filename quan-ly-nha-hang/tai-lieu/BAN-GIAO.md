@@ -22,11 +22,15 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
    - SVH: Lầu 1, Trệt (*giả định hoàn toàn*).
    - Chờ anh Hưng xác nhận các phần giả định và việc có thêm NAT hay không.
    Thanh thời gian, tua cả ngày, chấm công vào/ra ca, lịch ca dạng Gantt, nhân viên có `store` và `zone` (floorId:partIndex).
-3. **Hôm nay** (`#tong-quan`, đã đổi từ Tổng quan để bỏ trùng với Doanh thu):
-   - Cần chú ý: chưa vào ca, chưa nhập DSR (quá 10h là đỏ), DT hôm qua < 90%, checklist quá giờ, giao ca chưa đọc, nhắc việc, ngày lễ.
-   - Doanh thu một dòng.
-   - Checklist ca theo khung giờ `SHIFT_CL` (QL, PV, TN, BEP, BAR), tick lưu ở `S.chk['D'+ngày]`.
-   - Sổ giao ca `S.logbook` (Doanh thu, Nhân sự, Hàng hóa, Vấn đề tồn đọng, đã đọc).
+3. **Hôm nay** (`#tong-quan`), viết lại 24/11/2026 theo **17 hạng mục vận hành PPX** (10 ngày, 4 tuần, 3 tháng):
+   - Nguồn: Drive "Đào tạo AM Hưng": `HM công việc.xlsx` (giờ, công cụ), `QĐ KHỐI NHÀ HÀNG/Bộ mở - đóng ca các vị trí & 6 note.xlsx`, `QĐ KHỐI NHÀ HÀNG/BỘ QUY ĐỊNH FULL 5S.xlsx`.
+   - Dữ liệu trong app: `HM_DAY`, `HM_WEEK`, `HM_MONTH`, `OC` (bộ mở/đóng ca QL, PV, O2C, PC, KSM, BEP), `NOTE6` (47 chú ý), `SAFE` (note an toàn đỏ), `S5_STD`/`S5_AREA` (5 tiêu chuẩn sạch × 9 khu vực).
+   - Lưu ở `S.ops['D<ngày>|<mã CH>']`, `W<năm>-<tuần>|CH`, `M<yyyy-mm>|CH`; khóa `hm<n>.<lượt>`, `oc.<nhóm>.<o|c>.<i>.<ca>`, `n6.<mục>.<i>.<ca>`, `sf.<nhóm>.<i>.<ca>`, `s5.<khu>.<chuẩn>` = ok/ng, `note.<n>`, `w<n>`, `m<n>`. Đã tách theo cửa hàng, dùng được cho trang Điều hành zone.
+   - Bố cục: Cần chú ý (thêm: HM ngày quá giờ, note an toàn đỏ chưa xong trước 13h / 20h) → tổng 17 HM (chọn CH) → Note an toàn đỏ → 10 HM ngày theo giờ (mở rộng: HM1 bộ mở/đóng ca, HM9 6 note, HM10 5S, HM2 DSR) | cột phải: HM tuần/tháng, doanh thu, việc riêng, sắp tới → sổ giao ca.
+   - NV chỉ thấy và tick bộ mở/đóng ca của bộ phận mình.
+   - Checklist khung giờ cũ (`SHIFT_CL`, tổng hợp nhiều thương hiệu) đã bỏ khỏi app; file `tai-lieu/daily/` giữ làm tham khảo.
+   - **Chờ anh Hưng xác nhận**: 3 mục note an toàn đỏ đánh dấu "chờ xác nhận" (sống–chín/sát sàn, bình chữa cháy/lối thoát hiểm, sàn bếp/dao chảo); giờ của HM 8–10 lấy theo khung "Tập trung vận hành" 10h30–14h & 17h–21h; HM tuần/tháng chưa có thứ/ngày hạn trong file nên chỉ tick trong tuần/tháng.
+   - Script: `tai-lieu/hm17/patch_homnay.py` (đã chạy, chỉ để lưu vết).
 4. **Cẩm nang**: 47 công việc / 7 nhóm / 5 tần suất, lộ trình 90 ngày, kiến thức + máy tính nhanh. Nội dung do Claude tự viết theo kiến thức chung, chưa theo chuẩn PPX. Đã liệt kê các chỗ lệch (tủ mát 1–8°C, kiểm nhiệt 3 lần/ngày, BLAST, tốc độ ra món, kiểm hàng nhập ≤3h). Đã đề xuất viết lại theo sổ tay PPX, chưa làm.
 5. **Kế hoạch** Năm → Quý → Tháng → Tuần → Ngày, mục tiêu doanh thu tự chia xuống.
 6. **Doanh thu** (chung một quán, chưa tách theo cửa hàng), **Lịch** (âm lịch Hồ Ngọc Đức, ngày lễ VN, nhắc việc lặp), **Lưu ý tháng**, **Cài đặt** (bảng quyền, đổi chức vụ, sao lưu).
