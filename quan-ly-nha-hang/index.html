@@ -16,7 +16,7 @@
   --ink:#18221d; --muted:#5d6a62; --faint:#8a968e;
   --accent:#1f6b4f; --accent-ink:#ffffff; --accent-soft:#dcebe3;
   --saffron:#c98714; --saffron-soft:#f8ecd3;
-  --red:#b93a26; --red-soft:#f6e0db; --blue:#2c5f8a; --blue-soft:#dde8f1;
+  --red:#b93a26; --red-soft:#f6e0db; --blue:#2c5f8a; --blue-soft:#dde8f1; --plum:#7a4a8c; --plum-soft:#ece2f0;
   --plum:#7a3f7a; --teal:#17707a; --clay:#8a5a2b;
   --font-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-head:"Lexend","Be Vietnam Pro",system-ui,sans-serif;
@@ -27,7 +27,7 @@
   --ink:#e4ebe6; --muted:#a2b0a8; --faint:#76847c;
   --accent:#4fb38a; --accent-ink:#0b1410; --accent-soft:#1d3a2e;
   --saffron:#e6ae4a; --saffron-soft:#3a2f17;
-  --red:#ec7b66; --red-soft:#3d221d; --blue:#7fb2dc; --blue-soft:#1c2c3a;
+  --red:#ec7b66; --red-soft:#3d221d; --blue:#7fb2dc; --blue-soft:#1c2c3a; --plum:#c79ad8; --plum-soft:#33253a;
   --plum:#cf93cf; --teal:#5fc3cd; --clay:#d6a26c;
   color-scheme:dark}}
 :root[data-theme="dark"]{
@@ -35,7 +35,7 @@
   --ink:#e4ebe6; --muted:#a2b0a8; --faint:#76847c;
   --accent:#4fb38a; --accent-ink:#0b1410; --accent-soft:#1d3a2e;
   --saffron:#e6ae4a; --saffron-soft:#3a2f17;
-  --red:#ec7b66; --red-soft:#3d221d; --blue:#7fb2dc; --blue-soft:#1c2c3a;
+  --red:#ec7b66; --red-soft:#3d221d; --blue:#7fb2dc; --blue-soft:#1c2c3a; --plum:#c79ad8; --plum-soft:#33253a;
   --plum:#cf93cf; --teal:#5fc3cd; --clay:#d6a26c;
   color-scheme:dark}
 *{box-sizing:border-box}
@@ -406,6 +406,47 @@ button.ana-h{cursor:pointer}
 .mod-h{display:flex;gap:10px;align-items:flex-start}.mod-h>div{flex:1;min-width:0}.mod-h small{color:var(--muted)}
 .mod-i{width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;flex:none}
 .mod ul{margin:0;padding-left:20px;font-size:.86rem;display:flex;flex-direction:column;gap:3px}
+.dlx-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch}
+.dlx{border-collapse:collapse;width:100%;min-width:960px;font-size:.84rem}
+.dlx th{background:var(--ink);color:var(--bg);text-align:left;padding:8px;font-weight:700;white-space:nowrap}
+.dlx td{border-top:1px solid var(--line);padding:7px 8px;vertical-align:top;white-space:normal;background:var(--surface)}
+.dlx td+td,.dlx th+th{border-left:1px solid var(--line)}
+.dlx .dlx-t{position:sticky;left:0;z-index:1;min-width:120px;max-width:150px;box-shadow:2px 0 0 var(--line)}
+.dlx th.dlx-t{background:var(--ink);z-index:2}
+.dlx-t b{display:block;font-family:var(--font-head)}
+.dlx-t em{display:inline-block;margin-top:4px;font-style:normal;font-weight:700;font-size:.72rem;background:var(--saffron);color:#fff;border-radius:4px;padding:1px 6px}
+.dlx-c{min-width:200px}.dlx-f{white-space:nowrap!important}
+.dlx .dlx-o{text-align:center;width:46px;padding:6px 2px}
+.dlx th.dlx-o{white-space:normal;line-height:1.2;font-size:.74rem}
+.dlx tr.hot td{background:var(--saffron-soft)}
+.dlx-g td{background:var(--sunk);padding:9px 10px}
+.dlx-g b{font-family:var(--font-head);font-size:1rem;margin:0 8px 0 6px}.dlx-g small{color:var(--muted)}
+.dlx-gi{display:inline-block;vertical-align:-4px}
+.dlx-x{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;font-size:.72rem}
+.dlx-x.C{background:var(--accent);color:var(--accent-ink)}.dlx-x.A{background:var(--saffron);color:#fff}.dlx-x.O{background:var(--red);color:#fff}
+.dlx-hint{display:none;font-size:.78rem;margin:0}
+.plan6,.plan8{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:14px;border:3px solid var(--ink);border-radius:12px;background:var(--bg);position:relative}
+.plan6{grid-template-areas:"boh boh wc" "lane lane lane" "khach khach o2c" "front front front";grid-template-rows:auto auto minmax(140px,auto) auto;margin-bottom:22px}
+.z1{--zc:var(--red);--zs:var(--red-soft)}.z2{--zc:var(--accent);--zs:var(--accent-soft)}.z3{--zc:var(--saffron);--zs:var(--saffron-soft)}
+.z4{--zc:var(--blue);--zs:var(--blue-soft)}.z5{--zc:var(--plum);--zs:var(--plum-soft)}.z6{--zc:var(--ink);--zs:var(--sunk)}
+.pz{display:grid;grid-template-columns:auto 1fr;align-items:center;align-content:start;gap:4px 8px;text-align:left;border:2px solid var(--zc);background:var(--zs);border-radius:8px;padding:12px;cursor:pointer;color:var(--ink);font:inherit;min-height:84px;min-width:0}
+.pz b,.pz small{grid-column:1/-1}.pz b{font-family:var(--font-head);font-size:1.05rem;line-height:1.2}.pz small{color:var(--muted);font-size:.76rem}
+.pz-n{width:30px;height:30px;border-radius:50%;background:var(--zc);color:var(--bg);display:grid;place-items:center;font-weight:700;font-family:var(--font-head)}
+.pz-i{color:var(--zc);display:flex}
+.pz.z4{border-style:dashed;min-height:0}
+.pz.on{outline:3px solid var(--ink);outline-offset:2px}.pz:hover{filter:brightness(.97)}
+.pz-door{position:absolute;bottom:-13px;right:16%;background:var(--bg);border:2px solid var(--ink);border-radius:6px;padding:0 8px;font-size:.74rem;font-weight:700}
+.n6k{border-top:4px solid var(--zc)}.n6k .ana-n{background:var(--zc);color:var(--bg)}
+.plan8{grid-template-areas:"kho dong mat" "dien san gas" "pccc san rac"}
+.sz{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-content:start;border:2px solid var(--zc);background:var(--zs);border-radius:8px;padding:12px;min-height:96px;min-width:0}
+.sz.A{--zc:var(--red);--zs:var(--red-soft)}.sz.B{--zc:var(--saffron);--zs:var(--saffron-soft)}
+.sz-n{width:30px;height:30px;border-radius:50%;background:var(--zc);color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--font-head)}
+.sz b{display:block;font-family:var(--font-head);line-height:1.2}.sz small{color:var(--muted);font-size:.78rem}
+.sz em{grid-column:1/-1;font-style:normal;font-size:.68rem;font-weight:700;color:var(--zc);letter-spacing:.04em}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px}.sw.A{background:var(--red)}.sw.B{background:var(--saffron)}
+@media (max-width:820px){.dlx-hint{display:block}}
+@media (max-width:560px){.plan6,.plan8{padding:8px;gap:5px}.pz,.sz{padding:8px}.pz b{font-size:.92rem}.pz-i{display:none}
+ .plan8{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"kho dong" "mat rac" "dien gas" "pccc san"}}
 @media (max-width:820px){.ana-grid,.qd-grid,.hm17,.s5x,.mod-list{grid-template-columns:minmax(0,1fr)}.n6g{grid-template-columns:repeat(2,minmax(0,1fr))}.tl2-n{grid-template-columns:minmax(0,1fr);padding-left:24px;margin-left:12px}.pst-t{font-size:1.35rem}}
 @media (max-width:460px){.n6g{grid-template-columns:minmax(0,1fr)}}
 
@@ -726,116 +767,93 @@ function barChart(labels,vals,tgts,opt={}){
    Career Path PPX 27.08.24.xlsx, QT ĐỀ XUẤT VÀ TRÌNH KÝ BÁO CÁO CHI 03.02.23.xlsx, QĐ Kiểm soát - đối chiếu hàng hóa, tiền.xlsx,
    2025 - QUY ĐỊNH HỦY BILL - HỦY NVL - ĐIỀU CHUYỂN.xlsx, 2025 - QUY TRÌNH BÁO - ĐẶT HÀNG.xlsx, Hướng dẫn xử lý sự việc.xlsx,
    bộ Leading A Shift Module 7–16. */
+/* Cẩm nang bản 3.
+   1) Deadline công việc: bảng giống file "Deadline báo cáo công việc hệ thống.xlsx" (Thời gian | Nội dung | Người nhận | Hình thức | x người thực hiện).
+   2) Kiến thức vận hành: sơ đồ mặt bằng 6 khu theo 6 NOTE + mặt bằng bếp – kho "An toàn đỏ" (HTML grid, không dùng đường chỉ dẫn). */
+/* it: [nội dung, người nhận, hình thức, người thực hiện] — mã người thực hiện theo cột DLC */
+const DLC=[['C','CH'],['A','AMs'],['D','Ms. Dung'],['M','Ms. Mai'],['L','Ms. Ly · Ngọc'],['N','Ms. Nhi'],['T','Ms. Thơm'],['K','MKT'],['B','Mr. Đoan'],['O','OM']];
 const DL=[
- {g:'Q',t:'25/01 · 25/07',w:'Nửa năm',it:[['CH gửi đề xuất thăng chức (đợt T03 – T09)','CH','AM','Mail']]},
- {g:'Q',t:'30/01 · 30/07',w:'Nửa năm',it:[['AM tổng hợp đề xuất thăng chức','AM','Ms. Dung','Mail']]},
- {g:'Q',t:'25/02 · 25/08',w:'Nửa năm',it:[['RGM gửi đề xuất nâng bậc (thâm niên đến 1/3 hoặc 1/9 ≥ 6 tháng, đã test P/B > 80%)','CH','AM','Promotion']]},
- {g:'Q',t:'Trước 20/02 · 20/08',w:'Nửa năm',it:[['Thi nâng bậc lý thuyết (≥ 80%)','RSC','','']]},
- {g:'Q',t:'Trước 20/03 · 20/09',w:'Nửa năm',it:[['Thi nâng bậc thực hành (Đạt)','RSC','','']]},
- {g:'Q',t:'25/03 · 25/09',w:'Nửa năm',it:[['Ms. Dung gửi danh sách đạt nâng bậc','RSC','OM, AM, CH','Mail']]},
- {g:'Q',t:'Tháng 4–5 · 10–11',w:'Nửa năm',it:[['Tái đào tạo, đào tạo cho level mới','OM','','']]},
- {g:'Q',t:'Cuối quý',w:'Quý',it:[['Kiểm kê tài sản – vật dụng, đối chiếu file N-X-T kế toán','CH','Kế toán','']]},
- {g:'Q',t:'Ngày 25 quý sau',w:'Quý',it:[['Nhận thưởng MS (TB > 97) / QSC (TB > 92) của quý','RSC','CH','']]},
- {g:'Q',t:'15 Tết âm lịch',w:'Năm',it:[['Chi 30% thưởng KPI năm','RSC','CH','']]},
- {g:'M',d:[1],t:'Ngày 1',it:[['Gửi chỉnh sửa chấm công từ ngày 16 đến cuối tháng','CH','AM','Mail'],['Gửi phiếu bổ sung lương','CH','AM','Zalo']]},
- {g:'M',d:[1,2,3,4,5],t:'Ngày 1 – 5',it:[['Phỏng vấn ứng viên & hẹn thử việc','CH','','']]},
- {g:'M',d:[2],t:'Ngày 2',it:[['Biên bản hủy hàng NVL & vật dụng (trước 15h)','CH','Ms. Nhi','Hardcopy'],['Ms. Dung gửi KPI','RSC','OM','Hardcopy']]},
- {g:'M',d:[3],t:'Ngày 3 · trước 16h',it:[['Biên bản kiểm kê hàng hóa','CH','AM, Ms. Nhi','Mail / Hardcopy'],['VP gửi chốt bảng điểm tháng cuối cùng','RSC','OM, AM, CH','Mail']]},
- {g:'M',d:[5],t:'Ngày 5',it:[['AM tổng hợp bảng chấm công zone (trước 10h)','AM','OM','Mail / Hardcopy'],['Chốt đối chiếu CPTH (trước 15h)','CH','Ms. Nhi','Mail'],['Phản hồi chốt số tồn đầu – nhập – hàng tổng hợp (trước 15h)','CH','Ms. Nhi','Mail'],['OM gửi chi phí lương (trước 16h)','OM','Ms. Nhi','Mail'],['Ms. Nhi gửi tổng hợp chi phí + P&L (trước 20h)','RSC','OM','Mail'],['Ms. Thơm cấp vật dụng, CCDC','RSC','CH','']]},
- {g:'M',d:[8],t:'Ngày 8',it:[['Ms. Nhi gửi file X – N – T','RSC','','']]},
- {g:'M',d:[10],t:'Ngày 10',it:[['Nhận lương + KPI (70%) + tiền đền','RSC','CH',''],['Ms. Dung cấp code NV mới','RSC','CH','Mail'],['Ms. Dung & Ms. Mai gửi record MS/QSC','RSC','Ms. Nhi','Mail'],['Hạn tuyển dụng – phỏng vấn – thử việc tháng n','CH','','']]},
- {g:'M',d:[15],t:'Ngày 15',it:[['Phản hồi chốt số bán – tồn cuối – hủy – đền hàng (trước 15h)','CH','Ms. Nhi','Mail'],['Báo cáo tình hình tuyển dụng (trước ngày 15)','CH','Ms. Dung','Mail'],['Gửi Sale và Turnover tháng n-1 (trước ngày 15)','CH','Ms. Nhi','Mail'],['Ms. Dung cấp VPP, biểu mẫu','RSC','CH','']]},
- {g:'M',d:[16],t:'Ngày 16',it:[['Gửi chỉnh sửa chấm công từ ngày 1 đến 15','CH','AM','Mail']]},
- {g:'M',d:[20],t:'Ngày 20',it:[['Ms. Nhi gửi file Record audit','RSC','OM, AM, CH','Mail'],['AM định hướng con đường thăng tiến','AM','','']]},
- {g:'M',d:[22],t:'Ngày 22',it:[['Ms. Thơm gửi chi phí bán hoạt động','RSC','Ms. Nhi','Viber']]},
- {g:'M',d:[23],t:'Ngày 23 · trước 15h',it:[['Phản hồi Record audit','CH','AM, Ms. Nhi','Mail']]},
- {g:'M',d:[25],t:'Ngày 25',it:[['Monthly Report (Manager roster, Best staff)','CH','AM, OM, Ms. Nhi','Mail'],['Staff List · Staffing Need','CH','AM, Ms. Dung','Mail'],['Đề xuất VPP & biểu mẫu · công cụ dụng cụ','CH','AM','Mail'],['Ms. Nhi chốt Record audit','RSC','OM, AM, CH','Mail'],['AM báo cáo kết quả thực hiện, đo lường KPI','AM','OM','']]},
- {g:'M',d:[26],t:'Ngày 26',it:[['AM tổng hợp VPP & BM, Staff need gửi HR','AM','Ms. Dung','Mail / Hardcopy']]},
- {g:'M',d:[27,28,29,30,31],t:'Ngày 27 → 10',it:[['Tuyển dụng & phỏng vấn; cho NV thử việc 3 ngày','CH','AM, Ms. Dung','']]},
- {g:'M',d:[28],t:'Ngày 28',it:[['Gửi KPI','CH','AM','Mail']]},
- {g:'M',d:[30],t:'Ngày 30',it:[['AM gửi KPI','AM','Ms. Dung','Hardcopy'],['Hủy / trả vật dụng về Bếp tổng (ngày 30 hoặc 31), kiểm kê hàng hóa cuối tháng','CH','Bếp tổng, Kế toán','Phiếu 2 liên']]},
- {g:'M',t:'Tuần 3 – 4',it:[['Học Orientation: tuần 3 thứ 5 (9h–12h), tuần 4 thứ 5 (14h–17h)','RSC','','Ms. Dung'],['Training bếp: thứ 6 tuần 3 và tuần 4 (9h–17h)','RSC','','Ms. Mai']]},
- {g:'W',d:[1],t:'Thứ 2',it:[['Gửi biên bản hủy, điều chuyển, ĐNTT','CH','AM','Hardcopy'],['Nộp sổ doanh thu về Ms. Thơm (theo xe hàng); nộp tiền DT (QTR, DD, SVH, NKKN, PCAC, TSN)','CH','Ms. Thơm','']]},
- {g:'W',d:[2],t:'Thứ 3',it:[['AM tổng hợp & ký biên bản hủy, ĐNTT','AM','Ms. Nhi','Hardcopy'],['AM tổng hợp đề xuất đồng phục / bảo trì','AM','Ms. Kiều / Mr. Đoan','Hardcopy'],['Nộp chứng từ chi về kế toán (trước 15h)','CH','Kế toán',''],['Gửi giấy doanh thu, phiếu ATM, bill hủy, bill test','CH','Ms. Hương',''],['Họp khối RSC · AM báo cáo Claim & Action Plan','AM','OM','Mail']]},
- {g:'W',d:[3],t:'Thứ 4',it:[['Check việc thực hiện quy trình & đưa hướng dẫn','AM','CH','']]},
- {g:'W',d:[4],t:'Thứ 5',it:[['Gửi đề xuất đồng phục, bảo trì','CH','AM','Mail'],['Ms. Nhi tổng hợp ĐNTT · Họp MKT · Họp Bảo trì','RSC','OM','Hardcopy'],['Check việc thực thi target','AM','CH',''],['Nộp tiền doanh thu','CH','Ms. Thơm','']]},
- {g:'W',d:[5],t:'Thứ 6 · trước 17h',it:[['Nhân viên đăng ký lịch rảnh tuần sau','CH','QL','']]},
- {g:'W',d:[6],t:'Thứ 7',it:[['Nộp tiền doanh thu','CH','Ms. Thơm','']]},
- {g:'W',d:[0],t:'Chủ nhật · trước 16h',it:[['Gửi Roster nhân viên tuần sau','CH','AM, OM','Mail']]},
- {g:'D',t:'Mỗi ngày',it:[['Gửi phiếu trả/hủy NVL kèm hàng về Bếp tổng khi có phát sinh (3 liên)','CH','Bếp tổng','Phiếu'],['Kiểm tra tiền, hàng hóa, đối chiếu O2C – Bếp – QL cuối ca (lệch tiền cho phép 20.000đ)','CH','AM, OM','BM ban hành']]},
- {g:'D',t:'Ngày n+1',it:[['QC gửi kết quả QSC','RSC','OM, AM, CH','Mail'],['Gửi đề xuất Claim điểm & Action Plan','CH','AM, Ms. Mai','Mail']]},
- {g:'D',t:'Sau 3 ngày kiểm kê',it:[['Gửi biên bản kiểm kê vật dụng & hàng hóa','CH','AM, Ms. Nhi','Mail / Hardcopy']]},
- {g:'D',t:'Trong 30 ngày',it:[['Chi phí quá 30 ngày kể từ ngày phát sinh không được giải quyết','CH','Kế toán','DNTT']]},
- {g:'H',h:600,t:'Trước 10h00',it:[['DSR','CH','AM, OM','Mail'],['Tồn hàng','CH','AM, OM, Ms. Nhi','Mail'],['Đặt hàng BTT','CH','Ms. Nhi, Ms. Ngân','Zalo']]},
- {g:'H',h:0,t:'Sau 3 giờ nhập hàng',it:[['Báo cáo hàng hóa sau khi nhập (quá hạn, chưa có QC xác nhận thì CH chịu đền)','CH','AM, Ms. Nhi, Ms. Ly, Ms. Mai','Viber']]},
- {g:'H',h:840,t:'Trước 14h00',it:[['Báo bổ sung / chỉnh sửa đơn hàng','CH','AM, Ms. Nhi','Mail / Viber']]},
- {g:'H',h:1260,t:'Trước 21h00',it:[['Báo bổ sung hàng hóa','CH','AM, Ms. Nhi, Ms. Ly','Viber'],['AM gửi xác nhận bổ sung hàng hóa','AM','Ms. Nhi, Ms. Ly','Viber']]}
+ {g:'H',h:600,t:'Trước 10h hôm sau',it:[['CH gửi DSR','AM, OM','Mail','C'],['CH gửi Tồn hàng','AM, OM, Ms. Nhi','Mail','C'],['CH gửi Đặt hàng','Ms. Nhi, Ms. Ngân','Zalo','C']]},
+ {g:'H',h:840,t:'Trước 14h mỗi ngày',it:[['CH báo bổ sung / chỉnh sửa đơn hàng','AM, Ms. Nhi','Mail / Viber','C']]},
+ {g:'H',h:1260,t:'Trước 21h mỗi ngày',it:[['CH báo bổ sung hàng hóa','AM, Ms. Nhi, Ms. Ly','Viber','C'],['AM gửi xác nhận bổ sung hàng hóa','Ms. Nhi, Ms. Ly','Viber','A']]},
+ {g:'H',t:'Sau 3 tiếng nhập hàng',it:[['CH báo cáo hàng hóa sau khi nhập','AM, Ms. Nhi, Ms. Ly, Ms. Mai','Viber','C']]},
+ {g:'H',t:'Sau 3 ngày kể từ ngày kiểm kê',it:[['CH gửi biên bản kiểm kê vật dụng & hàng hóa','AM, Ms. Nhi','Mail / Hardcopy','C']]},
+ {g:'H',t:'Ngày n+1 (sau audit)',it:[['QC gửi kết quả QSC','OM, AM, CH','Mail','M'],['CH gửi đề xuất Claim điểm & Action Plan','AM, Ms. Mai','Mail','C']]},
+ {g:'W',d:[1],t:'Thứ 2 mỗi tuần',it:[['CH gửi các biên bản hủy, ĐNTT…','AM','Hardcopy','C']]},
+ {g:'W',d:[2],t:'Thứ 3 mỗi tuần',it:[['AM tổng hợp & ký biên bản hủy, ĐNTT…','Ms. Nhi','Hardcopy','A'],['AM tổng hợp đề xuất Đồng phục','Ms. Kiều','Hardcopy','A'],['AM tổng hợp đề xuất Bảo trì','Mr. Đoan','Hardcopy','A'],['Họp khối RSC','','','ADMLNTKBO']]},
+ {g:'W',d:[2],t:'Thứ 3 tuần gần nhất',it:[['AM báo cáo & đề xuất các lỗi Claim & Action Plan (đã xử lý)','OM','Mail','A'],['OM phê duyệt các lỗi được Claim','Ms. Dung, Ms. Mai, AM','Mail','O']]},
+ {g:'W',d:[4],t:'Thứ 5 mỗi tuần',it:[['CH gửi đề xuất Đồng phục','AM','Mail','C'],['CH gửi đề xuất Bảo trì','AM','Mail','C'],['Ms. Nhi tổng hợp các ĐNTT','OM','Hardcopy','N'],['Họp MKT','','','K'],['Họp Bảo trì','','','B']]},
+ {g:'W',d:[0],t:'Trước 16h Chủ nhật',it:[['CH gửi Roster nhân viên','AM, OM','Mail','C']]},
+ {g:'M',d:[1],t:'Ngày 1',it:[['CH gửi chỉnh sửa chấm công từ ngày 16 đến cuối tháng','AM','Mail','C'],['CH gửi phiếu bổ sung lương','AM','Zalo','C']]},
+ {g:'M',d:[1,2,3,4,5],t:'Từ ngày 1 đến ngày 5',it:[['CH phỏng vấn ứng viên & hẹn thử việc','','','C']]},
+ {g:'M',d:[2],t:'Ngày 2',it:[['CH gửi biên bản hủy hàng NVL & vật dụng (trước 15h)','Ms. Nhi','Hardcopy','C'],['Ms. Dung gửi KPI','OM','Hardcopy','D']]},
+ {g:'M',d:[3],t:'Ngày 3',it:[['VP gửi chốt bảng điểm tháng cuối cùng','OM, AM, CH','Mail','DM']]},
+ {g:'M',d:[3],t:'Trước 16h – Ngày 3',it:[['CH gửi biên bản kiểm kê hàng hóa','AM, Ms. Nhi','Mail / Hardcopy','C']]},
+ {g:'M',d:[5],t:'Ngày 5',it:[['CH chốt đối chiếu CPTH (trước 15h)','Ms. Nhi','Mail','C'],['Ms. Thơm cấp vật dụng, công cụ dụng cụ','CH','','T']]},
+ {g:'M',d:[5],t:'Trước 10h – Ngày 5',it:[['AM tổng hợp bảng chấm công zone','OM','Mail / Hardcopy','A']]},
+ {g:'M',d:[5],t:'Trước 15h – Ngày 5',it:[['CH phản hồi chốt số tồn đầu – nhập – hàng tổng hợp','Ms. Nhi','Mail','C'],['Ms. Nhi chốt số tồn đầu – nhập – hàng tổng hợp','CH','Mail','N']]},
+ {g:'M',d:[5],t:'Trước 16h – Ngày 5',it:[['OM gửi chi phí lương','Ms. Nhi','Mail','O']]},
+ {g:'M',d:[5],t:'Trước 20h – Ngày 5',it:[['Ms. Nhi gửi tổng hợp các chi phí + P&L','OM','Mail','N']]},
+ {g:'M',d:[8],t:'Ngày 8',it:[['Ms. Nhi gửi file X – N – T','','','N']]},
+ {g:'M',d:[10],t:'Ngày 10',it:[['Ms. Dung cấp code NV','CH','Mail','D'],['Nhận lương + KPI – tiền đền','','','T'],['Ms. Dung & Ms. Mai gửi record MS/QSC','Ms. Nhi','Mail','DM']]},
+ {g:'M',t:'Trước ngày 15',it:[['CH gửi báo cáo tình hình tuyển dụng','Ms. Dung','Mail','C'],['CH gửi thông tin Sale và Turnover tháng n-1','Ms. Nhi','Mail','C'],['Ms. Dung cấp VPP, biểu mẫu','CH','','D'],['Ms. Dung gửi cập nhật file KPI (nếu có)','AM, CH','','D']]},
+ {g:'M',d:[15],t:'Trước 15h – Ngày 15',it:[['CH phản hồi chốt số bán – tồn cuối – hủy hàng – đền hàng','Ms. Nhi','Mail','C'],['Ms. Nhi chốt số bán – tồn cuối – hủy hàng – đền hàng','CH','Mail','N']]},
+ {g:'M',d:[16],t:'Ngày 16',it:[['CH gửi chỉnh sửa chấm công từ ngày 1 đến ngày 15','AM','Mail','C']]},
+ {g:'M',d:[20],t:'Ngày 20',it:[['Ms. Nhi gửi file Record audit','OM, AM, CH','Mail','N']]},
+ {g:'M',d:[22],t:'Ngày 22',it:[['Ms. Thơm gửi chi phí bán hoạt động','Ms. Nhi','Viber','T']]},
+ {g:'M',d:[23],t:'Trước 15h ngày 23',it:[['CH phản hồi Record audit','AM, Ms. Nhi','Mail','C']]},
+ {g:'M',d:[25],t:'Ngày 25',it:[['CH gửi Monthly Report (Manager roster, Best staff)','AM, OM, Ms. Nhi','Mail','C'],['CH gửi Staff List','AM, Ms. Dung','Mail','C'],['CH gửi Staffing Need','AM, Ms. Dung','Mail','C'],['CH đề xuất VPP & BM','AM, Ms. Dung','Mail','C'],['CH đề xuất công cụ dụng cụ','AM','Mail','C'],['Ms. Nhi gửi chốt Record audit','OM, AM, CH','Mail','N']]},
+ {g:'M',d:[26],t:'Ngày 26',it:[['AM tổng hợp VPP & BM gửi Ms. Dung','Ms. Dung','Mail / Hardcopy','A'],['AM tổng hợp Staff need gửi Ms. Dung','Ms. Dung','Mail / Hardcopy','A']]},
+ {g:'M',d:[27,28,29,30,31,1,2,3,4,5,6,7,8,9,10],t:'Từ ngày 27 đến ngày 10',it:[['CH tuyển dụng & phỏng vấn','AM, Ms. Dung','','C'],['CH cho NV được thử việc 3 ngày','','','C']]},
+ {g:'M',d:[28],t:'Ngày 28',it:[['CH gửi KPI','AM','Mail','C']]},
+ {g:'M',d:[30],t:'Ngày 30',it:[['AM gửi KPI cho Ms. Dung','Ms. Dung','Hardcopy','A']]},
+ {g:'T',wk:3,d:[4],t:'Tuần 3 · Thứ 5 (9h–12h)',it:[['Học Orientation','','','D']]},
+ {g:'T',wk:4,d:[4],t:'Tuần 4 · Thứ 5 (14h–17h)',it:[['Học Orientation','','','D']]},
+ {g:'T',wk:3,d:[5],t:'Tuần 3 · Thứ 6 (9h–17h)',it:[['Training bếp','','','M']]},
+ {g:'T',wk:4,d:[5],t:'Tuần 4 · Thứ 6 (9h–17h)',it:[['Training bếp','','','M']]},
+ {g:'Q',md:['1-25','7-25'],t:'25/01 và 25/07',it:[['CH gửi đề xuất thăng chức T03 – T09','AM','Mail','C']]},
+ {g:'Q',md:['1-30','7-30'],t:'30/01 và 30/07',it:[['AM tổng hợp đề xuất thăng chức','Ms. Dung','Mail','A']]},
+ {g:'Q',t:'Trước ngày 20 tháng 2 & 8',it:[['Thi nâng bậc lý thuyết','','','']]},
+ {g:'Q',t:'Trước ngày 20 tháng 3 & 9',it:[['Thi nâng bậc thực hành','','','']]},
+ {g:'Q',md:['3-25','9-25'],t:'Trước ngày 25 tháng 3 & 9',it:[['Ms. Dung gửi danh sách đạt nâng bậc','OM, AM, CH','Mail','D']]}
 ];
-const DLG=[['Q','Quý · nửa năm','Mốc theo quý, 6 tháng và năm'],['M','Tháng','Ngày cố định trong tháng'],['W','Tuần','Thứ cố định trong tuần'],['D','Ngày','Mốc tính theo sự việc'],['H','Giờ','Giờ chót trong ngày']];
-const ICO={Q:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',M:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.5"/>',W:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M7 14h2M11 14h2M15 14h2M7 17h2"/>',D:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',H:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
+const DLG=[['H','Hằng ngày','Giờ chót trong ngày, mốc theo sự việc'],['W','Hằng tuần','Thứ cố định trong tuần'],['M','Hằng tháng','Ngày cố định trong tháng'],['T','Đào tạo','Lịch học tuần 3 – tuần 4'],['Q','Nửa năm','Thăng chức, nâng bậc']];
+const ICO={Q:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h3"/>',M:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.5"/>',W:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M7 14h2M11 14h2M15 14h2M7 17h2"/>',T:'<path d="M3 6l9-3 9 3-9 3z"/><path d="M7 8v5c0 1.5 2.5 3 5 3s5-1.5 5-3V8"/>',H:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'};
 const dlIco=(g,s)=>`<svg viewBox="0 0 24 24" width="${s||22}" height="${s||22}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[g]}</svg>`;
 function poster(kind,title,sub,body,foot){return`<div class="panel poster"><div class="pst-h"><span class="lbl">${esc(kind)}</span><h2 class="pst-t">${title}</h2><p>${sub}</p></div>${body}<div class="pst-f">${foot}</div></div>`}
-function dlHot(x,dd,wd,nm){return x.g==='M'&&x.d&&x.d.includes(dd)?'Hôm nay':x.g==='W'&&x.d&&x.d.includes(wd)?'Hôm nay':x.g==='H'&&x.h&&nm<x.h&&nm>=x.h-180?'Sắp đến hạn':''}
+function dlHot(x,dd,wd,nm,mo){
+ if(x.g==='M')return x.d&&x.d.includes(dd)?'Hôm nay':'';
+ if(x.g==='W')return x.d&&x.d.includes(wd)?'Hôm nay':'';
+ if(x.g==='T')return x.d&&x.d.includes(wd)&&Math.ceil(dd/7)===x.wk?'Hôm nay':'';
+ if(x.g==='Q')return x.md&&mo&&x.md.includes(mo+'-'+dd)?'Hôm nay':'';
+ if(x.g==='H')return x.h&&nm<x.h&&nm>=x.h-180?'Sắp đến hạn':'';
+ return''}
 function hbDeadline(){
- const t=today(),dd=t.getDate(),wd=t.getDay(),nm=nowMin(),f=U.dlG||'all',am=!!U.dlAm;
- const now=x=>dlHot(x,dd,wd,nm);
- const who=w=>`<span class="who-c ${w}">${w}</span>`;
- const sec=DLG.filter(([g])=>f==='all'||f===g).map(([g,n,s])=>{const rows=DL.filter(x=>x.g===g).map(x=>({...x,it:x.it.filter(i=>!am||i[1]==='AM')})).filter(x=>x.it.length);if(!rows.length)return'';
-  return`<div class="tl2-sec"><div class="tl2-g"><span class="tl2-ico">${dlIco(g,26)}</span><div><b>${n}</b><small>${s}</small></div></div>
-   ${rows.map(x=>{const hn=now(x);return`<div class="tl2-n ${hn?'hot':''}"><span class="tl2-dot"></span><div class="tl2-time"><b>${esc(x.t)}</b>${x.w?`<small>${esc(x.w)}</small>`:''}${hn?`<em>${hn}</em>`:''}</div>
-    <ul>${x.it.map(([a,w,to,fm])=>`<li>${who(w)}<span>${esc(a)}${to||fm?` <small>→ ${esc([to,fm].filter(Boolean).join(' · '))}</small>`:''}</span></li>`).join('')}</ul></div>`}).join('')}</div>`}).join('');
+ const t=today(),dd=t.getDate(),wd=t.getDay(),mo=t.getMonth()+1,nm=nowMin(),f=U.dlG||'all',am=!!U.dlAm;
+ const dot=k=>`<span class="dlx-x ${k}" aria-label="x">x</span>`;
+ const body=DLG.filter(([g])=>f==='all'||f===g).map(([g,n,s])=>{
+  const rows=DL.filter(x=>x.g===g).map(x=>({...x,it:x.it.filter(i=>!am||i[3].includes('A'))})).filter(x=>x.it.length);if(!rows.length)return'';
+  return`<tr class="dlx-g"><td colspan="${4+DLC.length}"><span class="dlx-gi">${dlIco(g,18)}</span><b>${n}</b><small>${s}</small></td></tr>`+
+   rows.map(x=>{const hn=dlHot(x,dd,wd,nm,mo);return x.it.map(([a,to,fm,w],j)=>`<tr class="${hn?'hot':''}">${j?'':`<td class="dlx-t" rowspan="${x.it.length}"><b>${esc(x.t)}</b>${hn?`<em>${hn}</em>`:''}</td>`}<td class="dlx-c">${esc(a)}</td><td>${esc(to)}</td><td class="dlx-f">${esc(fm)}</td>${DLC.map(([k])=>`<td class="dlx-o">${w.includes(k)?dot(k):''}</td>`).join('')}</tr>`).join('')}).join('')}).join('');
  const seg=`<div class="row"><div class="seg">${[['all','Tất cả'],...DLG.map(x=>[x[0],x[1]])].map(([k,n])=>`<button class="${f===k?'on':''}" data-act="dl-g" data-k="${k}">${n}</button>`).join('')}</div><button class="btn sm ${am?'pri':''}" data-act="dl-am" aria-pressed="${am}">Chỉ việc của AM</button></div>`;
- return poster('Mẫu 15 · Timeline','Deadline công việc hệ thống','Báo cáo và công việc theo Quý → Tháng → Tuần → Ngày → Giờ. Mốc trùng hôm nay được tô sáng.',
-  seg+`<div class="legend">${['CH','AM','OM','RSC'].map(w=>`<span>${who(w)} ${{CH:'Cửa hàng làm',AM:'AM làm',OM:'OM làm',RSC:'Văn phòng / RSC làm'}[w]}</span>`).join('')}</div><div class="tl2">${sec||'<div class="empty">Không có mục nào.</div>'}</div>`,
-  'Nguồn: Deadline báo cáo công việc hệ thống, HM công việc, QT đề xuất trình ký báo cáo chi, QĐ hủy bill – hủy NVL, Career Path PPX, QĐ nộp tiền & sổ doanh thu.')}
+ return poster('Bảng deadline','Tổng deadline báo cáo – công việc','Trình bày giống file Deadline của hệ thống. Cột bên phải đánh <b>x</b> cho người thực hiện. Dòng tô vàng là mốc rơi vào hôm nay hoặc sắp đến giờ.',
+  seg+`<p class="dlx-hint muted">Vuốt ngang bảng để xem cột người thực hiện.</p><div class="dlx-wrap"><table class="dlx"><thead><tr><th class="dlx-t">Thời gian</th><th>Nội dung</th><th>Người nhận</th><th>Hình thức</th>${DLC.map(([k,n])=>`<th class="dlx-o">${esc(n)}</th>`).join('')}</tr></thead><tbody>${body||`<tr><td colspan="${4+DLC.length}" class="empty">Không có mục nào.</td></tr>`}</tbody></table></div>`,
+  'Nguồn: Deadline báo cáo công việc hệ thống.xlsx (sheet Deadline tổng), Drive "Đào tạo AM Hưng".')}
 /* Hình giải phẫu nhà hàng: mặt cắt, chú thích đánh số */
 function calloutR(pts){/* pts: [n,x,y,t1,t2] điểm đã ở hệ tọa độ ngoài; nhãn xếp cột phải */
  const top=70,gap=Math.min(78,600/Math.max(1,pts.length-1));
  return pts.map(([n,x,y,t1,t2],i)=>{const ly=top+i*gap,lx=660;return`<path d="M${x} ${y} L${lx-40} ${ly} H${lx}" class="ld"/><circle cx="${x}" cy="${y}" r="16" class="cn"/><text x="${x}" y="${y+7}" class="cnt">${n}</text><text x="${lx+8}" y="${ly-2}" class="lb1">${n}. ${t1}</text><text x="${lx+8}" y="${ly+26}" class="lb2">${t2}</text>`}).join('')}
-const N6_POS=[[300,138],[450,520],[590,500],[640,430],[390,245],[690,520]];
-const N6_SUB=['Bảng hiệu · outside · bảo vệ','Sàn · bàn ghế · đèn · sạch','Đón · order · thanh toán','Gửi món · xốt · dọn bàn','Cửa · bồn · sàn · mùi','Phân công · hàng · an toàn'];
-const N6_SHORT=['Brand','Không gian','O2C','Bưng món','Nhà vệ sinh','F-B-S OH'];
-function svgRestaurant(){
- const T=(x,y)=>[Math.round(.75*x-100),Math.round(.75*y+60)];
- const pts=NOTE6.map(([id,n,r],i)=>{const[X,Y]=T(...N6_POS[i]);return[i+1,X,Y,`Note ${id} · ${N6_SHORT[i]} (${r.length})`,N6_SUB[i]]});
- return`<svg class="anat" viewBox="0 0 1080 560" role="img" aria-label="Mổ xẻ nhà hàng Papaxốt theo 6 NOTE QL">
- <g transform="translate(-100 60) scale(.75)">
- <rect x="230" y="170" width="620" height="420" class="wall"/><path d="M210 175 L540 70 L870 175 Z" class="roof"/>
- <rect x="420" y="112" width="240" height="44" rx="6" class="sign"/><text x="540" y="144" class="signt">PAPAXỐT</text>
- <line x1="160" y1="590" x2="920" y2="590" class="ground"/>
- <rect x="250" y="440" width="70" height="150" class="door"/><rect x="250" y="250" width="70" height="120" class="glass"/><path d="M180 590 v-90 h40 v90" class="std"/>
- <line x1="345" y1="370" x2="345" y2="590" class="part"/>
- ${[[400,520],[500,520]].map(([x,y])=>`<rect x="${x-35}" y="${y}" width="70" height="10" class="tbl"/><line x1="${x-25}" y1="${y+10}" x2="${x-25}" y2="590" class="part"/><line x1="${x+25}" y1="${y+10}" x2="${x+25}" y2="590" class="part"/>`).join('')}
- <rect x="560" y="470" width="60" height="120" class="counter"/>
- <line x1="640" y1="300" x2="640" y2="590" class="part"/><path d="M640 430 h-40" class="part"/><rect x="650" y="470" width="80" height="120" class="kit"/><circle cx="672" cy="470" r="9" class="burn"/><circle cx="708" cy="470" r="9" class="burn"/>
- <rect x="745" y="420" width="90" height="170" class="fridge"/><line x1="745" y1="500" x2="835" y2="500" class="part"/>
- <rect x="650" y="190" width="185" height="100" class="room"/><rect x="440" y="190" width="120" height="110" class="room"/><rect x="350" y="190" width="80" height="110" class="room"/>
- </g>
- ${calloutR(pts)}
- </svg>`}
-function svgSafety(){
- const pts=[[1,105,450,'Tủ đông','≤ -18°C · đo, ghi phiếu'],[2,225,450,'Tủ mát','1–8°C · rã đông tại đây'],[3,165,215,'Kệ kho','HSD · tem nhãn · sống–chín riêng'],[4,320,600,'Thùng rác','Có nắp · không bụi, mùi, ruồi'],[5,582,592,'Bình gas','Kiểm đầu ca · khóa kết ca'],[6,505,225,'Tủ điện','Thiết bị tốt · tắt khi không dùng'],[7,420,340,'Bình chữa cháy','Đúng vị trí · còn hạn · lối thoát'],[8,375,505,'Sàn · dao · chảo','Sàn khô · dao, chảo đúng chỗ']];
- return`<svg class="anat safe-fig" viewBox="0 0 1080 700" role="img" aria-label="Mặt cắt bếp Papaxốt với 8 điểm an toàn đỏ">
- <rect x="30" y="120" width="580" height="520" class="wall"/><line x1="10" y1="640" x2="630" y2="640" class="ground"/>
- <text x="320" y="95" class="lb1" text-anchor="middle">BẾP · KHO</text>
- ${[180,250,320].map(y=>`<line x1="50" y1="${y}" x2="280" y2="${y}" class="part"/>`).join('')}
- ${[[60,140,40],[120,148,32],[190,140,40],[60,210,40],[150,214,36],[215,206,44],[70,280,40],[160,284,36]].map(([x,y,h])=>`<rect x="${x}" y="${y}" width="50" height="${h}" class="box"/><rect x="${x+8}" y="${y+8}" width="22" height="10" class="tag"/>`).join('')}
- <rect x="50" y="380" width="110" height="260" class="fridge"/><rect x="170" y="380" width="110" height="260" class="fridge"/>
- <text x="105" y="420" class="tiny" text-anchor="middle">-18°C</text><text x="225" y="420" class="tiny" text-anchor="middle">1–8°C</text>
- <line x1="148" y1="470" x2="148" y2="530" class="part"/><line x1="182" y1="470" x2="182" y2="530" class="part"/>
- <rect x="470" y="180" width="70" height="90" class="panel"/><path d="M510 195 l-14 30 h12 l-8 28 l22-36 h-12 l8-22z" class="bolt"/>
- <rect x="405" y="315" width="30" height="70" rx="8" class="ext"/><rect x="412" y="305" width="16" height="12" class="ext"/>
- <rect x="300" y="190" width="90" height="34" class="exit"/><text x="345" y="214" class="exitt">EXIT</text>
- <rect x="300" y="495" width="150" height="16" class="tbl"/><line x1="312" y1="511" x2="312" y2="640" class="part"/><line x1="438" y1="511" x2="438" y2="640" class="part"/>
- <path d="M340 492 l50 -6 l-2 6z" class="knife"/>
- <rect x="460" y="495" width="100" height="145" class="kit"/><circle cx="485" cy="495" r="10" class="burn"/><circle cx="530" cy="495" r="10" class="burn"/><path d="M505 488 v-22 h50 v22" class="pan"/>
- <rect x="565" y="545" width="34" height="95" rx="10" class="gas"/><path d="M582 545 v-30 h-30" class="pipe"/>
- <rect x="300" y="585" width="40" height="55" class="bin"/><line x1="296" y1="580" x2="344" y2="580" class="ground"/>
- ${calloutR(pts)}
- </svg>`}
+/* ---------- Kiến thức vận hành: mặt bằng 6 NOTE + An toàn đỏ ---------- */
+const N6_SUB=['Bảng hiệu · outside · bảo vệ · xe','Sàn · bàn ghế · đèn · nhiệt độ · nhạc','Đón khách · order · thanh toán','Gửi món · xốt · dọn bàn','Cửa · bồn · sàn · mùi · giấy','Phân công · hàng · an toàn 3 khu'];
+const N6_SHORT=['Mặt tiền','Khu khách','Quầy O2C','Lối bưng món','Nhà vệ sinh','Bếp · Bar · Kho'];
+const N6_AREA=['front','khach','o2c','lane','wc','boh'];
+const N6_ICO=['<path d="M3 21h18M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/>','<circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>','<rect x="3" y="7" width="18" height="12" rx="2"/><path d="M7 11h4M7 15h10"/>','<path d="M4 15h16M6 15a6 6 0 0 1 12 0M12 7V5"/><path d="M3 19h18"/>','<path d="M7 3h10v7a5 5 0 0 1-10 0z"/><path d="M9 21h6M12 15v6"/>','<path d="M4 10h16v10H4z"/><path d="M8 10V6M12 10V4M16 10V6"/>'];
+const nIco=(i,s)=>`<svg viewBox="0 0 24 24" width="${s||22}" height="${s||22}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${i}</svg>`;
+const SAFE_PT=[['dong','Tủ đông','≤ -18°C · đo nhiệt, ghi phiếu 3 lần/ngày','A'],['mat','Tủ mát','1–8°C · rã đông tại đây, không rã ngoài','A'],['kho','Kệ kho','HSD · tem nhãn · sống – chín để riêng','A'],['rac','Thùng rác','Có nắp · không bụi, mùi, ruồi','A'],['gas','Bình gas','Kiểm đầu ca · khóa van khi kết ca','B'],['dien','Tủ điện','Thiết bị tốt · tắt khi không dùng','B'],['pccc','Bình chữa cháy · lối thoát','Đúng vị trí · còn hạn · lối thoát thông','B'],['san','Sàn · dao · chảo','Sàn khô · dao, chảo nóng để đúng chỗ','B']];
 function hbOps(){
- const nd=NOTE6.reduce((a,x)=>a+x[2].length,0);
- const n6=`<div class="n6c">${NOTE6.map(([id,n,r],i)=>`<div class="ana-c"><div class="ana-h"><span class="ana-n">${i+1}</span><h3>Note ${id} · ${esc(n)}<small>${r.length} chú ý · ${esc(N6_SUB[i])}</small></h3></div><ol>${r.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`).join('')}</div>`;
+ const nd=NOTE6.reduce((a,x)=>a+x[2].length,0),op=U.n6==null?-1:U.n6;
+ const plan=`<div class="plan6" role="group" aria-label="Mặt bằng nhà hàng chia 6 khu theo 6 NOTE">${NOTE6.map(([id,n,r],i)=>`<button class="pz z${i+1} ${op===i?'on':''}" style="grid-area:${N6_AREA[i]}" data-act="n6-open" data-i="${i}" aria-pressed="${op===i}"><span class="pz-n">${i+1}</span><span class="pz-i">${nIco(N6_ICO[i],22)}</span><b>${N6_SHORT[i]}</b><small>Note ${id} · ${r.length} chú ý</small></button>`).join('')}<span class="pz-door">Cửa vào ↑</span></div>`;
+ const n6=`<div class="n6c">${NOTE6.map(([id,n,r],i)=>(op<0||op===i)?`<div class="ana-c n6k z${i+1}"><div class="ana-h"><span class="ana-n">${i+1}</span><h3>Note ${id} · ${esc(n)}<small>${N6_SHORT[i]} · ${r.length} chú ý · ${esc(N6_SUB[i])}</small></h3></div><ol>${r.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>`:'').join('')}</div>`;
  const card=(n,t,body,cls)=>`<div class="ana-c ${cls||''}"><div class="ana-h"><span class="ana-n">${n}</span><h3>${t}</h3></div>${body}</div>`;
  const li=a=>`<ul>${a.map(x=>`<li>${x}</li>`).join('')}</ul>`;
  const q=' <span class="chip ask">chờ xác nhận</span>';
@@ -844,13 +862,12 @@ function hbOps(){
  const sB=card('B','PCCC – ATLĐ · an toàn lao động',li(SAFE[1][1].map(([x,s])=>esc(x)+(s==='?'?q:'')))+
   `<span class="lbl">Kết ca</span>`+li(['Tắt thiết bị không dùng, kiểm nhiệt độ tủ','Khóa điện, nước, gas, cửa → quay clip kết ca','Bàn giao bảo vệ, ký sổ']),'red');
  const sC=card('C','Khi có sự cố',li(['<b>Tủ đông/mát hư:</b> báo AM → chuyển hàng vào thùng xốp + đá khô 2kg/20kg → giữ hàng hoặc chuyển về BTT','<b>Hàng nhập lỗi, cận/hết date:</b> nhắn group bếp @QC trong ngày; quá hạn không có QC xác nhận thì CH chịu đền','<b>Hàng hết HSD tại CH:</b> hủy có tính đền, phải trả hàng về Bếp tổng kèm phiếu','<b>Tai nạn, cháy nổ:</b> ưu tiên an toàn người, báo QL ca → AM → OM']),'red');
- return poster('Mẫu 10 · Sơ đồ giải phẫu','Mổ xẻ Papaxốt theo 6 NOTE',`6 khu vực QL kiểm mỗi ca sáng và ca tối, tổng ${nd} chú ý. Sau đó là hình "An toàn đỏ".`,
-  svgRestaurant()+n6+
-  `<div class="pst-h safe-h"><span class="lbl">Hình 2</span><h2 class="pst-t">An toàn đỏ</h2><p>8 điểm nguy cơ trong bếp – kho. Không đạt thì dừng việc khác để xử lý ngay.</p></div>`+
-  svgSafety()+`<div class="ana-grid">${sA}${sB}${sC}</div>`,
-  'Nguồn: Bộ mở – đóng ca các vị trí & 6 note, sổ tay quy trình PPX, QĐ hủy bill – hủy NVL 2025. Hình minh hoạ, không theo mặt bằng cửa hàng cụ thể.')}
-
-/* Quy định: giải phẫu một nhân viên PPX */
+ const safe=`<div class="plan8" role="img" aria-label="Mặt bằng bếp – kho với 8 điểm an toàn đỏ">${SAFE_PT.map(([a,n,r,k],i)=>`<div class="sz ${k}" style="grid-area:${a}"><span class="sz-n">${i+1}</span><div><b>${n}</b><small>${r}</small></div><em>${k==='A'?'ATVSTP':'PCCC – ATLĐ'}</em></div>`).join('')}</div>`;
+ return poster('Sơ đồ mặt bằng','Mổ xẻ Papaxốt theo 6 NOTE',`Mặt bằng chia 6 khu, mỗi khu là 1 note QL kiểm mỗi ca sáng và ca tối, tổng ${nd} chú ý. Bấm vào khu để xem riêng note đó, bấm lại để xem cả 6.`,
+  plan+n6+
+  `<div class="pst-h safe-h"><span class="lbl">Hình 2</span><h2 class="pst-t">An toàn đỏ</h2><p>Mặt bằng bếp – kho với 8 điểm nguy cơ. Không đạt thì dừng việc khác để xử lý ngay.</p></div>`+
+  safe+`<div class="legend"><span><i class="sw A"></i> Thẻ A · ATVSTP</span><span><i class="sw B"></i> Thẻ B · PCCC – ATLĐ</span></div><div class="ana-grid">${sA}${sB}${sC}</div>`,
+  'Nguồn: Bộ mở – đóng ca các vị trí & 6 note, sổ tay quy trình PPX, QĐ hủy bill – hủy NVL 2025. Sơ đồ minh hoạ, không theo mặt bằng cửa hàng cụ thể.')}
 const QD=[
  {n:1,p:'Đầu',t:'Thăng tiến & đào tạo',s:['Career Path PPX 27.08.24','Lịch đào tạo NV'],it:[
   'Tuyển dụng: CH gửi staff need trước 25 tháng n-1 → AM tổng hợp 26 → tuyển, phỏng vấn, thử việc 12 tiếng trước ngày 10 → HR cấp code ngày 12 → báo cáo tuyển dụng ngày 15.',
@@ -945,7 +962,7 @@ function hbIndustry(){
   'Nguồn: bộ Leading A Shift – In Store Management (Trainee Guide 2020), Module 07–16 trên Drive. Dòng "Liên hệ PPX" do em nối sang quy định Papaxốt.')}
 
 function vHandbook(){
-  const t=today(),hot=DL.filter(x=>dlHot(x,t.getDate(),t.getDay(),nowMin())),hotN=hot.reduce((a,x)=>a+x.it.length,0),amN=hot.reduce((a,x)=>a+x.it.filter(i=>i[1]==='AM').length,0);
+  const t=today(),hot=DL.filter(x=>dlHot(x,t.getDate(),t.getDay(),nowMin(),t.getMonth()+1)),hotN=hot.reduce((a,x)=>a+x.it.length,0),amN=hot.reduce((a,x)=>a+x.it.filter(i=>i[3].includes('A')).length,0);
   const md=MOD.filter(m=>(S.mod||{})[m[0]]).length,qn=QD.reduce((a,g)=>a+g.it.length,0);
   if(!['dl','vh','qd','nganh'].includes(U.hbTab))U.hbTab='dl';
   const tabs=[['dl','Deadline công việc'],['vh','Kiến thức vận hành PPX'],['qd','Quy định công ty'],['nganh','Kiến thức ngành']];
@@ -1751,6 +1768,7 @@ document.addEventListener('click',async ev=>{
   switch(a){
     case 'close':closeModal();break;
     case 'dl-g':U.dlG=ds.k;{const y=window.scrollY;render();window.scrollTo(0,y)}return;
+    case 'n6-open':U.n6=U.n6===+ds.i?null:+ds.i;{const y=window.scrollY;render();window.scrollTo(0,y)}return;
     case 'dl-am':U.dlAm=!U.dlAm;{const y=window.scrollY;render();window.scrollTo(0,y)}return;
     case 'qd-open':U.qdOpen=U.qdOpen===+ds.n?null:+ds.n;{const y=window.scrollY;render();window.scrollTo(0,y)}return;
     case 'mod-done':{S.mod=S.mod||{};if(S.mod[ds.n])delete S.mod[ds.n];else S.mod[ds.n]=1;save();const y=window.scrollY;render();window.scrollTo(0,y)}return;

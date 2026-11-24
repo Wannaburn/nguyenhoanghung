@@ -69,3 +69,7 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
 - **Repo GitHub đang công khai**: trong repo `ODOO_SALES=null`. Số thật chỉ ghi vào bản sao để publish Artifact riêng tư: `python3 -I tai-lieu/odoo/import_sales.py <Sales-...xlsx> <Pivot_Doanh_thu_...xlsx> <bản sao index.html>`.
 - File nguồn kỳ 01–24/11: "Sales-T11-theo-cua-hang-ngay.xlsx" và "Pivot_Doanh_thu_papaxot.revenue.report.xlsx" (anh Hưng gửi qua upload). Chưa có số lượng bán theo món.
 - Tab "Kiến thức vận hành PPX" (25/11): chỉ còn 2 hình — mổ xẻ nhà hàng theo 6 NOTE (6 thẻ chi tiết) và "An toàn đỏ" (mặt cắt bếp – kho 8 điểm + thẻ ATVSTP, PCCC – ATLĐ, khi có sự cố). Mã nguồn `tai-lieu/camnang/hb_ops_v2.js` (thay `svgRestaurant`, `hbOps` trong hb_ppx.js).
+
+### Cẩm nang bản 3 (24/11)
+- Deadline công việc: đổi sang bảng giống file `Deadline báo cáo công việc hệ thống.xlsx` (Thời gian | Nội dung | Người nhận | Hình thức | x theo CH, AMs, Ms. Dung, Ms. Mai, Ms. Ly·Ngọc, Ms. Nhi, Ms. Thơm, MKT, Mr. Đoan, OM). Dữ liệu chỉ lấy từ file đó. Nhóm: Hằng ngày / tuần / tháng / Đào tạo / Nửa năm. Dòng hôm nay tô vàng.
+- Kiến thức vận hành: bỏ hình mặt cắt có đường chỉ dẫn, thay bằng sơ đồ mặt bằng 6 khu (bấm khu để lọc note) và mặt bằng bếp – kho 8 điểm An toàn đỏ. Nguồn: `tai-lieu/camnang/hb_v3.js`, patch `patch_v3.py`.
