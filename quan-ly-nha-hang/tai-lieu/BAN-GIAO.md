@@ -31,7 +31,12 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
    - Checklist khung giờ cũ (`SHIFT_CL`, tổng hợp nhiều thương hiệu) đã bỏ khỏi app; file `tai-lieu/daily/` giữ làm tham khảo.
    - **Chờ anh Hưng xác nhận**: 3 mục note an toàn đỏ đánh dấu "chờ xác nhận" (sống–chín/sát sàn, bình chữa cháy/lối thoát hiểm, sàn bếp/dao chảo); giờ của HM 8–10 lấy theo khung "Tập trung vận hành" 10h30–14h & 17h–21h; HM tuần/tháng chưa có thứ/ngày hạn trong file nên chỉ tick trong tuần/tháng.
    - Script: `tai-lieu/hm17/patch_homnay.py` (đã chạy, chỉ để lưu vết).
-4. **Cẩm nang**: 47 công việc / 7 nhóm / 5 tần suất, lộ trình 90 ngày, kiến thức + máy tính nhanh. Nội dung do Claude tự viết theo kiến thức chung, chưa theo chuẩn PPX. Đã liệt kê các chỗ lệch (tủ mát 1–8°C, kiểm nhiệt 3 lần/ngày, BLAST, tốc độ ra món, kiểm hàng nhập ≤3h). Đã đề xuất viết lại theo sổ tay PPX, chưa làm.
+4. **Cẩm nang** (cập nhật 25/11/2026): 4 tab mới ở đầu, vẽ theo skill `ve-hinh-15-mau`, mã nguồn ở `tai-lieu/camnang/hb_ppx.js` (đã chèn vào app bằng `patch_camnang.py`):
+   - **Deadline công việc** (mẫu 15 timeline): dữ liệu `DL`, nhóm Quý → Tháng → Tuần → Ngày → Giờ, lọc theo nhóm, nút "Chỉ việc của AM", tô sáng mốc trùng hôm nay. Nguồn chính: `Deadline báo cáo công việc hệ thống.xlsx`.
+   - **Kiến thức vận hành PPX** (mẫu 10 giải phẫu): mặt cắt nhà hàng 9 vị trí + thẻ A–E: 17 HM, 6 NOTE, Full 5S (9 tiêu chuẩn set up, bộ màu FOH/BOH), 5 tiêu chuẩn sạch, note an toàn đỏ.
+   - **Quy định công ty** (mẫu 10 giải phẫu): nhân viên PPX với 6 bộ phận = 6 nhóm `QD` (thăng tiến – đào tạo; lương thưởng phúc lợi; nội quy tác phong; tiền & chi phí; hàng hóa; vận hành & sự vụ).
+   - **Kiến thức ngành** (mẫu 02 lộ trình): Module 7–16 bộ Leading A Shift (`MOD`), đánh dấu đã học lưu `S.mod`. File Module 11 trên Drive trùng nội dung Module 7.
+   - 3 tab cũ (Bản đồ công việc, Lộ trình 90 ngày, Kiến thức & công thức) vẫn giữ, nội dung cũ chưa viết lại theo PPX.
 5. **Kế hoạch** Năm → Quý → Tháng → Tuần → Ngày, mục tiêu doanh thu tự chia xuống.
 6. **Doanh thu** (chung một quán, chưa tách theo cửa hàng), **Lịch** (âm lịch Hồ Ngọc Đức, ngày lễ VN, nhắc việc lặp), **Lưu ý tháng**, **Cài đặt** (bảng quyền, đổi chức vụ, sao lưu).
 
