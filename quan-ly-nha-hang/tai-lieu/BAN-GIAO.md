@@ -55,3 +55,9 @@ Cập nhật: 24/11/2026. Người dùng: anh Hưng, Area Manager 3 (AM3) Papax�
 - Ma trận phân quyền có một nguồn duy nhất `tai-lieu/pq/perm.py`. Sửa xong chạy `python3 mkxlsx.py` (trong `pq/`) để tạo Excel, và `python3 pq/mkjs.py` (trong `tai-lieu/`) để tạo `pq/perm.js`, rồi thay các dòng `const PERM=`, `PERM_ROWS`, `ROLE_INFO`, `STORE_LIST` trong app.
 - Checklist khung giờ có nguồn `tai-lieu/daily/mk.py` (tạo Excel; dữ liệu QL/PV/TN/BEP/BAR cũng là `SHIFT_CL` trong app). Tổng hợp từ Drive của anh Hưng: PPX "Checklist bộ phận theo khung giờ", Ăn Được Phúc "Checklist Management" + "Chi tiết công việc", Phúc Lộc Thọ "TnD-SOP-FOH" + "Handover-Sealing book", Highlands "Shift Leader Skills", Phúc Long "Sổ tay vận hành" + "Lobby".
 - Thông tin nội bộ PPX (cơ cấu, mã cửa hàng, deadline, câu thoại) nằm trong skill `anthropic-skills:viet-quy-trinh-ppx`.
+
+## Nguồn dữ liệu bán hàng (cập nhật 24/11/2026)
+
+- Từ 24/11/2026 công ty dùng Odoo (https://papaxot.hyperdata.vn) thay KAS/SMAC.
+- Anh Hưng tải dữ liệu từ Odoo về máy tại `C:\Users\Dell\Downloads\Hưng\ClaudeCode\Dữ liệu`. **Mỗi khi cần dữ liệu, báo anh Hưng** để anh đưa file lên (Google Drive thư mục "Đào tạo AM Hưng", hoặc nối máy qua Remote Control). Phiên cloud không đọc trực tiếp được ổ C của anh.
+- Môi trường cloud "nguyenhoanghung" đã mở host papaxot.hyperdata.vn để thử lấy dữ liệu bằng API key Odoo (phiên "Sổ Kế Hoạch PPX – lấy sales T11 từ Odoo").
